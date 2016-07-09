@@ -9,7 +9,12 @@
       .when('/', {
         templateUrl: 'modules/login/login.html',
         controller: 'loginController'
-      });
+      })
+      .when('/cadastro', {
+        templateUrl: 'modules/cadastro/cadastro.html',
+        controller: 'cadastroController'
+      })
+      ;
       // .otherwise({redirectTo: '/'});
   });
 
