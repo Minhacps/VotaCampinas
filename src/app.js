@@ -3,7 +3,7 @@
 
   var app = angular.module('votaCampinas', ['ngRoute']);
 
-  app.config(function($routeProvider){
+  app.config(function($routeProvider, $locationProvider){
 
     $routeProvider
       .when('/', {
@@ -15,6 +15,7 @@
         controller: 'rankingController'
       })
       ;
+
       // .otherwise({redirectTo: '/'});
   });
 
