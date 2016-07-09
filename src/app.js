@@ -14,8 +14,11 @@
         templateUrl: 'modules/ranking/ranking.html',
         controller: 'rankingController'
       })
+      .when('/cadastro', {
+        templateUrl: 'modules/cadastro/cadastro.html',
+        controller: 'cadastroController'
+      })
       ;
-
       // .otherwise({redirectTo: '/'});
   });
 

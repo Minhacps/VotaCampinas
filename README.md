@@ -15,3 +15,7 @@ Esse repositório contem o código do programa que auxilia os eleitores e eleito
   controller: 'novoModuloController'
 });
 ```
+6. adiciona o caminho do controller no index.html
+```
+<script src="modules/login/novoModuloController.js"></script>
+```
