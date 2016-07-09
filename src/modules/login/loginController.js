@@ -4,9 +4,7 @@
 
   var app = angular.module('votaCampinas');
 
-  var loginController = function($scope) {
-    $scope.pagina = 'Login';
-    
+  var loginController = function($scope) {    
   }
 
   app.controller('loginController', loginController);

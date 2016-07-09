@@ -10,7 +10,7 @@ Esse repositório contem o código do programa que auxilia os eleitores e eleito
 4. abra o arquivo src/app.js
 5. Adicione o seguinte trecho de código:
 ```
-.when('/', {
+.when('/rota-do-novo-modulo', {
   templateUrl: 'modules/novo-modulo/novo-modulo.html',
   controller: 'novoModuloController'
 });
