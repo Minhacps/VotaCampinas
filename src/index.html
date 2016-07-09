@@ -12,9 +12,33 @@
   </head>
 
   <body>
-
     
+    <header class="page-header">
+      <nav>
+        <div class="nav-wrapper container">
+            <a href="/" class="brand-logo" style="height: 100%;">
+                <img src="http://placehold.it/200x100" alt="" style="height: 100%;">
+            </a>
+
+            <ul class="right hide-on-med-and-down">
+                <li>
+                    <a href="#">Item 1</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col s10"></div>
+      </nav>
+    </header>
+
     <div data-ng-view></div>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container">
+          © 2016 Copyright Text
+        </div>
+      </div>
+    </footer>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="components/Materialize/dist/js/materialize.min.js"></script>
@@ -22,6 +46,6 @@
     <script type="text/javascript" src="components/angular-route/angular-route.min.js"></script>
 
     <script src="app.js"></script>
-    <script src="modules/home/mainController.js"></script>
+    <script src="modules/login/loginController.js"></script>
   </body>
 </html>

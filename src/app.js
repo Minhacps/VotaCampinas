@@ -7,8 +7,8 @@
 
     $routeProvider
       .when('/', {
-        templateUrl: 'modules/home/header.html',
-        controller: 'mainController'
+        templateUrl: 'modules/login/login.html',
+        controller: 'loginController'
       });
       // .otherwise({redirectTo: '/'});
   });
