@@ -1,0 +1,21 @@
+{
+  "name": "votacampinas",
+  "description": "Esse repositório contem o código do programa que auxilia os eleitores e eleitoras de Campinas a escolherem o seu candidato ou candidata a vereadora de Campinas para as eleiçoes de 2016",
+  "main": "gulpfile.js",
+  "authors": [
+    "Gabriel Ribeiro <biel.ribeiro1990@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Minhacps/VotaCampinas",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Materialize": "materialize#^0.97.6"
+  }
+}
