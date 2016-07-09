@@ -14,8 +14,13 @@
         templateUrl: 'modules/cadastro/cadastro.html',
         controller: 'cadastroController'
       })
+      .when('/prioridades', {
+        templateUrl: 'modules/prioridades/prioridades.html',
+        controller: 'prioridadesController'
+      })
       ;
       // .otherwise({redirectTo: '/'});
+
   });
 
 })();
