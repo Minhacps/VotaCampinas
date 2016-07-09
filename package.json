@@ -4,7 +4,10 @@
   "description": "Esse repositório contem o código do programa que auxilia os eleitores e eleitoras de Campinas a escolherem o seu candidato ou candidata a vereadora de Campinas para as eleiçoes de 2016",
   "main": "gulpfile.js",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "browser-sync": "^2.13.0",
+    "gulp": "^3.9.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "install": "npm i && bower install"
