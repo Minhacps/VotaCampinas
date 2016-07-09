@@ -18,7 +18,10 @@
         templateUrl: 'modules/cadastro/cadastro.html',
         controller: 'cadastroController'
       })
-      ;
+      .when('/perfil', {
+        templateUrl: 'modules/perfil/perfil.html',
+        controller: 'perfilController'
+      })
       // .otherwise({redirectTo: '/'});
   });
 
