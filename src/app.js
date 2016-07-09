@@ -9,7 +9,12 @@
       .when('/', {
         templateUrl: 'modules/login/login.html',
         controller: 'loginController'
-      });
+      })
+      .when('/ranking', {
+        templateUrl: 'modules/ranking/ranking.html',
+        controller: 'rankingController'
+      })
+      ;
       // .otherwise({redirectTo: '/'});
   });
 
