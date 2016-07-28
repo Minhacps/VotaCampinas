@@ -10,6 +10,10 @@
         templateUrl: 'modules/login/login.html',
         controller: 'loginController'
       })
+      .when('/login', {
+        templateUrl: 'modules/login/login.html',
+        controller: 'loginController'
+      })
       .when('/ranking', {
         templateUrl: 'modules/ranking/ranking.html',
         controller: 'rankingController'
@@ -25,8 +29,13 @@
       .when('/perfil', {
         templateUrl: 'modules/perfil/perfil.html',
         controller: 'perfilController'
+      })
+      .otherwise({redirectTo: '/'});
+
+      $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: true
       });
-      // .otherwise({redirectTo: '/'});
 
   });
 
