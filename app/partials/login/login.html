@@ -10,19 +10,21 @@
     <hr>
   </div>
 
-  <div class="col s12 input-field">
-    <label for="">E-mail</label>
-    <input type="text">
-  </div>
+  <form data-ng-submit="enviar()">
+    <div class="col s12 input-field">
+      <label for="">E-mail</label>
+      <input type="text" data-ng-model="user.email">
+    </div>
 
-  <div class="col s12 input-field">
-    <label for="">Senha</label>
-    <input type="password">
-  </div>
+    <div class="col s12 input-field">
+      <label for="">Senha</label>
+      <input type="password" data-ng-model="user.password">
+    </div>
 
-  <div class="col s12 input-field">
-    <button class="btn">Entrar</button>
-  </div>
+    <div class="col s12 input-field">
+      <button class="btn">Entrar</button>
+    </div>
+  </form>
 
   <div class="col s12">
     <a data-ng-href="/cadastro">Cadastre-se</a>

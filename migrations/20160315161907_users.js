@@ -14,7 +14,7 @@ exports.up = function (knex, Promise) {
       table.string('twitter');
       table.string('google');
       table.string('vk');
-      table.dateTime('birthDates');
+      table.dateTime('birthDate');
       table.integer('prioridade1');
       table.integer('prioridade2');
       table.integer('prioridade3');

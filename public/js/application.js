@@ -270,30 +270,31 @@ angular.module('votaCampinas')
   }]);
 
 angular.module('votaCampinas')
-  .controller('SignupCtrl', ["$scope", "$rootScope", "$location", "$window", "$auth", function($scope, $rootScope, $location, $window, $auth) {
-    $scope.signup = function() {
+  .controller('SignupCtrl', ["$scope", "$rootScope", "$location", "$window", "$auth", function ($scope, $rootScope, $location, $window, $auth) {
+    $scope.signup = function () {
+      console.log($scope.user)
       $auth.signup($scope.user)
-        .then(function(response) {
+        .then(function (response) {
           $auth.setToken(response);
           $rootScope.currentUser = response.data.user;
           $window.localStorage.user = JSON.stringify(response.data.user);
           $location.path('/');
         })
-        .catch(function(response) {
+        .catch(function (response) {
           $scope.messages = {
             error: Array.isArray(response.data) ? response.data : [response.data]
           };
         });
     };
 
-    $scope.authenticate = function(provider) {
+    $scope.authenticate = function (provider) {
       $auth.authenticate(provider)
-        .then(function(response) {
+        .then(function (response) {
           $rootScope.currentUser = response.data.user;
           $window.localStorage.user = JSON.stringify(response.data.user);
           $location.path('/');
         })
-        .catch(function(response) {
+        .catch(function (response) {
           if (response.error) {
             $scope.messages = {
               error: [{ msg: response.error }]
@@ -306,6 +307,7 @@ angular.module('votaCampinas')
         });
     };
   }]);
+
 angular.module('votaCampinas')
   .factory('Account', ["$http", function($http) {
     return {
@@ -334,38 +336,105 @@ angular.module('votaCampinas')
       }
     };
   }]);
-(function() {
-
+(function () {
   'use strict';
-
   var app = angular.module('votaCampinas');
+  var cadastroController = function ($scope, $rootScope, $location, $window, $auth) {
+    $scope.enviar = function () {
+      $scope.user.gender = $('#sexo').val();
+      // return;
+      $auth.signup($scope.user)
+        .then(function (response) {
+          $auth.setToken(response);
+          $rootScope.currentUser = response.data.user;
+          $window.localStorage.user = JSON.stringify(response.data.user);
+          $location.path('/account');
+        })
+        .catch(function (response) {
+          $scope.messages = {
+            error: Array.isArray(response.data) ? response.data : [response.data]
+          };
+        });
+    };
 
-  var cadastroController = function($scope) {    
-  	$('select').material_select();
-  	$('.exclusivo-candidato').hide();
-  	$('#sou-candidato').change(function (){
-  		$('.exclusivo-candidato').toggle("slow");
-  	});
-  }
-  cadastroController.$inject = ["$scope"];
+    $scope.authenticate = function (provider) {
+      $auth.authenticate(provider)
+        .then(function (response) {
+          $rootScope.currentUser = response.data.user;
+          $window.localStorage.user = JSON.stringify(response.data.user);
+          $location.path('/');
+        })
+        .catch(function (response) {
+          if (response.error) {
+            $scope.messages = {
+              error: [{ msg: response.error }]
+            };
+          } else if (response.data) {
+            $scope.messages = {
+              error: [response.data]
+            };
+          }
+        });
+    };
+
+    $('select').material_select();
+    $('.exclusivo-candidato').hide();
+    $('#sou-candidato').change(function () {
+      $('.exclusivo-candidato').toggle('slow');
+    });
+  };
+  cadastroController.$inject = ["$scope", "$rootScope", "$location", "$window", "$auth"];
 
   app.controller('cadastroController', cadastroController);
-
 }());
 
-(function() {
+(function () {
 
   'use strict';
 
   var app = angular.module('votaCampinas');
 
-  var loginController = function ($scope) {
+  var loginController = function ($scope, $rootScope, $location, $window, $auth) {
+    $scope.enviar = function () {
+      $auth.login($scope.user)
+        .then(function (response) {
+          $rootScope.currentUser = response.data.user;
+          $window.localStorage.user = JSON.stringify(response.data.user);
+          $location.path('/account');
+        })
+        .catch(function (response) {
+          $scope.messages = {
+            error: Array.isArray(response.data) ? response.data : [response.data]
+          };
+        });
+    };
+
+    $scope.authenticate = function (provider) {
+      $auth.authenticate(provider)
+        .then(function (response) {
+          $rootScope.currentUser = response.data.user;
+          $window.localStorage.user = JSON.stringify(response.data.user);
+          $location.path('/');
+        })
+        .catch(function (response) {
+          if (response.error) {
+            $scope.messages = {
+              error: [{ msg: response.error }]
+            };
+          } else if (response.data) {
+            $scope.messages = {
+              error: [response.data]
+            };
+          }
+        });
+    };
   };
-  loginController.$inject = ["$scope"];
+  loginController.$inject = ["$scope", "$rootScope", "$location", "$window", "$auth"];
 
   app.controller('loginController', loginController);
 
 }());
+
 (function() {
 
   'use strict';

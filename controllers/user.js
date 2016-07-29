@@ -64,6 +64,7 @@ exports.ensureAuthenticated = function(req, res, next) {
  * POST /signup
  */
 exports.signupPost = function(req, res, next) {
+  console.log(req.body)
   req.assert('name', 'Name cannot be blank').notEmpty();
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
@@ -79,7 +80,8 @@ exports.signupPost = function(req, res, next) {
   new User({
     name: req.body.name,
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    gender: req.body.gender
   }).save()
     .then(function(user) {
         res.send({ token: generateToken(user), user: user });
