@@ -68,3 +68,8 @@ form button[type="submit"] {
   height: 30px;
   vertical-align: middle;
 }
+
+input.invalid + label,
+input.invalid + label:focus {
+  color: #F44336 !important;
+}
