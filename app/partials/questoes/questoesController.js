@@ -3,7 +3,12 @@
 
   var app = angular.module('votaCampinas');
 
-  var questoesController = function ($scope, $timeout) {
+  var questoesController = function ($scope, $timeout, perguntasFactory) {
+    perguntasFactory.obterPerguntas()
+    .success(function (perguntas) {
+      $scope.perguntas = perguntas;
+    });
+
   	var prioridades  = [],
   		inTransition = false;
 
@@ -12,28 +17,24 @@
   		selecionadas: {}
   	}
 
-  	$scope.opcoes = [
-  		"Ass Social",
-  		"Educação",
-  		"Saúde",
-  		"Segurança",
-  		"Transpote"
-  	]
-
-  	$scope.pagina = 1;
+  	$scope.pagina = 0;
 
   	$scope.selecionadas = {};
 
-  	$scope.next = function () {
-  		if (!inTransition) {
-  			inTransition = true;
-  			$timeout(function (){
-		  		prioridades.push($scope.model.prioridade);
-				$scope.model.prioridade = 0;
-				$scope.pagina += 1;
-				return inTransition = false;
-			}, 1200);
-  		}
+    $scope.next = function () {
+      perguntasFactory.salvarResposta($scope.perguntas[$scope.pagina])
+      .success(function () {
+        ++$scope.pagina;
+      });
+  		// if (!inTransition) {
+  		// 	inTransition = true;
+  		// 	$timeout(function (){
+		  // 		prioridades.push($scope.model.prioridade);
+			// 	$scope.model.prioridade = 0;
+			// 	$scope.pagina += 1;
+			// 	return inTransition = false;
+			// }, 1200);
+  		// }
   	}
 
   	$scope.back = function (){
