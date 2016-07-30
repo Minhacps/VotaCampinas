@@ -6,38 +6,45 @@ angular.module('votaCampinas', ['ngRoute', 'satellizer'])
 
     $routeProvider
       .when('/', {
-        templateUrl: 'partials/login/login.html',
-        controller: 'loginController'
+        templateUrl: 'partials/home/home.html'
       })
-      // .when('/login', {
-      //   templateUrl: 'partials/login/login.html',
-      //   controller: 'loginController'
-      // })
-      .when('/ranking', {
-        templateUrl: 'partials/ranking/ranking.html',
-        controller: 'rankingController'
+      .when('/home', {
+        templateUrl: 'partials/home/home.html'
       })
-      .when('/cadastro', {
-        templateUrl: 'partials/cadastro/cadastro.html',
-        controller: 'cadastroController'
+      .when('/projeto', {
+        templateUrl: 'partials/projeto/projeto.html'
       })
-      .when('/prioridades', {
-        templateUrl: 'partials/prioridades/prioridades.html',
-        controller: 'prioridadesController'
+      .when('/como-funciona', {
+        templateUrl: 'partials/comofunciona/como-funciona.html'
       })
-      .when('/perfil', {
-        templateUrl: 'partials/perfil/perfil.html',
-        controller: 'perfilController'
-      })
-      
       .when('/contact', {
         templateUrl: 'partials/contact.html',
         controller: 'ContactCtrl'
-      })
+      })      
       .when('/login', {
-        templateUrl: 'partials/login.html',
-        controller: 'LoginCtrl',
+        templateUrl: 'partials/login/login.html',
+        controller: 'loginController',
         resolve: { skipIfAuthenticated: skipIfAuthenticated }
+      })
+      .when('/ranking', {
+        templateUrl: 'partials/ranking/ranking.html',
+        controller: 'rankingController',
+        resolve: { loginRequired: loginRequired }
+      })
+      .when('/cadastro', {
+        templateUrl: 'partials/cadastro/cadastro.html',
+        controller: 'cadastroController',
+        resolve: { skipIfAuthenticated: skipIfAuthenticated }
+      })
+      .when('/prioridades', {
+        templateUrl: 'partials/prioridades/prioridades.html',
+        controller: 'prioridadesController',
+        resolve: { loginRequired: loginRequired }
+      })
+      .when('/perfil', {
+        templateUrl: 'partials/perfil/perfil.html',
+        controller: 'perfilController',
+        resolve: { loginRequired: loginRequired }
       })
       .when('/signup', {
         templateUrl: 'partials/signup.html',
@@ -125,6 +132,12 @@ angular.module('votaCampinas')
 
 angular.module('votaCampinas')
   .controller('HeaderCtrl', ["$scope", "$location", "$window", "$auth", function($scope, $location, $window, $auth) {
+    $(".button-collapse").sideNav();
+
+    $scope.closeNav = function() {
+      $(".button-collapse").sideNav('hide');
+    };
+    
     $scope.isActive = function (viewLocation) {
       return viewLocation === $location.path();
     };
@@ -137,6 +150,7 @@ angular.module('votaCampinas')
       $auth.logout();
       delete $window.localStorage.user;
       $location.path('/');
+      $scope.closeNav();
     };
   }]);
 
@@ -340,9 +354,12 @@ angular.module('votaCampinas')
   'use strict';
   var app = angular.module('votaCampinas');
   var cadastroController = function ($scope, $rootScope, $location, $window, $auth) {
+    $scope.user = {};
+    $scope.required = true;
+
     $scope.enviar = function () {
       $scope.user.gender = $('#sexo').val();
-      // return;
+
       $auth.signup($scope.user)
         .then(function (response) {
           $auth.setToken(response);
@@ -378,10 +395,7 @@ angular.module('votaCampinas')
     };
 
     $('select').material_select();
-    $('.exclusivo-candidato').hide();
-    $('#sou-candidato').change(function () {
-      $('.exclusivo-candidato').toggle('slow');
-    });
+    $('#data-nascimento').mask('00/00/0000');
   };
   cadastroController.$inject = ["$scope", "$rootScope", "$location", "$window", "$auth"];
 
