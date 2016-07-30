@@ -5,13 +5,6 @@ html {
 ul, ol {
   list-style: none; }
 
-footer {
-  display: block;
-  margin-top: 30px;
-  height: auto;
-  padding: 0 30px 10px;
-  width: 100%; }
-
 a:hover {
   text-decoration: underline; }
 
@@ -59,3 +52,19 @@ form button[type="submit"] {
 input.invalid + label,
 input.invalid + label:focus {
   color: #F44336 !important; }
+
+footer {
+  display: block;
+  margin-top: 30px;
+  height: auto;
+  padding: 0 30px 5px;
+  width: 100%; }
+
+.footer-links {
+  float: right; }
+  .footer-links li {
+    float: left;
+    padding: 0 10px; }
+
+.pular {
+  float: right; }

@@ -14,7 +14,6 @@
     }
 
     function salvarResposta (pergunta) {
-      console.log($rootScope);
       delete pergunta.pergunta;
 
       var obj = {
