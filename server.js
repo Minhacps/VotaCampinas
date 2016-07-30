@@ -70,6 +70,9 @@ app.get('/auth/facebook/callback', userController.authFacebookCallback);
 app.get('/api/perguntas', perguntasController.obterPerguntas);
 app.post('/api/respostas', respostasPerguntasController.inserirReposta);
 
+var prioridadesController = require('./controllers/prioridades');
+app.get('/api/prioridades', prioridadesController.obterTodas);
+
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'app', 'index.html'));
 });
