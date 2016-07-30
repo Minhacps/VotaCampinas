@@ -53,6 +53,18 @@ exports.up = function (knex, Promise) {
     knex('perguntas').insert({id:39, pergunta:"Empreendimentos como do jardim Bassoli, residencial Sirius, residencial Cosmos são a melhor forma para resolver o problema de moradia da cidade de Campinas."}),
     knex('perguntas').insert({id:40, pergunta:"A Prefeitura construiu equipamentos públicos [Escola, Centros de Saúde, Creches, Praças, Academias...] suficientes para as regiões periféricas"}),
     knex('perguntas').insert({id:41, pergunta:"O espaço criado pela Prefeitura para a participação popular na elaboração do Plano Diretor e da Lei de Uso e Ocupação do Solo foi suficiente})"})
+
+    //seeds de prioridades
+    knex('prioridades').insert([
+      {id:1, prioridade:"Assistência social"},
+      {id:2, prioridade:"Saúde"},
+      {id:3, prioridade:"Segurança"},
+      {id:4, prioridade:"Educação"},
+      {id:5, prioridade:"Cultura"},
+      {id:6, prioridade:"Mobilidade urbana"},
+      {id:7, prioridade:"Meio ambiente"},
+      {id:8, prioridade:"Habitação"}
+    ]);
   ]);
 };
 
