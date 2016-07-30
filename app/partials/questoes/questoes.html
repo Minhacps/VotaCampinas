@@ -5,6 +5,7 @@
   </div>
   <div class="col s12">
     <form novalidate>
+      <!-- <div ng-repeat="perguntas[pagina]"> -->
         <h3>{{perguntas[pagina].pergunta}}</h3>
         <input ng-click="next()" ng-model="perguntas[pagina].resposta" name="resposta-{{perguntas[pagina]}}" id="resposta-2-{{perguntas[pagina]}}" type="radio" value="2"/>
         <label for="resposta-2-{{perguntas[pagina]}}">Concordo plenamente</label>
@@ -14,6 +15,7 @@
         <label for="resposta-1-{{perguntas[pagina]}}">Discordo plenamente</label>
         <input ng-click="next()" ng-model="perguntas[pagina].resposta" name="resposta-{{perguntas[pagina]}}" id="resposta-3-{{perguntas[pagina]}}" type="radio" value="3"/>
         <label for="resposta-3-{{perguntas[pagina]}}">Discordo</label>
+      <!-- </div> -->
 
       <input ng-click="back()" ng-if="pagina !== 1" type="button" class="btn" style="margin-top: 30px;" value="Voltar">
     </form>
