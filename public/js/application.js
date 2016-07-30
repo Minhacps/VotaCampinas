@@ -486,12 +486,13 @@ angular.module('votaCampinas')
       prioridade: ""
     };
 
-    $scope.opcoes = [
-      {"id":1,"prioridade":"Assistência social"},
-      {"id":2,"prioridade":"Saúde"},
-      {"id":3,"prioridade":"Segurança"},
-      {"id":4,"prioridade":"Educação"}
-    ];
+    $http.get('/api/prioridades')
+    .success(function(suc){
+      $scope.opcoes = suc;
+    })
+    .error(function(err){
+      console.log(err);
+    })
 
   	$scope.next = function(){
   		if(!inTransition){
@@ -516,7 +517,6 @@ angular.module('votaCampinas')
             $scope.pagina += 1;
             return inTransition = false;
           }, 1000);
-          Materialize.showStaggeredList('#staggered-test')
         }
 
         $scope.respostas.push(op);
@@ -531,7 +531,13 @@ angular.module('votaCampinas')
   	}
 
     $scope.submit = function(){
-      console.log($scope.respostas);
+      $http.post('/api/prioridades', $scope.respostas)
+      .success(function(suc){
+        console.log(suc);
+      })
+      .error(function(err){
+        console.log(err);
+      })
     }
 
   }

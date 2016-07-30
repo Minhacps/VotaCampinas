@@ -6,12 +6,12 @@
   <div class="col s12">
     <form novalidate>
       <h3>Prioridade nível {{pagina}}</h3>
-      <div ng-repeat="opcao in opcoes">
-        <input ng-click="next()" ng-model="model.prioridade" name="prioridade" type="radio" value="{{opcao}}" id="prioridade-{{$index}}" />
-        <label for="prioridade-{{$index}}">{{opcao}}</label>
+      <div ng-if="opcoes" id="options" ng-repeat="opcao in opcoes | orderBy: 'prioridade'">
+        <input ng-click="next()" ng-model="model.prioridade" name="prioridade" type="radio" value="{{opcao.id}}" id="prioridade-{{$index}}" />
+        <label for="prioridade-{{$index}}">{{opcao.prioridade}}</label>
       </div>
-
-      <input ng-click="back()" ng-if="pagina !== 1" type="button" class="btn" style="margin-top: 30px;" value="Voltar">
+      <input ng-click="back()" ng-if="pagina !== 1 && pagina < 4" type="button" class="btn" style="margin-top: 30px;" value="Voltar">
+      <input ng-click="submit()" ng-show="submitOk" type="button" class="btn" style="margin-top: 30px;" value="Enviar">
     </form>
   </div>
-</div>
+</div>  
