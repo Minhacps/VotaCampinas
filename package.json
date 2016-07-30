@@ -30,6 +30,7 @@
     "gulp-if": "^2.0.0",
     "gulp-ng-annotate": "^2.0.0",
     "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.3",
     "jsonwebtoken": "^5.7.0",
@@ -57,6 +58,9 @@
     "node": "6.1.0"
   },
   "semistandard": {
-    "globals": ["angular", "$"]
+    "globals": [
+      "angular",
+      "$"
+    ]
   }
 }
