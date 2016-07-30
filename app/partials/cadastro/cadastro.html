@@ -4,7 +4,6 @@
   </div>
 
   <div class="col s12">
-    {{user}}
     <form ng-submit="enviar()">
       <div class="dados-pessoais">
         <h4>Pessoais</h4>
@@ -35,22 +34,33 @@
 
         <div class="row">
           <div class="col s12">
-            <input type="checkbox" id="sou-candidato" />
+            <input type="checkbox" id="sou-candidato" data-ng-model="user.ehVereador"/>
             <label for="sou-candidato">Sou Candidato</label>
           </div>
         </div>
 
-        <div class="exclusivo-candidato">
+        <div class="exclusivo-candidato" data-ng-show="user.ehVereador">
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="cod-j-e" type="text" class="validate" data-ng-model="user.vereador.partido" maxlength="5">
+              <label for="cod-j-e">Partido</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="cod-j-e" type="number" class="validate" data-ng-model="user.vereador.numero">
+              <label for="cod-j-e">Número</label>
+            </div>
+          </div>
+
            <div class="row">
              <div class="input-field col s12">
-               <input id="cod-j-e" type="text" class="validate">
+               <input id="cod-j-e" type="number" class="validate" data-ng-model="user.vereador.codigoJusticaEleitoral">
                <label for="cod-j-e">Cod. Justiça Eleitoral</label>
              </div>
            </div>
 
            <div class="row">
             <div class="input-field col s12">
-              <textarea id="descricao" class="materialize-textarea" length="120"></textarea>
+              <textarea id="descricao" class="materialize-textarea" length="120" data-ng-model="user.vereador.descricao"></textarea>
               <label for="descricao">Descrição</label>
             </div>
           </div>
