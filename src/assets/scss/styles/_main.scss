@@ -21,6 +21,15 @@ a {
   }
 }
 
+.footer-links {
+  float: right;
+
+  li {
+    float: left;
+    padding: 0 10px;
+  }
+}
+
 label {
   display: block;
   line-height: 1.8;

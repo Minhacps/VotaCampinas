@@ -15,6 +15,12 @@ footer {
 a:hover {
   text-decoration: underline; }
 
+.footer-links {
+  float: right; }
+  .footer-links li {
+    float: left;
+    padding: 0 10px; }
+
 label {
   display: block;
   line-height: 1.8; }
