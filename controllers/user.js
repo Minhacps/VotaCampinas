@@ -76,8 +76,6 @@ exports.signupPost = function (req, res, next) {
     return res.status(400).send(errors);
   }
 
-  // console.log(req.body)
-
   User.forge({
     name: req.body.name,
     email: req.body.email,
@@ -87,7 +85,7 @@ exports.signupPost = function (req, res, next) {
     ehVereador: req.body.ehVereador
   }).save()
     .then(function (user) {
-      if (!user.ehVereador) {
+      if (!req.body.ehVereador) {
         return res.send({ token: generateToken(user), user: user });
       }
 
@@ -103,7 +101,7 @@ exports.signupPost = function (req, res, next) {
       });
     })
     .catch(function (err) {
-      console.log(err)
+      console.log(err);
       if (err.code === 'ER_DUP_ENTRY' || err.code === '23505') {
         return res.status(400).send({ msg: 'The email address you have entered is already associated with another account.' });
       }

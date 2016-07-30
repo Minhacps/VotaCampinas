@@ -7,8 +7,6 @@
     $scope.enviar = function () {
       $scope.user.gender = $('#sexo').val();
 
-      console.log($scope.user);
-
       $auth.signup($scope.user)
         .then(function (response) {
           $auth.setToken(response);
