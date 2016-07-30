@@ -46,6 +46,11 @@ angular.module('votaCampinas', ['ngRoute', 'satellizer'])
         controller: 'perfilController',
         resolve: { loginRequired: loginRequired }
       })
+      .when('/perguntas', {
+        templateUrl: 'partials/questoes/questoes.html',
+        controller: 'questoesController',
+        resolve: { loginRequired: loginRequired }
+      })
       .when('/signup', {
         templateUrl: 'partials/signup.html',
         controller: 'SignupCtrl',
@@ -469,48 +474,68 @@ angular.module('votaCampinas')
 
   var app = angular.module('votaCampinas');
 
-  var prioridadesController = function($scope, $timeout) { 
-  	var prioridades  = [],
-  		inTransition = false;
+  var prioridadesController = function($scope, $timeout, $http) { 
+  	var inTransition = false;
 
-  	$scope.model = {
-  		prioridade: "",
-  		selecionadas: {}
-  	}
+    $scope.submitOk     = false;
+  	$scope.pagina       = 1;
+    $scope.respostas    = [];
+    
+    $scope.model = {
+      id: "",
+      prioridade: ""
+    };
 
-  	$scope.opcoes = [
-  		"Ass Social",
-  		"Educação",
-  		"Saúde",
-  		"Segurança",
-  		"Transpote"
-  	]
-
-  	$scope.pagina = 1;
-
-  	$scope.selecionadas = {};
+    $scope.opcoes = [
+      {"id":1,"prioridade":"Assistência social"},
+      {"id":2,"prioridade":"Saúde"},
+      {"id":3,"prioridade":"Segurança"},
+      {"id":4,"prioridade":"Educação"}
+    ];
 
   	$scope.next = function(){
   		if(!inTransition){
-  			inTransition = true;
-  			$timeout(function(){
-		  		prioridades.push($scope.model.prioridade);
-				$scope.model.prioridade = 0;
-				$scope.pagina += 1;
-				return inTransition = false;
-			}, 1200);
-  		}
+        var opcoes  = $scope.opcoes,
+            opcao   = $scope.model.prioridade,
+            op      = {};
+
+        var idx = opcoes.map(function(i){
+          if(i.id == opcao){ op = i; }
+          return Number(i.id);
+        }).indexOf(Number(opcao));
+
+        if($scope.pagina >= 3 && !$scope.submitOk) {
+          $scope.submitOk = true;
+        } else if($scope.submitOk) {
+          $scope.respostas.pop();
+        } else{
+          inTransition = true;
+          $timeout(function(){
+            opcoes.splice(idx, 1);
+            opcao = '';
+            $scope.pagina += 1;
+            return inTransition = false;
+          }, 1000);
+          Materialize.showStaggeredList('#staggered-test')
+        }
+
+        $scope.respostas.push(op);
+      }
   	}
 
   	$scope.back = function(){
-  		prioridades.pop();
-  		$scope.model.prioridade = 0;
-		$scope.pagina -= 1;
-  		console.log(prioridades);
+      if($scope.submitOk){ $scope.respostas.pop(); $scope.submitOk = false; }
+      $scope.opcoes.push($scope.respostas.pop());
+  		$scope.model.prioridade = '';
+		  $scope.pagina -= 1;
   	}
 
+    $scope.submit = function(){
+      console.log($scope.respostas);
+    }
+
   }
-  prioridadesController.$inject = ["$scope", "$timeout"];
+  prioridadesController.$inject = ["$scope", "$timeout", "$http"];
 
   app.controller('prioridadesController', prioridadesController);
 
@@ -520,7 +545,12 @@ angular.module('votaCampinas')
 
   var app = angular.module('votaCampinas');
 
-  var questoesController = function ($scope, $timeout) {
+  var questoesController = function ($scope, $timeout, perguntasFactory) {
+    perguntasFactory.obterPerguntas()
+    .success(function (perguntas) {
+      $scope.perguntas = perguntas;
+    });
+
   	var prioridades  = [],
   		inTransition = false;
 
@@ -529,28 +559,24 @@ angular.module('votaCampinas')
   		selecionadas: {}
   	}
 
-  	$scope.opcoes = [
-  		"Ass Social",
-  		"Educação",
-  		"Saúde",
-  		"Segurança",
-  		"Transpote"
-  	]
-
-  	$scope.pagina = 1;
+  	$scope.pagina = 0;
 
   	$scope.selecionadas = {};
 
-  	$scope.next = function () {
-  		if (!inTransition) {
-  			inTransition = true;
-  			$timeout(function (){
-		  		prioridades.push($scope.model.prioridade);
-				$scope.model.prioridade = 0;
-				$scope.pagina += 1;
-				return inTransition = false;
-			}, 1200);
-  		}
+    $scope.next = function () {
+      //perguntasFactory.salvarResposta($scope.perguntas[$scope.pagina])
+      //.success(function () {
+        ++$scope.pagina;
+      //});
+  		// if (!inTransition) {
+  		// 	inTransition = true;
+  		// 	$timeout(function (){
+		  // 		prioridades.push($scope.model.prioridade);
+			// 	$scope.model.prioridade = 0;
+			// 	$scope.pagina += 1;
+			// 	return inTransition = false;
+			// }, 1200);
+  		// }
   	}
 
   	$scope.back = function (){
@@ -561,12 +587,43 @@ angular.module('votaCampinas')
   	}
 
   }
-  questoesController.$inject = ["$scope", "$timeout"];
+  questoesController.$inject = ["$scope", "$timeout", "perguntasFactory"];
 
   app.controller('questoesController', questoesController);
 
 }());
 
+(function () {
+  'use strict';
+
+  var app = angular.module('votaCampinas');
+
+  var perguntasFactory = function ($rootScope, $http) {
+    return {
+      obterPerguntas: obterPerguntas,
+      salvarResposta: salvarResposta
+    };
+
+    function obterPerguntas () {
+      return $http.get('/api/perguntas');
+    }
+
+    function salvarResposta (pergunta) {
+      console.log($rootScope);
+      delete pergunta.pergunta;
+
+      var obj = {
+        usuarioId: $rootScope.currentUser.id,
+        pergunta: pergunta
+      };
+
+      return $http.post('/api/respostas', obj);
+    }
+  };
+  perguntasFactory.$inject = ["$rootScope", "$http"];
+
+  app.factory('perguntasFactory', perguntasFactory);
+})();
 
 (function() {
 
