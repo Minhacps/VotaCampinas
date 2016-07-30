@@ -1,93 +1,45 @@
-angular.module('votaCampinas', ['ngRoute', 'satellizer'])
-  .config(["$routeProvider", "$locationProvider", "$authProvider", function($routeProvider, $locationProvider, $authProvider) {
-    skipIfAuthenticated.$inject = ["$location", "$auth"];
-    loginRequired.$inject = ["$location", "$auth"];
-    $locationProvider.html5Mode(true);
+(function() {
+  'use strict';
+
+  var app = angular.module('votaCampinas', ['ngRoute']);
+
+  app.config(["$routeProvider", "$locationProvider", function($routeProvider, $locationProvider){
 
     $routeProvider
       .when('/', {
-        templateUrl: 'partials/login/login.html',
+        templateUrl: 'modules/login/login.html',
         controller: 'loginController'
       })
-      // .when('/login', {
-      //   templateUrl: 'partials/login/login.html',
-      //   controller: 'loginController'
-      // })
+      .when('/login', {
+        templateUrl: 'modules/login/login.html',
+        controller: 'loginController'
+      })
       .when('/ranking', {
-        templateUrl: 'partials/ranking/ranking.html',
+        templateUrl: 'modules/ranking/ranking.html',
         controller: 'rankingController'
       })
       .when('/cadastro', {
-        templateUrl: 'partials/cadastro/cadastro.html',
+        templateUrl: 'modules/cadastro/cadastro.html',
         controller: 'cadastroController'
       })
       .when('/prioridades', {
-        templateUrl: 'partials/prioridades/prioridades.html',
+        templateUrl: 'modules/prioridades/prioridades.html',
         controller: 'prioridadesController'
       })
       .when('/perfil', {
-        templateUrl: 'partials/perfil/perfil.html',
+        templateUrl: 'modules/perfil/perfil.html',
         controller: 'perfilController'
       })
-      
-      .when('/contact', {
-        templateUrl: 'partials/contact.html',
-        controller: 'ContactCtrl'
-      })
-      .when('/login', {
-        templateUrl: 'partials/login.html',
-        controller: 'LoginCtrl',
-        resolve: { skipIfAuthenticated: skipIfAuthenticated }
-      })
-      .when('/signup', {
-        templateUrl: 'partials/signup.html',
-        controller: 'SignupCtrl',
-        resolve: { skipIfAuthenticated: skipIfAuthenticated }
-      })
-      .when('/account', {
-        templateUrl: 'partials/profile.html',
-        controller: 'ProfileCtrl',
-        resolve: { loginRequired: loginRequired }
-      })
-      .when('/forgot', {
-        templateUrl: 'partials/forgot.html',
-        controller: 'ForgotCtrl',
-        resolve: { skipIfAuthenticated: skipIfAuthenticated }
-      })
-      .when('/reset/:token', {
-        templateUrl: 'partials/reset.html',
-        controller: 'ResetCtrl',
-        resolve: { skipIfAuthenticated: skipIfAuthenticated }
-      })
-      .otherwise({
-        templateUrl: 'partials/404.html'
+      .otherwise({redirectTo: '/'});
+
+      $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: true
       });
 
-    $authProvider.loginUrl = '/login';
-    $authProvider.signupUrl = '/signup';
-    $authProvider.facebook({
-      url: '/auth/facebook',
-      clientId: '980220002068787',
-      redirectUri: 'http://localhost:3000/auth/facebook/callback'
-    });
-
-    function skipIfAuthenticated($location, $auth) {
-      if ($auth.isAuthenticated()) {
-        $location.path('/');
-      }
-    }
-
-    function loginRequired($location, $auth) {
-      if (!$auth.isAuthenticated()) {
-        $location.path('/login');
-      }
-    }
-  }])
-  .run(["$rootScope", "$window", function($rootScope, $window) {
-    if ($window.localStorage.user) {
-      $rootScope.currentUser = JSON.parse($window.localStorage.user);
-    }
   }]);
+
+})();
 
 angular.module('votaCampinas')
   .controller('ContactCtrl', ["$scope", "Contact", function($scope, Contact) {
@@ -336,105 +288,38 @@ angular.module('votaCampinas')
       }
     };
   }]);
-(function () {
+(function() {
+
   'use strict';
+
   var app = angular.module('votaCampinas');
-  var cadastroController = function ($scope, $rootScope, $location, $window, $auth) {
-    $scope.enviar = function () {
-      $scope.user.gender = $('#sexo').val();
-      // return;
-      $auth.signup($scope.user)
-        .then(function (response) {
-          $auth.setToken(response);
-          $rootScope.currentUser = response.data.user;
-          $window.localStorage.user = JSON.stringify(response.data.user);
-          $location.path('/account');
-        })
-        .catch(function (response) {
-          $scope.messages = {
-            error: Array.isArray(response.data) ? response.data : [response.data]
-          };
-        });
-    };
 
-    $scope.authenticate = function (provider) {
-      $auth.authenticate(provider)
-        .then(function (response) {
-          $rootScope.currentUser = response.data.user;
-          $window.localStorage.user = JSON.stringify(response.data.user);
-          $location.path('/');
-        })
-        .catch(function (response) {
-          if (response.error) {
-            $scope.messages = {
-              error: [{ msg: response.error }]
-            };
-          } else if (response.data) {
-            $scope.messages = {
-              error: [response.data]
-            };
-          }
-        });
-    };
-
-    $('select').material_select();
-    $('.exclusivo-candidato').hide();
-    $('#sou-candidato').change(function () {
-      $('.exclusivo-candidato').toggle('slow');
-    });
-  };
-  cadastroController.$inject = ["$scope", "$rootScope", "$location", "$window", "$auth"];
+  var cadastroController = function($scope) {    
+  	$('select').material_select();
+  	$('.exclusivo-candidato').hide();
+  	$('#sou-candidato').change(function (){
+  		$('.exclusivo-candidato').toggle("slow");
+  	});
+  }
+  cadastroController.$inject = ["$scope"];
 
   app.controller('cadastroController', cadastroController);
+
 }());
 
-(function () {
+(function() {
 
   'use strict';
 
   var app = angular.module('votaCampinas');
 
-  var loginController = function ($scope, $rootScope, $location, $window, $auth) {
-    $scope.enviar = function () {
-      $auth.login($scope.user)
-        .then(function (response) {
-          $rootScope.currentUser = response.data.user;
-          $window.localStorage.user = JSON.stringify(response.data.user);
-          $location.path('/account');
-        })
-        .catch(function (response) {
-          $scope.messages = {
-            error: Array.isArray(response.data) ? response.data : [response.data]
-          };
-        });
-    };
-
-    $scope.authenticate = function (provider) {
-      $auth.authenticate(provider)
-        .then(function (response) {
-          $rootScope.currentUser = response.data.user;
-          $window.localStorage.user = JSON.stringify(response.data.user);
-          $location.path('/');
-        })
-        .catch(function (response) {
-          if (response.error) {
-            $scope.messages = {
-              error: [{ msg: response.error }]
-            };
-          } else if (response.data) {
-            $scope.messages = {
-              error: [response.data]
-            };
-          }
-        });
-    };
+  var loginController = function ($scope) {
   };
-  loginController.$inject = ["$scope", "$rootScope", "$location", "$window", "$auth"];
+  loginController.$inject = ["$scope"];
 
   app.controller('loginController', loginController);
 
 }());
-
 (function() {
 
   'use strict';
