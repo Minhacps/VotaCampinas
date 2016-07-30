@@ -35,8 +35,8 @@ exports.inserirRespostas = function(req, res){
         }
       });
 
-  if(respostas.length < 3)
-    return res.status(500).send("voce precisa responder as 3 questoes.");
+  if(req.body.length < 3)
+    return res.status(500).json({err: "voce precisa responder as 3 questoes."});
 
   RespostaPrioridade.forge()
     .fetchAll({ userId: req.user.id})
