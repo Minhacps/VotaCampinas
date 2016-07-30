@@ -2,7 +2,9 @@ var Prioridade = require('../models/Prioridade');
 
 exports.obterTodas = function(req, res){
 
-  new Prioridade().fetchAll()
+  new Prioridade().fetchAll({
+    columns: ['id', 'prioridade']
+  })
     .then(function(prioridades) {
         res.send(prioridades);
     })
