@@ -1,10 +1,12 @@
 {
-  prioridades:["Assistência social",
-  "Saúde",
-  "Segurança",
-  "Educação",
-  "Cultura",
-  "Mobilidade urbana",
-  "Meio ambiente",
-  "Habitação"]
+  "prioridades":[
+    "Assistência social",
+    "Saúde",
+    "Segurança",
+    "Educação",
+    "Cultura",
+    "Mobilidade urbana",
+    "Meio ambiente",
+    "Habitação"
+  ]
 }

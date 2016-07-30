@@ -54,6 +54,16 @@ angular.module('votaCampinas', ['ngRoute', 'satellizer'])
         controller: 'ForgotCtrl',
         resolve: { skipIfAuthenticated: skipIfAuthenticated }
       })
+      .when('/projeto', {
+        templateUrl: 'partials/projeto/projeto.html',
+        //controller: 'ProjetoCtrl',
+        resolve: { skipIfAuthenticated: skipIfAuthenticated }
+      })
+      .when('/como-funciona', {
+        templateUrl: 'partials/comofunciona/como-funciona.html',
+        //controller: 'ComoFuncionaCtrl',
+        resolve: { skipIfAuthenticated: skipIfAuthenticated }
+      })
       .when('/reset/:token', {
         templateUrl: 'partials/reset.html',
         controller: 'ResetCtrl',
@@ -125,6 +135,12 @@ angular.module('votaCampinas')
 
 angular.module('votaCampinas')
   .controller('HeaderCtrl', ["$scope", "$location", "$window", "$auth", function($scope, $location, $window, $auth) {
+    $(".button-collapse").sideNav();
+
+    $scope.closeNav = function() {
+      $(".button-collapse").sideNav('hide');
+    };
+    
     $scope.isActive = function (viewLocation) {
       return viewLocation === $location.path();
     };
@@ -137,6 +153,7 @@ angular.module('votaCampinas')
       $auth.logout();
       delete $window.localStorage.user;
       $location.path('/');
+      $scope.closeNav();
     };
   }]);
 
