@@ -65,7 +65,7 @@ exports.up = function (knex, Promise) {
       {id:6, prioridade:"Mobilidade urbana"},
       {id:7, prioridade:"Meio ambiente"},
       {id:8, prioridade:"Habitação"}
-    ]);
+    ])
   ]);
 };
 
