@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var argv = require('yargs').argv;
 var concat = require('gulp-concat');
+var sass = require('gulp-sass');
 var ngAnnotate = require('gulp-ng-annotate');
 var templateCache = require('gulp-angular-templatecache');
 var uglify = require('gulp-uglify');
@@ -40,6 +41,13 @@ gulp.task('angular', function () {
     .pipe(browserSync.stream());
 });
 
+gulp.task('materialize', function () {
+  return gulp.src('public/components/materialize/sass/materialize.scss')
+    .pipe(sass())
+    .pipe(gulp.dest('public/css'))
+    .pipe(browserSync.stream());
+});
+
 gulp.task('templates', function () {
   return gulp.src('app/partials/**/*.html')
     .pipe(templateCache({ root: 'partials', module: 'votaCampinas' }))
@@ -59,5 +67,5 @@ gulp.task('watch', function () {
   gulp.watch('app/**/*.js', ['angular']);
 });
 
-gulp.task('build', ['angular', 'vendor', 'templates']);
+gulp.task('build', ['angular', 'vendor', 'templates', 'materialize']);
 gulp.task('default', ['build', 'server', 'browser-sync', 'watch']);
