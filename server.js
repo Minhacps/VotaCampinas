@@ -68,7 +68,7 @@ app.post('/auth/facebook', userController.authFacebook);
 app.get('/auth/facebook/callback', userController.authFacebookCallback);
 
 app.get('/api/perguntas', perguntasController.obterPerguntas);
-app.post('/api/respostas', respostasPerguntasController.inserirReposta);
+app.post('/api/respostas', userController.ensureAuthenticated, respostasPerguntasController.inserirReposta);
 
 var prioridadesController = require('./controllers/prioridades');
 app.get('/api/prioridades', prioridadesController.obterTodas);

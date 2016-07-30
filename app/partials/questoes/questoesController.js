@@ -22,26 +22,21 @@
   	$scope.selecionadas = {};
 
     $scope.next = function () {
-      //perguntasFactory.salvarResposta($scope.perguntas[$scope.pagina])
-      //.success(function () {
-        ++$scope.pagina;
-      //});
-  		// if (!inTransition) {
-  		// 	inTransition = true;
-  		// 	$timeout(function (){
-		  // 		prioridades.push($scope.model.prioridade);
-			// 	$scope.model.prioridade = 0;
-			// 	$scope.pagina += 1;
-			// 	return inTransition = false;
-			// }, 1200);
-  		// }
+      $scope.enviando = true;
+
+      $timeout(function () {
+        var pergunta = angular.copy($scope.perguntas[$scope.pagina]);
+        perguntasFactory.salvarResposta(pergunta)
+        .success(function () {
+            ++$scope.pagina;
+            $scope.enviando = false;
+        });
+      }, 700);
   	}
 
   	$scope.back = function (){
-  		prioridades.pop();
-  		$scope.model.prioridade = 0;
-		$scope.pagina -= 1;
-  		console.log(prioridades);
+		  --$scope.pagina;
+      console.log($scope.perguntas[$scope.pagina])
   	}
 
   }
