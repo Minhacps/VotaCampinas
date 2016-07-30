@@ -9,6 +9,7 @@ DB_HOST='localhost'
 DB_USER='root'
 DB_PASSWORD='suasenha'
 DB_NAME='seubanco'
+TOKEN_SECRET='0c1e50b0519fcc11024e65952026dafbfadc5defb93bc2acbf0c96b3fb9a0b02'
 ```
 É muito importante que você crie esse banco que está listado no `.env`, você pode fazer isso com o comando:
 ```
