@@ -42,7 +42,14 @@ gulp.task('angular', function () {
 });
 
 gulp.task('materialize', function () {
-  return gulp.src('src/scss/components/materialize.scss')
+  return gulp.src('src/assets/scss/materialize.scss')
+    .pipe(sass())
+    .pipe(gulp.dest('public/css'))
+    .pipe(browserSync.stream());
+});
+
+gulp.task('styles', function () {
+  return gulp.src('src/assets/scss/votacampinas.scss')
     .pipe(sass())
     .pipe(gulp.dest('public/css'))
     .pipe(browserSync.stream());
@@ -65,7 +72,8 @@ gulp.task('vendor', function () {
 gulp.task('watch', function () {
   gulp.watch('app/partials/**/*.html', ['templates']);
   gulp.watch('app/**/*.js', ['angular']);
-  gulp.watch('src/scss/components/**/*.scss', ['materialize']);
+  gulp.watch('src/assets/scss/components/**/*.scss', ['materialize']);
+  gulp.watch('src/assets/scss/styles/**/*.scss', ['styles']);
 });
 
 gulp.task('build', ['angular', 'vendor', 'templates', 'materialize']);
