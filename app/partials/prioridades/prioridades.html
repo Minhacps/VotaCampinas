@@ -5,25 +5,15 @@
   </div>
   <div class="col s12">
     <form novalidate>
-      <div>
-        <input name="prioridade" type="radio" id="prioridade-1" />
-        <label for="prioridade-1">Prioridade 1</label>
+      <div class="opcoes" style="position: relative;">
+        <h3>Prioridade nível {{pagina}}</h3>
+        <div ng-if="opcoes" ng-repeat="opcao in opcoes | orderBy: 'prioridade'">
+          <input ng-click="next()" ng-model="model.prioridade" name="prioridade" type="radio" value="{{opcao.id}}" id="prioridade-{{$index}}" />
+          <label for="prioridade-{{$index}}">{{opcao.prioridade}}</label>
+        </div>
       </div>
-
-      <div>
-        <input name="prioridade" type="radio" id="prioridade-2" />
-        <label for="prioridade-2">Prioridade 2</label>
-      </div>
-
-      <div>
-        <input name="prioridade" type="radio" id="prioridade-3" />
-        <label for="prioridade-3">Prioridade 3</label>
-      </div>
-
-      <div>
-        <input name="prioridade" type="radio" id="prioridade-4" />
-        <label for="prioridade-4">Prioridade 4</label>
-      </div>
+      <input ng-click="back()" ng-if="pagina !== 1 && pagina < 4" type="button" class="btn" style="margin-top: 30px;" value="Voltar">
+      <input ng-click="submit()" ng-show="submitOk" type="button" class="btn" style="margin-top: 30px;" value="Enviar">
     </form>
   </div>
-</div>
+</div>  
