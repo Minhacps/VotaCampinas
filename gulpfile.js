@@ -12,7 +12,7 @@ var browserSync = require('browser-sync').create();
 
 gulp.task('browser-sync', function () {
   browserSync.init({
-    proxy: 'localhost:3000',
+    proxy: '127.0.0.1:3000',
     port: '8000'
   });
 });
@@ -42,7 +42,7 @@ gulp.task('angular', function () {
 });
 
 gulp.task('materialize', function () {
-  return gulp.src('public/components/materialize/sass/materialize.scss')
+  return gulp.src('src/components/Materialize/sass/materialize.scss')
     .pipe(sass())
     .pipe(gulp.dest('public/css'))
     .pipe(browserSync.stream());
@@ -65,7 +65,7 @@ gulp.task('vendor', function () {
 gulp.task('watch', function () {
   gulp.watch('app/partials/**/*.html', ['templates']);
   gulp.watch('app/**/*.js', ['angular']);
-  gulp.watch('public/components/materialize/sass/*.scss', ['materialize']);
+  gulp.watch('src/components/Materialize/sass/**/*.scss', ['materialize']);
 });
 
 gulp.task('build', ['angular', 'vendor', 'templates', 'materialize']);
