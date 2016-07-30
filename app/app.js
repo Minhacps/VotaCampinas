@@ -52,6 +52,16 @@ angular.module('votaCampinas', ['ngRoute', 'satellizer'])
         controller: 'ForgotCtrl',
         resolve: { skipIfAuthenticated: skipIfAuthenticated }
       })
+      .when('/projeto', {
+        templateUrl: 'partials/projeto/projeto.html',
+        //controller: 'ProjetoCtrl',
+        resolve: { skipIfAuthenticated: skipIfAuthenticated }
+      })
+      .when('/como-funciona', {
+        templateUrl: 'partials/comofunciona/como-funciona.html',
+        //controller: 'ComoFuncionaCtrl',
+        resolve: { skipIfAuthenticated: skipIfAuthenticated }
+      })
       .when('/reset/:token', {
         templateUrl: 'partials/reset.html',
         controller: 'ResetCtrl',
