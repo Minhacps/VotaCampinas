@@ -46,7 +46,9 @@
             opcao = '';
             $scope.pagina += 1;
             return inTransition = false;
-          }, 1000);
+          }, 500);
+
+          $('.opcoes').animate({left: '1900px'}, 400).animate({left: '-1900px'}, 0).animate({left: '0'}, 400);
         }
 
         $scope.respostas.push(op);
@@ -58,6 +60,7 @@
       $scope.opcoes.push($scope.respostas.pop());
   		$scope.model.prioridade = '';
 		  $scope.pagina -= 1;
+      $('.opcoes').animate({left: '-1900px'}, 400).animate({left: '1900px'}, 0).animate({left: '0'}, 400);
   	}
 
     $scope.submit = function(){

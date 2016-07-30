@@ -460,20 +460,6 @@ angular.module('votaCampinas')
 
   var app = angular.module('votaCampinas');
 
-  var perfilController = function($scope) {    
-  }
-  perfilController.$inject = ["$scope"];
-
-  app.controller('perfilController', perfilController);
-
-}());
-
-(function() {
-
-  'use strict';
-
-  var app = angular.module('votaCampinas');
-
   var prioridadesController = function($scope, $timeout, $http) { 
   	var inTransition = false;
 
@@ -516,7 +502,9 @@ angular.module('votaCampinas')
             opcao = '';
             $scope.pagina += 1;
             return inTransition = false;
-          }, 1000);
+          }, 500);
+
+          $('.opcoes').animate({left: '1900px'}, 400).animate({left: '-1900px'}, 0).animate({left: '0'}, 400);
         }
 
         $scope.respostas.push(op);
@@ -528,6 +516,7 @@ angular.module('votaCampinas')
       $scope.opcoes.push($scope.respostas.pop());
   		$scope.model.prioridade = '';
 		  $scope.pagina -= 1;
+      $('.opcoes').animate({left: '-1900px'}, 400).animate({left: '1900px'}, 0).animate({left: '0'}, 400);
   	}
 
     $scope.submit = function(){
@@ -546,6 +535,20 @@ angular.module('votaCampinas')
   app.controller('prioridadesController', prioridadesController);
 
 }());
+(function() {
+
+  'use strict';
+
+  var app = angular.module('votaCampinas');
+
+  var perfilController = function($scope) {    
+  }
+  perfilController.$inject = ["$scope"];
+
+  app.controller('perfilController', perfilController);
+
+}());
+
 (function () {
   'use strict';
 
