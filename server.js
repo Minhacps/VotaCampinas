@@ -72,6 +72,7 @@ app.post('/api/respostas', respostasPerguntasController.inserirReposta);
 
 var prioridadesController = require('./controllers/prioridades');
 app.get('/api/prioridades', prioridadesController.obterTodas);
+app.post('/api/prioridades', prioridadesController.inserirRespostas);
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'app', 'index.html'));
