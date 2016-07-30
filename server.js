@@ -65,6 +65,9 @@ app.get('/unlink/:provider', userController.ensureAuthenticated, userController.
 app.post('/auth/facebook', userController.authFacebook);
 app.get('/auth/facebook/callback', userController.authFacebookCallback);
 
+var prioridadesController = require('./controllers/prioridades');
+app.get('/api/prioridades', prioridadesController.obterTodas);
+
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'app', 'index.html'));
 });
