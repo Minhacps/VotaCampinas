@@ -42,7 +42,7 @@ gulp.task('angular', function () {
 });
 
 gulp.task('materialize', function () {
-  return gulp.src('src/components/Materialize/sass/materialize.scss')
+  return gulp.src('src/scss/components/materialize.scss')
     .pipe(sass())
     .pipe(gulp.dest('public/css'))
     .pipe(browserSync.stream());
@@ -65,7 +65,7 @@ gulp.task('vendor', function () {
 gulp.task('watch', function () {
   gulp.watch('app/partials/**/*.html', ['templates']);
   gulp.watch('app/**/*.js', ['angular']);
-  gulp.watch('src/components/Materialize/sass/**/*.scss', ['materialize']);
+  gulp.watch('src/scss/components/**/*.scss', ['materialize']);
 });
 
 gulp.task('build', ['angular', 'vendor', 'templates', 'materialize']);
