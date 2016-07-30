@@ -7,26 +7,9 @@ ul, ol {
   list-style: none;
 }
 
-footer {
-  display: block;
-  margin-top: 30px;
-  height: auto;
-  padding: 0 30px 10px;
-  width: 100%;
-}
-
 a {
   &:hover {
     text-decoration: underline;
-  }
-}
-
-.footer-links {
-  float: right;
-
-  li {
-    float: left;
-    padding: 0 10px;
   }
 }
 

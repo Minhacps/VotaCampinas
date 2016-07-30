@@ -1,0 +1,16 @@
+footer {
+  display: block;
+  margin-top: 30px;
+  height: auto;
+  padding: 0 30px 10px;
+  width: 100%;
+}
+
+.footer-links {
+  float: right;
+
+  li {
+    float: left;
+    padding: 0 10px;
+  }
+}

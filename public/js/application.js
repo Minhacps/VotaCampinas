@@ -46,6 +46,11 @@ angular.module('votaCampinas', ['ngRoute', 'satellizer'])
         controller: 'perfilController',
         resolve: { loginRequired: loginRequired }
       })
+      .when('/perguntas', {
+        templateUrl: 'partials/questoes/questoes.html',
+        controller: 'questoesController',
+        resolve: { loginRequired: loginRequired }
+      })
       .when('/signup', {
         templateUrl: 'partials/signup.html',
         controller: 'SignupCtrl',
@@ -481,7 +486,12 @@ angular.module('votaCampinas')
 
   var app = angular.module('votaCampinas');
 
-  var questoesController = function ($scope, $timeout) {
+  var questoesController = function ($scope, $timeout, perguntasFactory) {
+    perguntasFactory.obterPerguntas()
+    .success(function (perguntas) {
+      $scope.perguntas = perguntas;
+    });
+
   	var prioridades  = [],
   		inTransition = false;
 
@@ -490,28 +500,24 @@ angular.module('votaCampinas')
   		selecionadas: {}
   	}
 
-  	$scope.opcoes = [
-  		"Ass Social",
-  		"Educação",
-  		"Saúde",
-  		"Segurança",
-  		"Transpote"
-  	]
-
-  	$scope.pagina = 1;
+  	$scope.pagina = 0;
 
   	$scope.selecionadas = {};
 
-  	$scope.next = function () {
-  		if (!inTransition) {
-  			inTransition = true;
-  			$timeout(function (){
-		  		prioridades.push($scope.model.prioridade);
-				$scope.model.prioridade = 0;
-				$scope.pagina += 1;
-				return inTransition = false;
-			}, 1200);
-  		}
+    $scope.next = function () {
+      perguntasFactory.salvarResposta($scope.perguntas[$scope.pagina])
+      .success(function () {
+        ++$scope.pagina;
+      });
+  		// if (!inTransition) {
+  		// 	inTransition = true;
+  		// 	$timeout(function (){
+		  // 		prioridades.push($scope.model.prioridade);
+			// 	$scope.model.prioridade = 0;
+			// 	$scope.pagina += 1;
+			// 	return inTransition = false;
+			// }, 1200);
+  		// }
   	}
 
   	$scope.back = function (){
@@ -522,12 +528,43 @@ angular.module('votaCampinas')
   	}
 
   }
-  questoesController.$inject = ["$scope", "$timeout"];
+  questoesController.$inject = ["$scope", "$timeout", "perguntasFactory"];
 
   app.controller('questoesController', questoesController);
 
 }());
 
+(function () {
+  'use strict';
+
+  var app = angular.module('votaCampinas');
+
+  var perguntasFactory = function ($rootScope, $http) {
+    return {
+      obterPerguntas: obterPerguntas,
+      salvarResposta: salvarResposta
+    };
+
+    function obterPerguntas () {
+      return $http.get('/api/perguntas');
+    }
+
+    function salvarResposta (pergunta) {
+      console.log($rootScope);
+      delete pergunta.pergunta;
+
+      var obj = {
+        usuarioId: $rootScope.currentUser.id,
+        pergunta: pergunta
+      };
+
+      return $http.post('/api/respostas', obj);
+    }
+  };
+  perguntasFactory.$inject = ["$rootScope", "$http"];
+
+  app.factory('perguntasFactory', perguntasFactory);
+})();
 
 (function() {
 
