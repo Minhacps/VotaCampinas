@@ -340,9 +340,14 @@ angular.module('votaCampinas')
   'use strict';
   var app = angular.module('votaCampinas');
   var cadastroController = function ($scope, $rootScope, $location, $window, $auth) {
+    $scope.user = {};
+    $scope.user.birthDate = '16/11/1994';
+
     $scope.enviar = function () {
       $scope.user.gender = $('#sexo').val();
-      // return;
+
+      console.log($scope.user);
+
       $auth.signup($scope.user)
         .then(function (response) {
           $auth.setToken(response);
@@ -378,10 +383,7 @@ angular.module('votaCampinas')
     };
 
     $('select').material_select();
-    $('.exclusivo-candidato').hide();
-    $('#sou-candidato').change(function () {
-      $('.exclusivo-candidato').toggle('slow');
-    });
+    $('#data-nascimento').mask('00/00/0000');
   };
   cadastroController.$inject = ["$scope", "$rootScope", "$location", "$window", "$auth"];
 

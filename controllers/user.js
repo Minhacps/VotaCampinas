@@ -4,10 +4,10 @@ var nodemailer = require('nodemailer');
 var jwt = require('jsonwebtoken');
 var moment = require('moment');
 var request = require('request');
-var qs = require('querystring');
 var User = require('../models/User');
+var Vereador = require('../models/Vereador');
 
-function generateToken(user) {
+function generateToken (user) {
   var payload = {
     iss: 'my.domain.com',
     sub: user.id,
@@ -20,7 +20,7 @@ function generateToken(user) {
 /**
  * Login required middleware
  */
-exports.ensureAuthenticated = function(req, res, next) {
+exports.ensureAuthenticated = function (req, res, next) {
   if (req.isAuthenticated()) {
     next();
   } else {
@@ -31,7 +31,7 @@ exports.ensureAuthenticated = function(req, res, next) {
    * POST /login
    * Sign in with email and password
    */
-  exports.loginPost = function(req, res, next) {
+  exports.loginPost = function (req, res, next) {
     req.assert('email', 'Email is not valid').isEmail();
     req.assert('email', 'Email cannot be blank').notEmpty();
     req.assert('password', 'Password cannot be blank').notEmpty();
@@ -45,13 +45,13 @@ exports.ensureAuthenticated = function(req, res, next) {
 
     new User({ email: req.body.email })
       .fetch()
-      .then(function(user) {
+      .then(function (user) {
         if (!user) {
           return res.status(401).send({ msg: 'The email address ' + req.body.email + ' is not associated with any account. ' +
           'Double-check your email address and try again.'
           });
         }
-        user.comparePassword(req.body.password, function(err, isMatch) {
+        user.comparePassword(req.body.password, function (err, isMatch) {
           if (!isMatch) {
             return res.status(401).send({ msg: 'Invalid email or password' });
           }
@@ -63,8 +63,7 @@ exports.ensureAuthenticated = function(req, res, next) {
 /**
  * POST /signup
  */
-exports.signupPost = function(req, res, next) {
-  console.log(req.body)
+exports.signupPost = function (req, res, next) {
   req.assert('name', 'Name cannot be blank').notEmpty();
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
@@ -77,28 +76,45 @@ exports.signupPost = function(req, res, next) {
     return res.status(400).send(errors);
   }
 
+  // console.log(req.body)
+
   new User({
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
-    gender: req.body.gender
+    gender: req.body.gender,
+    birthDate: moment(req.body.birthDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+    ehVereador: req.body.ehVereador
   }).save()
-    .then(function(user) {
+    .then(function (user) {
+      if (!user.ehVereador) {
+        return res.send({ token: generateToken(user), user: user });
+      }
+
+      new Vereador({
+        userId: user.id,
+        codigoJusticaEleitoral: req.body.vereador.codigoJusticaEleitoral,
+        partido: req.body.vereador.partido,
+        numero: req.body.vereador.numero,
+        descricao: req.body.vereador.descricao
+      }).save().then((vereador) => {
+        console.log(vereador)
         res.send({ token: generateToken(user), user: user });
+      });
     })
-    .catch(function(err) {
+    .catch(function (err) {
+      console.log(err)
       if (err.code === 'ER_DUP_ENTRY' || err.code === '23505') {
         return res.status(400).send({ msg: 'The email address you have entered is already associated with another account.' });
       }
     });
 };
 
-
 /**
  * PUT /account
  * Update profile information OR change password.
  */
-exports.accountPut = function(req, res, next) {
+exports.accountPut = function (req, res, next) {
   if ('password' in req.body) {
     req.assert('password', 'Password must be at least 4 characters long').len(4);
     req.assert('confirm', 'Passwords must match').equals(req.body.password);
@@ -126,14 +142,14 @@ exports.accountPut = function(req, res, next) {
       website: req.body.website
     }, { patch: true });
   }
-  user.fetch().then(function(user) {
+  user.fetch().then(function (user) {
     if ('password' in req.body) {
       res.send({ msg: 'Your password has been changed.' });
     } else {
       res.send({ user: user, msg: 'Your profile information has been updated.' });
     }
     res.redirect('/account');
-  }).catch(function(err) {
+  }).catch(function (err) {
     if (err.code === 'ER_DUP_ENTRY') {
       res.status(409).send({ msg: 'The email address you have entered is already associated with another account.' });
     }
@@ -143,8 +159,8 @@ exports.accountPut = function(req, res, next) {
 /**
  * DELETE /account
  */
-exports.accountDelete = function(req, res, next) {
-  new User({ id: req.user.id }).destroy().then(function(user) {
+exports.accountDelete = function (req, res, next) {
+  new User({ id: req.user.id }).destroy().then(function (user) {
     res.send({ msg: 'Your account has been permanently deleted.' });
   });
 };
@@ -152,10 +168,10 @@ exports.accountDelete = function(req, res, next) {
 /**
  * GET /unlink/:provider
  */
-exports.unlink = function(req, res, next) {
+exports.unlink = function (req, res, next) {
   new User({ id: req.user.id })
     .fetch()
-    .then(function(user) {
+    .then(function (user) {
       switch (req.params.provider) {
         case 'facebook':
           user.set('facebook', null);
@@ -172,7 +188,7 @@ exports.unlink = function(req, res, next) {
         default:
         return res.status(400).send({ msg: 'Invalid OAuth Provider' });
       }
-      user.save(user.changed, { patch: true }).then(function() {
+      user.save(user.changed, { patch: true }).then(function () {
       res.send({ msg: 'Your account has been unlinked.' });
       });
     });
@@ -181,7 +197,7 @@ exports.unlink = function(req, res, next) {
 /**
  * POST /forgot
  */
-exports.forgotPost = function(req, res, next) {
+exports.forgotPost = function (req, res, next) {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.sanitize('email').normalizeEmail({ remove_dots: false });
@@ -193,27 +209,27 @@ exports.forgotPost = function(req, res, next) {
   }
 
   async.waterfall([
-    function(done) {
-      crypto.randomBytes(16, function(err, buf) {
+    function (done) {
+      crypto.randomBytes(16, function (err, buf) {
         var token = buf.toString('hex');
         done(err, token);
       });
     },
-    function(token, done) {
+    function (token, done) {
       new User({ email: req.body.email })
         .fetch()
-        .then(function(user) {
+        .then(function (user) {
           if (!user) {
         return res.status(400).send({ msg: 'The email address ' + req.body.email + ' is not associated with any account.' });
           }
           user.set('passwordResetToken', token);
           user.set('passwordResetExpires', new Date(Date.now() + 3600000)); // expire in 1 hour
-          user.save(user.changed, { patch: true }).then(function() {
+          user.save(user.changed, { patch: true }).then(function () {
             done(null, token, user.toJSON());
           });
         });
     },
-    function(token, user, done) {
+    function (token, user, done) {
       var transporter = nodemailer.createTransport({
         service: 'Mailgun',
         auth: {
@@ -230,7 +246,7 @@ exports.forgotPost = function(req, res, next) {
         'http://' + req.headers.host + '/reset/' + token + '\n\n' +
         'If you did not request this, please ignore this email and your password will remain unchanged.\n'
       };
-      transporter.sendMail(mailOptions, function(err) {
+      transporter.sendMail(mailOptions, function (err) {
         res.send({ msg: 'An email has been sent to ' + user.email + ' with further instructions.' });
         done(err);
       });
@@ -241,7 +257,7 @@ exports.forgotPost = function(req, res, next) {
 /**
  * POST /reset
  */
-exports.resetPost = function(req, res, next) {
+exports.resetPost = function (req, res, next) {
   req.assert('password', 'Password must be at least 4 characters long').len(4);
   req.assert('confirm', 'Passwords must match').equals(req.body.password);
 
@@ -252,23 +268,23 @@ exports.resetPost = function(req, res, next) {
   }
 
   async.waterfall([
-    function(done) {
+    function (done) {
       new User({ passwordResetToken: req.params.token })
         .where('passwordResetExpires', '>', new Date())
         .fetch()
-        .then(function(user) {
+        .then(function (user) {
           if (!user) {
           return res.status(400).send({ msg: 'Password reset token is invalid or has expired.' });
           }
           user.set('password', req.body.password);
           user.set('passwordResetToken', null);
           user.set('passwordResetExpires', null);
-          user.save(user.changed, { patch: true }).then(function() {
+          user.save(user.changed, { patch: true }).then(function () {
           done(err, user.toJSON());
           });
         });
     },
-    function(user, done) {
+    function (user, done) {
       var transporter = nodemailer.createTransport({
         service: 'Mailgun',
         auth: {
@@ -283,7 +299,7 @@ exports.resetPost = function(req, res, next) {
         text: 'Hello,\n\n' +
         'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
       };
-      transporter.sendMail(mailOptions, function(err) {
+      transporter.sendMail(mailOptions, function (err) {
         res.send({ msg: 'Your password has been changed successfully.' });
       });
     }
@@ -294,7 +310,7 @@ exports.resetPost = function(req, res, next) {
  * POST /auth/facebook
  * Sign in with Facebook
  */
-exports.authFacebook = function(req, res) {
+exports.authFacebook = function (req, res) {
   var profileFields = ['id', 'name', 'email', 'gender', 'location'];
   var accessTokenUrl = 'https://graph.facebook.com/v2.5/oauth/access_token';
   var graphApiUrl = 'https://graph.facebook.com/v2.5/me?fields=' + profileFields.join(',');
@@ -307,13 +323,13 @@ exports.authFacebook = function(req, res) {
   };
 
   // Step 1. Exchange authorization code for access token.
-  request.get({ url: accessTokenUrl, qs: params, json: true }, function(err, response, accessToken) {
+  request.get({ url: accessTokenUrl, qs: params, json: true }, function (err, response, accessToken) {
     if (accessToken.error) {
       return res.status(500).send({ msg: accessToken.error.message });
     }
 
     // Step 2. Retrieve user's profile information.
-    request.get({ url: graphApiUrl, qs: accessToken, json: true }, function(err, response, profile) {
+    request.get({ url: graphApiUrl, qs: accessToken, json: true }, function (err, response, profile) {
       if (profile.error) {
         return res.status(500).send({ msg: profile.error.message });
       }
@@ -322,7 +338,7 @@ exports.authFacebook = function(req, res) {
       if (req.isAuthenticated()) {
         new User({ facebook: profile.id })
           .fetch()
-          .then(function(user) {
+          .then(function (user) {
             if (user) {
               return res.status(409).send({ msg: 'There is already an existing account linked with Facebook that belongs to you.' });
             }
@@ -331,7 +347,7 @@ exports.authFacebook = function(req, res) {
             user.set('gender', user.get('gender') || profile.gender);
             user.set('picture', user.get('picture') || 'https://graph.facebook.com/' + profile.id + '/picture?type=large');
             user.set('facebook', profile.id);
-            user.save(user.changed, { patch: true }).then(function() {
+            user.save(user.changed, { patch: true }).then(function () {
               res.send({ token: generateToken(user), user: user });
             });
           });
@@ -339,13 +355,13 @@ exports.authFacebook = function(req, res) {
         // Step 3b. Create a new user account or return an existing one.
         new User({ facebook: profile.id })
           .fetch()
-          .then(function(user) {
+          .then(function (user) {
             if (user) {
               return res.send({ token: generateToken(user), user: user });
             }
             new User({ email: profile.email })
               .fetch()
-              .then(function(user) {
+              .then(function (user) {
                 if (user) {
                   return res.status(400).send({ msg: user.get('email') + ' is already associated with another account.' })
                 }
@@ -356,7 +372,7 @@ exports.authFacebook = function(req, res) {
                 user.set('location', profile.location && profile.location.name);
                 user.set('picture', 'https://graph.facebook.com/' + profile.id + '/picture?type=large');
                 user.set('facebook', profile.id);
-                user.save().then(function(user) {
+                user.save().then(function (user) {
                   return res.send({ token: generateToken(user), user: user });
                 });
               });
@@ -366,6 +382,6 @@ exports.authFacebook = function(req, res) {
   });
 };
 
-exports.authFacebookCallback = function(req, res) {
+exports.authFacebookCallback = function (req, res) {
   res.send('Loading...');
 };
