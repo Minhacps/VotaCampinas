@@ -3,6 +3,7 @@
   var app = angular.module('votaCampinas');
   var cadastroController = function ($scope, $rootScope, $location, $window, $auth) {
     $scope.user = {};
+    $scope.required = true;
 
     $scope.enviar = function () {
       $scope.user.gender = $('#sexo').val();
