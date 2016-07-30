@@ -18,10 +18,7 @@ exports.up = function (knex, Promise) {
       table.integer('prioridade1');
       table.integer('prioridade2');
       table.integer('prioridade3');
-      table.timestamps();
-    }),
-    knex.schema.createTable('eleitores', function (table) {
-      table.integer('userId').primary().unsigned().references('id').inTable('users');
+      table.boolean('ehVereador');
       table.timestamps();
     }),
     knex.schema.createTable('vereadores', function (table) {
@@ -38,7 +35,6 @@ exports.up = function (knex, Promise) {
 exports.down = function (knex, Promise) {
   return Promise.all([
     knex.schema.dropTable('users'),
-    knex.schema.dropTable('eleitores'),
     knex.schema.dropTable('vereadores')
   ]);
 };
