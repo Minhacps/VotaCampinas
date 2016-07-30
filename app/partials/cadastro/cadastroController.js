@@ -3,12 +3,9 @@
   var app = angular.module('votaCampinas');
   var cadastroController = function ($scope, $rootScope, $location, $window, $auth) {
     $scope.user = {};
-    $scope.user.birthDate = '16/11/1994';
 
     $scope.enviar = function () {
       $scope.user.gender = $('#sexo').val();
-
-      console.log($scope.user);
 
       $auth.signup($scope.user)
         .then(function (response) {
