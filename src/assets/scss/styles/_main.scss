@@ -3,19 +3,14 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 44px;
-}
-
 ul, ol {
   list-style: none;
 }
 
-footer {
-  position: absolute;
-  height: 44px;
-  bottom: 0;
-  padding: 0 30px;
+a {
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 label {

@@ -19,6 +19,8 @@ var User = require('./models/User');
 // Controllers
 var userController = require('./controllers/user');
 var contactController = require('./controllers/contact');
+var perguntasController = require('./controllers/perguntas');
+var respostasPerguntasController = require('./controllers/respostasPerguntas');
 
 var app = express();
 
@@ -64,6 +66,9 @@ app.post('/reset/:token', userController.resetPost);
 app.get('/unlink/:provider', userController.ensureAuthenticated, userController.unlink);
 app.post('/auth/facebook', userController.authFacebook);
 app.get('/auth/facebook/callback', userController.authFacebookCallback);
+
+app.get('/api/perguntas', perguntasController.obterPerguntas);
+app.post('/api/respostas', respostasPerguntasController.inserirReposta);
 
 var prioridadesController = require('./controllers/prioridades');
 app.get('/api/prioridades', prioridadesController.obterTodas);
