@@ -18,7 +18,7 @@ angular.module('votaCampinas', ['ngRoute', 'satellizer'])
       .when('/contact', {
         templateUrl: 'partials/contact.html',
         controller: 'ContactCtrl'
-      })      
+      })
       .when('/login', {
         templateUrl: 'partials/login/login.html',
         controller: 'loginController',
