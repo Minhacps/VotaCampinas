@@ -78,7 +78,7 @@ exports.signupPost = function (req, res, next) {
 
   // console.log(req.body)
 
-  new User({
+  User.forge({
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
@@ -91,14 +91,14 @@ exports.signupPost = function (req, res, next) {
         return res.send({ token: generateToken(user), user: user });
       }
 
-      new Vereador({
+      Vereador.forge({
         userId: user.id,
         codigoJusticaEleitoral: req.body.vereador.codigoJusticaEleitoral,
         partido: req.body.vereador.partido,
         numero: req.body.vereador.numero,
         descricao: req.body.vereador.descricao
       }).save().then((vereador) => {
-        console.log(vereador)
+        console.log(vereador);
         res.send({ token: generateToken(user), user: user });
       });
     })
