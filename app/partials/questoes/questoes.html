@@ -1,21 +1,37 @@
 <div class="row">
   <div class="col s12">
       <h1>Questões</h1>
-      <h2>Responda as perguntas</h2>
+      <h3>Responda as perguntas</h3>
   </div>
   <div class="col s12">
     <form novalidate>
-        <h3>{{perguntas[pagina].pergunta}}</h3>
-        <input ng-click="next()" ng-model="perguntas[pagina].resposta" name="resposta-{{perguntas[pagina]}}" id="resposta-2-{{perguntas[pagina]}}" type="radio" value="2"/>
-        <label for="resposta-2-{{perguntas[pagina]}}">Concordo plenamente</label>
-        <input ng-click="next()" ng-model="perguntas[pagina].resposta" name="resposta-{{perguntas[pagina]}}" id="resposta-4-{{perguntas[pagina]}}" type="radio" value="4"/>
-        <label for="resposta-4-{{perguntas[pagina]}}">Concordo</label>
-        <input ng-click="next()" ng-model="perguntas[pagina].resposta" name="resposta-{{perguntas[pagina]}}" id="resposta-1-{{perguntas[pagina]}}" type="radio" value="1"/>
-        <label for="resposta-1-{{perguntas[pagina]}}">Discordo plenamente</label>
-        <input ng-click="next()" ng-model="perguntas[pagina].resposta" name="resposta-{{perguntas[pagina]}}" id="resposta-3-{{perguntas[pagina]}}" type="radio" value="3"/>
-        <label for="resposta-3-{{perguntas[pagina]}}">Discordo</label>
-
-      <input ng-click="back()" ng-if="pagina !== 1" type="button" class="btn" style="margin-top: 30px;" value="Voltar">
+        <p>{{perguntas[pagina].pergunta}}</p>
+        <ul class="form-questoes">
+          <li>
+            <input ng-click="next()" ng-model="perguntas[pagina].resposta" name="resposta-{{perguntas[pagina]}}" id="resposta-2-{{perguntas[pagina]}}" type="radio" value="2"/>
+            <label for="resposta-2-{{perguntas[pagina]}}">Concordo plenamente</label>
+           </li>
+           <li>
+             <input ng-click="next()" ng-model="perguntas[pagina].resposta" name="resposta-{{perguntas[pagina]}}" id="resposta-4-{{perguntas[pagina]}}" type="radio" value="4"/>
+             <label for="resposta-4-{{perguntas[pagina]}}">Concordo</label>
+           </li>
+           <li>
+              <input ng-click="next()" ng-model="perguntas[pagina].resposta" name="resposta-{{perguntas[pagina]}}" id="resposta-1-{{perguntas[pagina]}}" type="radio" value="1"/>
+              <label for="resposta-1-{{perguntas[pagina]}}">Discordo plenamente</label>           
+           </li>
+           <li>
+             <input ng-click="next()" ng-model="perguntas[pagina].resposta" name="resposta-{{perguntas[pagina]}}" id="resposta-3-{{perguntas[pagina]}}" type="radio" value="3"/>
+             <label for="resposta-3-{{perguntas[pagina]}}">Discordo</label>
+           </li>
+        </ul>
+        <div class="row">
+          <div class="col s6 m6 l6">
+            <input ng-click="back()" ng-if="pagina !== 1" type="button" class="btn" value="Voltar">    
+          </div>
+          <div class="col s6 m6 l6">
+            <a class="red-text pular tooltipped" data-position="left" data-delay="30" data-tooltip="Você só pode pular a partir da 18ª questão" href="" disabled>* Pular</a>        
+          </div>
+        </div>
     </form>
   </div>
 </div>

@@ -22,10 +22,10 @@
   	$scope.selecionadas = {};
 
     $scope.next = function () {
-      perguntasFactory.salvarResposta($scope.perguntas[$scope.pagina])
-      .success(function () {
+      //perguntasFactory.salvarResposta($scope.perguntas[$scope.pagina])
+      //.success(function () {
         ++$scope.pagina;
-      });
+      //});
   		// if (!inTransition) {
   		// 	inTransition = true;
   		// 	$timeout(function (){
