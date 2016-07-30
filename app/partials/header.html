@@ -3,21 +3,22 @@
       <a href="/" class="brand-logo" style="height: 100%;">
           <img src="http://placehold.it/200x100" alt="" style="height: 100%;">
       </a>
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <a href="#" class="button-collapse" data-activates="mobile-demo" data-sidenav="left" data-menuwidth="500" data-closeonclick="false"><i class="material-icons">menu</i></a>
+
       <ul class="right hide-on-med-and-down">
-        <li ng-if="!isAuthenticated()"><a href="/projeto" ng-class="{ active: isActive('/projeto')}">O Projeto</a></li>
-        <li ng-if="!isAuthenticated()"><a href="/como-funciona" ng-class="{ active: isActive('/como-funciona')}">Como funciona</a></li>
+        <li ng-if="!isAuthenticated()"><a href="/projeto" ng-click="closeNav()" ng-class="{ active: isActive('/projeto')}">O Projeto</a></li>
+        <li ng-if="!isAuthenticated()"><a href="/como-funciona" ng-click="closeNav()" ng-class="{ active: isActive('/como-funciona')}">Como funciona</a></li>
         <li ng-if="!isAuthenticated()"><a href="/" ng-class="{ active: isActive('/')}">Entrar</a></li>
         <li ng-if="!isAuthenticated()"><a href="/cadastro" ng-class="{ active: isActive('/cadastro')}">Cadastre-se</a></li>
         <li ng-if="isAuthenticated()"><a href="/account" ng-class="{ active: isActive('/account')}">My Account</a></li>
         <li ng-if="isAuthenticated()"><a href="#" ng-click="logout()">Logout</a></li>
       </ul>
        <ul class="side-nav" id="mobile-demo">
-        <li ng-if="!isAuthenticated()"><a href="/projeto" ng-class="{ active: isActive('/projeto')}">O Projeto</a></li>
-        <li ng-if="!isAuthenticated()"><a href="/como-funciona" ng-class="{ active: isActive('/como-funciona')}">Como funciona</a></li>
-        <li ng-if="!isAuthenticated()"><a href="/" ng-class="{ active: isActive('/')}">Entrar</a></li>
-        <li ng-if="!isAuthenticated()"><a href="/cadastro" ng-class="{ active: isActive('/cadastro')}">Cadastre-se</a></li>
-        <li ng-if="isAuthenticated()"><a href="/account" ng-class="{ active: isActive('/account')}">My Account</a></li>
+        <li ng-if="!isAuthenticated()"><a href="/projeto" ng-click="closeNav()" ng-class="{ active: isActive('/projeto')}">O Projeto</a></li>
+        <li ng-if="!isAuthenticated()"><a href="/como-funciona" ng-click="closeNav()" ng-class="{ active: isActive('/como-funciona')}">Como funciona</a></li>
+        <li ng-if="!isAuthenticated()"><a href="/" ng-click="closeNav()" ng-class="{ active: isActive('/')}">Entrar</a></li>
+        <li ng-if="!isAuthenticated()"><a href="/cadastro" ng-click="closeNav()" ng-class="{ active: isActive('/cadastro')}">Cadastre-se</a></li>
+        <li ng-if="isAuthenticated()"><a href="/account" ng-click="closeNav()" ng-class="{ active: isActive('/account')}">My Account</a></li>
         <li ng-if="isAuthenticated()"><a href="#" ng-click="logout()">Logout</a></li>        
        </ul>
   </div>

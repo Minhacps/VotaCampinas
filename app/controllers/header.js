@@ -1,6 +1,10 @@
 angular.module('votaCampinas')
   .controller('HeaderCtrl', function($scope, $location, $window, $auth) {
     $(".button-collapse").sideNav();
+
+    $scope.closeNav = function() {
+      $(".button-collapse").sideNav('hide');
+    };
     
     $scope.isActive = function (viewLocation) {
       return viewLocation === $location.path();
@@ -14,5 +18,6 @@ angular.module('votaCampinas')
       $auth.logout();
       delete $window.localStorage.user;
       $location.path('/');
+      $scope.closeNav();
     };
   });
