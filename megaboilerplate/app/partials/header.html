@@ -1,0 +1,17 @@
+<nav class="page-header" ng-controller="HeaderCtrl">
+  <div class="nav-wrapper container">
+      <a href="/" class="brand-logo" style="height: 100%;">
+          <img src="http://placehold.it/200x100" alt="" style="height: 100%;">
+      </a>
+
+      <ul ng-if="isAuthenticated()" class="right hide-on-med-and-down">
+        <li><a href="/account" ng-class="{ active: isActive('/account')}">My Account</a></li>
+        <li><a href="#" ng-click="logout()">Logout</a></li>
+      </ul>
+      <ul ng-if="!isAuthenticated()" class="right hide-on-med-and-down">
+        <li><a href="/" ng-class="{ active: isActive('/')}">Entrar</a></li>
+        <li><a href="/cadastro" ng-class="{ active: isActive('/cadastro')}">Cadastre-se</a></li>
+      </ul>
+  </div>
+  <div class="col s10"></div>
+</nav>

@@ -1,0 +1,62 @@
+{
+  "name": "votacampinas",
+  "version": "1.0.0",
+  "description": "Esse repositório contem o código do programa que auxilia os eleitores e eleitoras de Campinas a escolherem o seu candidato ou candidata a vereadora de Campinas para as eleiçoes de 2016",
+  "scripts": {
+    "build": "gulp build",
+    "build:production": "gulp build --production",
+    "postinstall": "bower install && npm run build:production",
+    "start": "node server.js",
+    "test": "npm run test:server && npm run test:client",
+    "test:client": "karma start app/karma.conf.js --single-run",
+    "test:server": "jasmine",
+    "watch": "gulp"
+  },
+  "dependencies": {
+    "async": "^1.5.2",
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "^1.15.1",
+    "bookshelf": "^0.9.2",
+    "compression": "^1.6.2",
+    "cookie-parser": "^1.4.1",
+    "dotenv": "^2.0.0",
+    "express": "^4.13.4",
+    "express-validator": "^2.20.4",
+    "gulp": "^3.9.1",
+    "gulp-angular-templatecache": "latest",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-concat": "latest",
+    "gulp-csso": "^1.1.0",
+    "gulp-if": "^2.0.0",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.3",
+    "jsonwebtoken": "^5.7.0",
+    "knex": "^0.10.0",
+    "moment": "^2.12.0",
+    "morgan": "^1.7.0",
+    "mysql": "^2.10.2",
+    "nodemailer": "^2.3.0",
+    "request": "^2.69.0",
+    "vinyl-buffer": "^1.0.0",
+    "yargs": "^4.3.2"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.13.0",
+    "gulp-nodemon": "^2.1.0",
+    "jasmine": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-coverage": "^0.5.5",
+    "karma-jasmine": "^0.3.7",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "phantomjs-prebuilt": "^2.1.7",
+    "semistandard": "^8.0.0"
+  },
+  "engines": {
+    "node": "6.1.0"
+  },
+  "semistandard": {
+    "globals": ["angular", "$"]
+  }
+}
