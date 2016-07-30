@@ -125,6 +125,8 @@ angular.module('votaCampinas')
 
 angular.module('votaCampinas')
   .controller('HeaderCtrl', ["$scope", "$location", "$window", "$auth", function($scope, $location, $window, $auth) {
+    $(".button-collapse").sideNav();
+    
     $scope.isActive = function (viewLocation) {
       return viewLocation === $location.path();
     };

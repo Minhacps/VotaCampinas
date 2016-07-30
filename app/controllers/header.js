@@ -1,5 +1,7 @@
 angular.module('votaCampinas')
   .controller('HeaderCtrl', function($scope, $location, $window, $auth) {
+    $(".button-collapse").sideNav();
+    
     $scope.isActive = function (viewLocation) {
       return viewLocation === $location.path();
     };
