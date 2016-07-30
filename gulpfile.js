@@ -65,6 +65,7 @@ gulp.task('vendor', function () {
 gulp.task('watch', function () {
   gulp.watch('app/partials/**/*.html', ['templates']);
   gulp.watch('app/**/*.js', ['angular']);
+  gulp.watch('public/components/materialize/sass/*.scss', ['materialize']);
 });
 
 gulp.task('build', ['angular', 'vendor', 'templates', 'materialize']);
