@@ -10,21 +10,22 @@
     <hr>
   </div>
 
-  <form data-ng-submit="enviar()">
+  <form data-ng-submit="enviar()" name="formLogin">
     <div class="col s12 input-field">
-      <label for="">E-mail</label>
-      <input type="text" data-ng-model="user.email">
+      <label for="email">E-mail</label>
+      <input id="email" name="email" type="email" data-ng-model="user.email" ng-required="true">
     </div>
 
     <div class="col s12 input-field">
-      <label for="">Senha</label>
-      <input type="password" data-ng-model="user.password">
+      <label for="password">Senha</label>
+      <input id="password" name="password" type="password" data-ng-model="user.password" ng-required="true" ng-minlength="">
     </div>
 
     <div class="col s12 input-field">
-      <button class="btn">Entrar</button>
+      <button type="submit" class="btn" ng-disabled="formLogin.$invalid">Entrar</button>
     </div>
   </form>
+
 
   <div class="col s12">
     <a data-ng-href="/cadastro">Cadastre-se</a>
