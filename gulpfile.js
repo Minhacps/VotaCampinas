@@ -12,7 +12,7 @@ var browserSync = require('browser-sync').create();
 
 gulp.task('browser-sync', function () {
   browserSync.init({
-    proxy: '127.0.0.1:3000',
+    proxy: 'localhost:3000',
     port: '8000'
   });
 });
@@ -37,30 +37,26 @@ gulp.task('angular', function () {
     .pipe(concat('application.js'))
     .pipe(ngAnnotate())
     .pipe(gulpif(argv.production, uglify()))
-    .pipe(gulp.dest('public/js'))
-    .pipe(browserSync.stream());
+    .pipe(gulp.dest('public/js'));
 });
 
 gulp.task('materialize', function () {
   return gulp.src('src/assets/scss/materialize.scss')
     .pipe(sass())
-    .pipe(gulp.dest('public/css'))
-    .pipe(browserSync.stream());
+    .pipe(gulp.dest('public/css'));
 });
 
 gulp.task('styles', function () {
   return gulp.src('src/assets/scss/votacampinas.scss')
     .pipe(sass())
-    .pipe(gulp.dest('public/css'))
-    .pipe(browserSync.stream());
+    .pipe(gulp.dest('public/css'));
 });
 
 gulp.task('templates', function () {
   return gulp.src('app/partials/**/*.html')
     .pipe(templateCache({ root: 'partials', module: 'votaCampinas' }))
     .pipe(gulpif(argv.production, uglify()))
-    .pipe(gulp.dest('public/js'))
-    .pipe(browserSync.stream());
+    .pipe(gulp.dest('public/js'));
 });
 
 gulp.task('vendor', function () {
@@ -74,6 +70,7 @@ gulp.task('watch', function () {
   gulp.watch('app/**/*.js', ['angular']);
   gulp.watch('src/assets/scss/components/**/*.scss', ['materialize']);
   gulp.watch('src/assets/scss/styles/**/*.scss', ['styles']);
+  gulp.watch('public/**/*').on('change', browserSync.reload);
 });
 
 gulp.task('build', ['angular', 'vendor', 'templates', 'materialize']);
