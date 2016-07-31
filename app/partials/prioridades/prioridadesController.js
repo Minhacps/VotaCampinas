@@ -4,13 +4,13 @@
 
   var app = angular.module('votaCampinas');
 
-  var prioridadesController = function($scope, $timeout, $http) { 
+  var prioridadesController = function($scope, $timeout, $http, $location) {
   	var inTransition = false;
 
     $scope.submitOk     = false;
   	$scope.pagina       = 1;
     $scope.respostas    = [];
-    
+
     $scope.model = {
       id: "",
       prioridade: ""
@@ -66,7 +66,7 @@
     $scope.submit = function(){
       $http.post('/api/prioridades', $scope.respostas)
       .success(function(suc){
-        console.log(suc);
+        $location.path('/perguntas');
       })
       .error(function(err){
         console.log(err);

@@ -419,7 +419,7 @@ angular.module('votaCampinas')
         .then(function (response) {
           $rootScope.currentUser = response.data.user;
           $window.localStorage.user = JSON.stringify(response.data.user);
-          $location.path('/account');
+          $location.path('/prioridades');
         })
         .catch(function (response) {
           $scope.messages = {
@@ -474,13 +474,13 @@ angular.module('votaCampinas')
 
   var app = angular.module('votaCampinas');
 
-  var prioridadesController = function($scope, $timeout, $http) { 
+  var prioridadesController = function($scope, $timeout, $http, $location) {
   	var inTransition = false;
 
     $scope.submitOk     = false;
   	$scope.pagina       = 1;
     $scope.respostas    = [];
-    
+
     $scope.model = {
       id: "",
       prioridade: ""
@@ -536,7 +536,7 @@ angular.module('votaCampinas')
     $scope.submit = function(){
       $http.post('/api/prioridades', $scope.respostas)
       .success(function(suc){
-        console.log(suc);
+        $location.path('/perguntas');
       })
       .error(function(err){
         console.log(err);
@@ -544,11 +544,12 @@ angular.module('votaCampinas')
     }
 
   }
-  prioridadesController.$inject = ["$scope", "$timeout", "$http"];
+  prioridadesController.$inject = ["$scope", "$timeout", "$http", "$location"];
 
   app.controller('prioridadesController', prioridadesController);
 
 }());
+
 (function () {
   'use strict';
 
@@ -556,21 +557,13 @@ angular.module('votaCampinas')
 
   var questoesController = function ($scope, $timeout, perguntasFactory) {
     perguntasFactory.obterPerguntas()
-    .success(function (perguntas) {
-      $scope.perguntas = perguntas;
-    });
+      .success(function (perguntas) {
+        $scope.perguntas = perguntas;
+      });
 
-  	var prioridades  = [],
-  		inTransition = false;
+    $scope.pagina = 0;
 
-  	$scope.model = {
-  		prioridade: "",
-  		selecionadas: {}
-  	}
-
-  	$scope.pagina = 0;
-
-  	$scope.selecionadas = {};
+    $scope.selecionadas = {};
 
     $scope.next = function () {
       $scope.enviando = true;
@@ -579,22 +572,19 @@ angular.module('votaCampinas')
         var pergunta = angular.copy($scope.perguntas[$scope.pagina]);
         perguntasFactory.salvarResposta(pergunta)
         .success(function () {
-            ++$scope.pagina;
-            $scope.enviando = false;
+          ++$scope.pagina;
+          $scope.enviando = false;
         });
       }, 700);
-  	}
+    };
 
-  	$scope.back = function (){
-		  --$scope.pagina;
-      console.log($scope.perguntas[$scope.pagina])
-  	}
-
-  }
+    $scope.back = function () {
+      --$scope.pagina;
+    };
+  };
   questoesController.$inject = ["$scope", "$timeout", "perguntasFactory"];
 
   app.controller('questoesController', questoesController);
-
 }());
 
 (function () {
