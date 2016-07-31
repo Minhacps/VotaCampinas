@@ -4,11 +4,11 @@
       <h2>Para você, quais são as principais prioridades para Campinas?</h2>
   </div>
   <div class="col s12">
-    <form novalidate>
-      <div class="opcoes" style="position: relative;">
+    <form id="opcoes" style="min-height: 320px;" novalidate>
+      <div class="opcoes" style="position: relative; min-height: 250px;">
         <h3>Prioridade nível {{pagina}}</h3>
         <div ng-if="opcoes" ng-repeat="opcao in opcoes | orderBy: 'prioridade'">
-          <input ng-click="next()" ng-model="model.prioridade" name="prioridade" type="radio" value="{{opcao.id}}" id="prioridade-{{$index}}" />
+          <input ng-click="next()" ng-disabled="enviando" ng-model="model.prioridade" name="prioridade" type="radio" value="{{opcao.id}}" id="prioridade-{{$index}}" />
           <label for="prioridade-{{$index}}">{{opcao.prioridade}}</label>
         </div>
       </div>
