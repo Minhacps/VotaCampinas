@@ -1,5 +1,5 @@
 angular.module('votaCampinas', ['ngRoute', 'satellizer'])
-  .config(function($routeProvider, $locationProvider, $authProvider) {
+  .config(function ($routeProvider, $locationProvider, $authProvider) {
     $locationProvider.html5Mode(true);
 
     $routeProvider
@@ -45,8 +45,8 @@ angular.module('votaCampinas', ['ngRoute', 'satellizer'])
         resolve: { loginRequired: loginRequired }
       })
       .when('/perguntas', {
-        templateUrl: 'partials/questoes/questoes.html',
-        controller: 'questoesController',
+        templateUrl: 'partials/perguntas/perguntas.html',
+        controller: 'perguntasController',
         resolve: { loginRequired: loginRequired }
       })
       .when('/signup', {
@@ -81,19 +81,19 @@ angular.module('votaCampinas', ['ngRoute', 'satellizer'])
       redirectUri: 'http://localhost:3000/auth/facebook/callback'
     });
 
-    function skipIfAuthenticated($location, $auth) {
+    function skipIfAuthenticated ($location, $auth) {
       if ($auth.isAuthenticated()) {
         $location.path('/');
       }
     }
 
-    function loginRequired($location, $auth) {
+    function loginRequired ($location, $auth) {
       if (!$auth.isAuthenticated()) {
         $location.path('/login');
       }
     }
   })
-  .run(function($rootScope, $window) {
+  .run(function ($rootScope, $window) {
     if ($window.localStorage.user) {
       $rootScope.currentUser = JSON.parse($window.localStorage.user);
     }

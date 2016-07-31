@@ -3,10 +3,10 @@
 
   var app = angular.module('votaCampinas');
 
-  var questoesController = function ($scope, $timeout, perguntasFactory) {
+  var perguntasController = function ($scope, $timeout, perguntasFactory) {
     perguntasFactory.obterPerguntas()
       .success(function (perguntas) {
-        $scope.perguntas = perguntas;
+        $scope.perguntas = perguntas.slice(0, 3);
       });
 
     $scope.pagina = 0;
@@ -31,5 +31,5 @@
     };
   };
 
-  app.controller('questoesController', questoesController);
+  app.controller('perguntasController', perguntasController);
 }());
