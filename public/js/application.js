@@ -495,6 +495,7 @@ angular.module('votaCampinas')
     })
 
   	$scope.next = function(){
+      $scope.enviando = true;
   		if(!inTransition){
         var opcoes  = $scope.opcoes,
             opcao   = $scope.model.prioridade,
@@ -515,13 +516,14 @@ angular.module('votaCampinas')
             opcoes.splice(idx, 1);
             opcao = '';
             $scope.pagina += 1;
+            $('.opcoes').animate({left: '600', opacity: 0}, 400).animate({left: '-400'}, 400).animate({left: '0', opacity: 1}, 400);
             return inTransition = false;
           }, 500);
 
-          $('.opcoes').animate({left: '1900px'}, 400).animate({left: '-1900px'}, 0).animate({left: '0'}, 400);
         }
 
         $scope.respostas.push(op);
+        $scope.enviando = false;
       }
   	}
 
@@ -530,7 +532,7 @@ angular.module('votaCampinas')
       $scope.opcoes.push($scope.respostas.pop());
   		$scope.model.prioridade = '';
 		  $scope.pagina -= 1;
-      $('.opcoes').animate({left: '-1900px'}, 400).animate({left: '1900px'}, 0).animate({left: '0'}, 400);
+      $('.opcoes').animate({left: '-400', opacity: 0}, 400).animate({left: '500'}, 400).animate({left: '0', opacity: 1}, 400);
   	}
 
     $scope.submit = function(){
