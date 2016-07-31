@@ -5,21 +5,13 @@
 
   var questoesController = function ($scope, $timeout, perguntasFactory) {
     perguntasFactory.obterPerguntas()
-    .success(function (perguntas) {
-      $scope.perguntas = perguntas;
-    });
+      .success(function (perguntas) {
+        $scope.perguntas = perguntas;
+      });
 
-  	var prioridades  = [],
-  		inTransition = false;
+    $scope.pagina = 0;
 
-  	$scope.model = {
-  		prioridade: "",
-  		selecionadas: {}
-  	}
-
-  	$scope.pagina = 0;
-
-  	$scope.selecionadas = {};
+    $scope.selecionadas = {};
 
     $scope.next = function () {
       $scope.enviando = true;
@@ -28,19 +20,16 @@
         var pergunta = angular.copy($scope.perguntas[$scope.pagina]);
         perguntasFactory.salvarResposta(pergunta)
         .success(function () {
-            ++$scope.pagina;
-            $scope.enviando = false;
+          ++$scope.pagina;
+          $scope.enviando = false;
         });
       }, 700);
-  	}
+    };
 
-  	$scope.back = function (){
-		  --$scope.pagina;
-      console.log($scope.perguntas[$scope.pagina])
-  	}
-
-  }
+    $scope.back = function () {
+      --$scope.pagina;
+    };
+  };
 
   app.controller('questoesController', questoesController);
-
 }());

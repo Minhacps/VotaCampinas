@@ -2,18 +2,18 @@
   <div class="col s12">
     <h1>Login</h1>
   </div>
-  <div class="col s12">
+  <!-- <div class="col s12">
     <button class="btn">Logar com Facebook</button>
-  </div>
+  </div> -->
 
-  <div class="col s12 center-align">
+  <!-- <div class="col s12 center-align">
     <hr>
-  </div>
+  </div> -->
 
-  <form data-ng-submit="enviar()" name="formLogin">
+  <form data-ng-submit="enviar()" name="formLogin" class="col s8 pull-s2 center-align">
     <div class="col s12 input-field">
       <label for="email">E-mail</label>
-      <input id="email" name="email" type="email" data-ng-model="user.email" ng-required="true">
+      <input id="email" name="email" type="email" data-ng-model="user.email" ng-required="true" autofocus>
     </div>
 
     <div class="col s12 input-field">
