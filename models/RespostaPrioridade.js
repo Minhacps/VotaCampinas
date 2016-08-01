@@ -1,15 +1,12 @@
-var bookshelf = require('../config/bookshelf');
+const bookshelf = require('../config/bookshelf');
+const User = require('./User');
+const Pergunta = require('./Pergunta');
 
-var RespostaPrioridade = bookshelf.Model.extend({
+const RespostaPrioridade = bookshelf.Model.extend({
   tableName: 'respostasPrioridades',
   hasTimestamps: true,
-
-  user: function () {
-    return this.belongsTo(User);
-  },
-  pergunta: function () {
-    return this.belongsTo(Pergunta);
-  }
+  userId: () => this.belongsTo(User),
+  pergunta: () => this.belongsTo(Pergunta)
 });
 
 module.exports = RespostaPrioridade;

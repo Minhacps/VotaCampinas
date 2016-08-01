@@ -9,7 +9,7 @@
         <h4>Pessoais</h4>
         <div class="row">
           <div class="input-field col s12">
-            <input id="nome" type="text" name="name" data-ng-model="user.name" ng-required="required">
+            <input id="nome" type="text" name="name" data-ng-model="user.name" ng-required="required" autofocus>
             <label for="nome">Nome</label>
           </div>
         </div>
@@ -61,7 +61,7 @@
            <div class="row">
             <div class="input-field col s12">
               <textarea id="descricao" class="materialize-textarea" length="120" data-ng-model="user.vereador.descricao" ng-required="user.ehVereador"></textarea>
-              <label for="descricao">Descrição</label>
+              <label for="descricao">Descrição - Esta será a descrição do seu perfil para o eleitor</label>
             </div>
           </div>
         </div>

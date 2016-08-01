@@ -39,7 +39,8 @@ exports.inserirRespostas = function(req, res){
     return res.status(500).json({err: "voce precisa responder as 3 questoes."});
 
   RespostaPrioridade.forge()
-    .fetchAll({ userId: req.user.id})
+    .where('userId', req.user.id)
+    .fetchAll()
     .then((results) => {
       if(results.length > 0)
         return res.status(500).send({err:"voce ja adicionou suas respostas"});
@@ -49,5 +50,17 @@ exports.inserirRespostas = function(req, res){
         }, (err) => {
           return res.status(500).send(err);
         })
+    });
+};
+
+exports.obterRespostas = function (req, res) {
+  RespostaPrioridade.forge()
+    .where('userId', req.user.id)
+    .fetch()
+    .then(function (prioridades) {
+      res.send(prioridades);
+    })
+    .catch(function (err) {
+      res.status(500).send(err);
     });
 };

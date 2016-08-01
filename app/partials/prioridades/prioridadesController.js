@@ -4,7 +4,7 @@
 
   var app = angular.module('votaCampinas');
 
-  var prioridadesController = function($scope, $timeout, $http, $location) {
+  var prioridadesController = function ($rootScope, $scope, $timeout, $http, $location) {
   	var inTransition = false;
 
     $scope.submitOk     = false;
@@ -15,6 +15,11 @@
       id: "",
       prioridade: ""
     };
+
+    $http.get('/api/prioridades/' + $rootScope.currentUser.id)
+    .success(function (res) {
+      console.log(res);
+    });
 
     $http.get('/api/prioridades')
     .success(function(suc){

@@ -542,7 +542,7 @@ angular.module('votaCampinas')
 
   var app = angular.module('votaCampinas');
 
-  var prioridadesController = function($scope, $timeout, $http, $location) {
+  var prioridadesController = function ($rootScope, $scope, $timeout, $http, $location) {
   	var inTransition = false;
 
     $scope.submitOk     = false;
@@ -553,6 +553,11 @@ angular.module('votaCampinas')
       id: "",
       prioridade: ""
     };
+
+    $http.get('/api/prioridades/' + $rootScope.currentUser.id)
+    .success(function (res) {
+      console.log(res);
+    });
 
     $http.get('/api/prioridades')
     .success(function(suc){
@@ -614,7 +619,7 @@ angular.module('votaCampinas')
     }
 
   }
-  prioridadesController.$inject = ["$scope", "$timeout", "$http", "$location"];
+  prioridadesController.$inject = ["$rootScope", "$scope", "$timeout", "$http", "$location"];
 
   app.controller('prioridadesController', prioridadesController);
 
