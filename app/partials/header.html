@@ -11,16 +11,16 @@
         <li ng-class="{ active: isActive('/como-funciona')}"><a href="/como-funciona" ng-click="closeNav()">Como funciona</a></li>
         <li ng-class="{ active: isActive('/login')}" ng-if="!isAuthenticated()"><a href="/login">Entrar</a></li>
         <li ng-class="{ active: isActive('/cadastro')}" ng-if="!isAuthenticated()"><a href="/cadastro">Cadastre-se</a></li>
-        <li ng-class="{ active: isActive('/account')}" ng-if="isAuthenticated()"><a href="/account">My Account</a></li>
-        <li ng-if="isAuthenticated()"><a href="#" ng-click="logout()">Logout</a></li>
+        <li ng-class="{ active: isActive('/account')}" ng-if="isAuthenticated()"><a href="/account">Meu perfil</a></li>
+        <li ng-if="isAuthenticated()"><a href="#" ng-click="logout()">Sair</a></li>
       </ul>
        <ul class="side-nav" id="mobile-demo">
         <li ng-class="{ active: isActive('/projeto')}"><a href="/projeto" ng-click="closeNav()">O Projeto</a></li>
         <li ng-class="{ active: isActive('/como-funciona')}"><a href="/como-funciona" ng-click="closeNav()">Como funciona</a></li>
         <li ng-class="{ active: isActive('/login')}" ng-if="!isAuthenticated()"><a href="/" ng-click="closeNav()">Entrar</a></li>
         <li ng-class="{ active: isActive('/cadastro')}" ng-if="!isAuthenticated()"><a href="/cadastro" ng-click="closeNav()">Cadastre-se</a></li>
-        <li ng-class="{ active: isActive('/account')}" ng-if="isAuthenticated()"><a href="/account" ng-click="closeNav()">My Account</a></li>
-        <li ng-if="isAuthenticated()"><a href="#" ng-click="logout()">Logout</a></li>
+        <li ng-class="{ active: isActive('/account')}" ng-if="isAuthenticated()"><a href="/account" ng-click="closeNav()">Meu Perfil</a></li>
+        <li ng-if="isAuthenticated()"><a href="#" ng-click="logout()">Sair</a></li>
        </ul>
   </div>
   <div class="col s10"></div>
