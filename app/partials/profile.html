@@ -6,50 +6,38 @@
     <div ng-repeat="success in messages.success">{{success.msg}}</div>
   </div>
 
-  <h4>Profile Information</h4>
+  <h4>Meu perfil</h4>
 
   <form ng-submit="updateProfile()">
     <label for="email">Email</label>
     <input type="email" name="email" id="email" ng-model="profile.email">
-    <label for="name">Name</label>
+
+    <label for="name">Nome</label>
     <input type="text" name="name" id="name" ng-model="profile.name">
-    <label>Gender</label>
-    <input type="radio" name="gender" id="male" value="male" ng-checked="profile.gender === 'male'">
-    <label for="male">Male</label>
-    <input type="radio" name="gender" id="female" value="female" ng-checked="profile.gender === 'female'">
-    <label for="female">Female</label>
-    <label for="location">Location</label>
-    <input type="text" name="location" id="location" ng-model="profile.location">
-    <label for="website">Website</label>
-    <input type="text" name="website" id="website" ng-model="profile.website">
+
     <label>Gravatar</label>
     <img ng-src="{{profile.gravatar}}" class="gravatar" width="100" height="100">
     <br>
-    <button type="submit">Update Profile</button>
+
+    <button class="btn waves-effect waves-light" type="submit" name="action">Atualizar perfil
+      <i class="material-icons right">send</i>
+    </button>
   </form>
 
-  <h4>Change Password</h4>
+  <br>
+  <hr>
+
+  <h4>Alterar senha</h4>
 
   <form ng-submit="changePassword()">
-    <label for="password">New Password</label>
+    <label for="password">Nova senha</label>
     <input type="password" name="password" id="password" ng-model="profile.password">
-    <label for="confirm">Confirm Password</label>
+    <label for="confirm">Confirme sua senha</label>
     <input type="password" name="confirm" id="confirm" ng-model="profile.confirm">
     <br>
-    <button type="submit">Change Password</button>
-  </form>
 
-  <h4>Linked Accounts</h4>
-
-  <p>
-    <a href="#" ng-click="unlink('facebook')" ng-if="currentUser.facebook" class="text-danger">Unlink your Facebook account</a>
-    <a href="#" ng-click="link('facebook')" ng-if="!currentUser.facebook">Link your Facebook account</a>
-  </p>
-
-  <h4>Delete Account</h4>
-
-  <form ng-submit="deleteAccount()">
-    <p>You can delete your account, but keep in mind this action is irreversible.</p>
-    <button type="submit">Delete my account</button>
+    <button class="btn waves-effect waves-light" type="submit" name="action">Atualizar senha
+      <i class="material-icons right">send</i>
+    </button>
   </form>
 </div>
