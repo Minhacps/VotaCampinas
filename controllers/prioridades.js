@@ -55,8 +55,8 @@ exports.inserirRespostas = function(req, res){
 
 exports.obterRespostas = function (req, res) {
   RespostaPrioridade.forge()
-    .where('userId', req.user.id)
-    .fetch()
+    .where('userId', '=', req.user.id)
+    .fetchAll()
     .then(function (prioridades) {
       res.send(prioridades);
     })

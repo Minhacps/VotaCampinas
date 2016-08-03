@@ -12,22 +12,24 @@
     $scope.respostas    = [];
 
     $scope.model = {
-      id: "",
-      prioridade: ""
+      id: '',
+      prioridade: ''
     };
 
     $http.get('/api/prioridades/' + $rootScope.currentUser.id)
     .success(function (res) {
-      console.log(res);
+      if (res.length === 3) {
+        $location.path('perguntas');
+      }
     });
 
     $http.get('/api/prioridades')
-    .success(function(suc){
+    .success(function (suc) {
       $scope.opcoes = suc;
     })
-    .error(function(err){
+    .error(function (err) {
       console.log(err);
-    })
+    });
 
   	$scope.next = function(){
       $scope.enviando = true;
