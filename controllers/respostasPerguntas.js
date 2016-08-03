@@ -27,3 +27,15 @@ exports.inserirReposta = function (req, res) {
       });
   });
 };
+
+exports.obterRespostas = function (req, res) {
+  RespostaPergunta.forge()
+    .where('userId', '=', req.user.id)
+    .fetchAll()
+    .then(function (respostas) {
+      res.send(respostas);
+    })
+    .catch(function (err) {
+      res.status(500).send(err);
+    });
+};

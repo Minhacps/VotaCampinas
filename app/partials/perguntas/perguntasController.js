@@ -4,12 +4,23 @@
   var app = angular.module('votaCampinas');
 
   var perguntasController = function ($scope, $timeout, perguntasFactory) {
+    $scope.pagina = 0;
+
+    perguntasFactory.obterRespostas()
+    .success(function (respostas) {
+      $scope.respostas = respostas;
+      $scope.pagina = respostas.length;
+    });
+
     perguntasFactory.obterPerguntas()
       .success(function (perguntas) {
         $scope.perguntas = perguntas.slice(0, 3);
+        $scope.perguntas.map(function (pergunta, indice) {
+          if ($scope.respostas[indice]) {
+            $scope.perguntas[indice].resposta = $scope.respostas[indice].resposta;
+          }
+        });
       });
-
-    $scope.pagina = 0;
 
     $scope.selecionadas = {};
 

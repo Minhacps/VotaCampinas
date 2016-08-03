@@ -6,7 +6,8 @@
   var perguntasFactory = function ($rootScope, $http) {
     return {
       obterPerguntas: obterPerguntas,
-      salvarResposta: salvarResposta
+      salvarResposta: salvarResposta,
+      obterRespostas: obterRespostas
     };
 
     function obterPerguntas () {
@@ -22,6 +23,10 @@
       };
 
       return $http.post('/api/respostas', obj);
+    }
+
+    function obterRespostas () {
+      return $http.get('/api/respostas/');
     }
   };
 
