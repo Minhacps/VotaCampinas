@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col s12">
-      <h1>Responda as perguntas - {{pagina}} / {{perguntas.length}}</h1>
+      <h1>Analise as afirmações - {{pagina}} / {{perguntas.length}}</h1>
   </div>
   <div class="col s12">
     <div class="progress">
@@ -27,11 +27,11 @@
            </li>
            <li>
               <input ng-click="next()" ng-model="perguntas[pagina].resposta" name="resposta-{{perguntas[pagina]}}" id="resposta-1-{{perguntas[pagina]}}" type="radio" value="1" ng-disabled="enviando"/>
-              <label for="resposta-1-{{perguntas[pagina]}}">Discordo plenamente</label>
+              <label for="resposta-1-{{perguntas[pagina]}}">Discordo</label>
            </li>
            <li>
              <input ng-click="next()" ng-model="perguntas[pagina].resposta" name="resposta-{{perguntas[pagina]}}" id="resposta-3-{{perguntas[pagina]}}" type="radio" value="3" ng-disabled="enviando"/>
-             <label for="resposta-3-{{perguntas[pagina]}}">Discordo</label>
+             <label for="resposta-3-{{perguntas[pagina]}}">Discordo plenamente</label>
            </li>
         </ul>
         <div class="row">

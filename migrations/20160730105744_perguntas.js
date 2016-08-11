@@ -13,7 +13,7 @@ exports.up = function (knex, Promise) {
 
     //seeds de perguntas
     knex('perguntas').insert([
-      {id:1, pergunta:"A atual gestão municipal realizou um combate eficiente ao mosquito da dengue."},
+      {id:1, pergunta:"A aatual gestão municipal realizou um combate eficiente ao mosquito da dengue."},
       {id:2, pergunta:"Programa Mais Médicos. (Programa do governo federal que estabelece parceria com outros países para vinda de médicos para o Brasil.)"},
       {id:3, pergunta:"Descriminalização do consumo da maconha."},
       {id:4, pergunta:"Os centros de saúde tem uma estrutura adequada para atendimento à população."},
