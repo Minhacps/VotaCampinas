@@ -1,4 +1,5 @@
-angular.module('votaCampinas', ['ngRoute', 'satellizer'])
+
+Ranking.$inject = ["$http"];angular.module('votaCampinas', ['ngRoute', 'satellizer'])
   .config(["$routeProvider", "$locationProvider", "$authProvider", function ($routeProvider, $locationProvider, $authProvider) {
     skipIfAuthenticated.$inject = ["$location", "$auth"];
     loginRequired.$inject = ["$location", "$auth"];
@@ -659,49 +660,53 @@ angular.module('votaCampinas')
     return function(pontuacao) {
       var pontuacaoMaxima = 90;
 
-      return pontuacao * 100 / pontuacaoMaxima;
+      return Math.round(pontuacao * 100 / pontuacaoMaxima);
     }
   };
 
   app.filter('pontuacaoFilter', pontuacaoFilter);
 
 }());
+
 (function() {
 
   'use strict';
 
   var app = angular.module('votaCampinas');
 
-  var rankingController = function ($scope) {
-    $scope.candidatos = [
-      {
-        id: 2,
-        nome: "Victor Vereador",
-        partido: "123",
-        numero: 123,
-        prioridades: [
-          1,
-          5,
-          4
-        ],
-        pontuacao: 90
-      },
-      {
-        id: 3,
-        nome: "Imelda Swanson",
-        partido: "Quia",
-        numero: 64,
-        prioridades: [
-          3,
-          6,
-          1
-        ],
-        pontuacao: 45
-      }
-    ];
+  var rankingController = function ($scope, Ranking) {
+    Ranking.obterMatches()
+    .then(function (res) {
+      $scope.candidatos = res;
+    });
   };
-  rankingController.$inject = ["$scope"];
+  rankingController.$inject = ["$scope", "Ranking"];
 
   app.controller('rankingController', rankingController);
 
 }());
+
+angular
+  .module('votaCampinas')
+  .factory('Ranking', Ranking);
+
+function Ranking ($http) {
+  return {
+    obterMatches: obterMatches
+  };
+
+  function obterMatches () {
+    return $http
+    .get('/api/ranking')
+    .then(obterMatchesComplete)
+    .catch(obterMatchesFailed);
+
+    function obterMatchesComplete (res) {
+      return res.data;
+    }
+
+    function obterMatchesFailed (err) {
+      return err;
+    }
+  }
+}

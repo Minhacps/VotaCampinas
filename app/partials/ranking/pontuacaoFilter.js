@@ -8,7 +8,7 @@
     return function(pontuacao) {
       var pontuacaoMaxima = 90;
 
-      return pontuacao * 100 / pontuacaoMaxima;
+      return Math.round(pontuacao * 100 / pontuacaoMaxima);
     }
   };
 
