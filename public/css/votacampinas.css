@@ -57,24 +57,31 @@ footer {
   display: block;
   height: 105px;
   padding: 0 30px 5px;
-  width: 100%; }
-  footer .row {
-    margin-bottom: 0; }
-
-.footer-links {
-  float: right;
-  margin: 0;
+  width: 100%;
   position: relative;
-  top: 6px; }
-  .footer-links .fa-facebook {
-    left: 4px;
-    position: relative; }
-  .footer-links span {
+  top: 10px;
+  z-index: 2; }
+  footer .row {
+    margin-bottom: 0;
+    right: 0 !important; }
+    footer .row .col {
+      text-align: center; }
+  footer span {
     float: left;
     color: #fff;
-    margin: 17px 15px 0 0; }
-  .footer-links li {
+    margin: 30px 15px 0 0; }
+  footer .brand-logo {
     float: left; }
+
+.footer-links {
+  margin: 10px auto;
+  width: auto;
+  display: block;
+  float: right; }
+  .footer-links .container {
+    padding: 0; }
+  .footer-links li {
+    display: inline-block; }
   .footer-links li a {
     float: left;
     padding: 0 10px; }
@@ -83,8 +90,7 @@ footer {
     width: 50px;
     height: 28.87px;
     background-color: transparent;
-    margin: 14.43px 0;
-    margin-right: 7px;
+    margin: 14.43px 5px;
     border-left: solid 2px #fff;
     border-right: solid 2px #fff;
     float: left;
@@ -110,7 +116,7 @@ footer {
     border-bottom: solid 2.8284px #fff;
     border-left: solid 2.8284px #fff; }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 770px) {
   footer {
     height: 180px; }
     footer span {
@@ -118,6 +124,11 @@ footer {
     footer ul {
       top: 15px;
       left: 10px; }
+    footer .brand-logo {
+      float: none; }
+    footer .footer-links {
+      float: none;
+      width: 100%; }
     footer .row {
       margin-bottom: 0;
       position: relative;
@@ -126,26 +137,35 @@ footer {
 .pular {
   float: right; }
 
-.home h2 {
-  margin-top: 0; }
+.home {
+  height: 100%; }
+  .home h2 {
+    margin-top: 0; }
+  .home .col {
+    padding: 0; }
+  .home .row {
+    margin: 0;
+    width: 100%;
+    height: 100%; }
+  .home .bg {
+    background-image: url("../img/home-bg.jpg");
+    color: white;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 15% 0;
+    height: 100%; }
 
-.home .col {
-  padding: 0; }
+main, .bg {
+  height: 90%; }
 
-.home .row {
-  margin: 0;
-  width: 100%; }
-
-.home .bg {
-  background-image: url("../img/home-bg.jpg");
-  color: white;
-  background-size: cover;
-  background-repeat: no-repeat;
-  padding: 13% 0; }
+.page-content {
+  height: 100%; }
+  .page-content:after {
+    display: none; }
 
 @media only screen and (max-width: 600px) {
   .home .bg {
-    padding: 25% 0; }
+    padding: 50% 0; }
   .home h2 {
     font-size: 2em; }
   .home h5 {
