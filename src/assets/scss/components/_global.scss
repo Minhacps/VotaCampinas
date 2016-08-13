@@ -748,6 +748,10 @@ nav ul a span.badge {
   float: right !important;
 }
 
+.container-fluid{
+  padding: 0 !important;
+}
+
 // No Text Select
 .no-select {
   -webkit-touch-callout: none;
@@ -781,11 +785,11 @@ nav ul a span.badge {
 
 .page-content{
   min-height: 100%;
-  margin-bottom: -113px;
+  margin-bottom: -105px;
 
   &:after{
     content: "";
     display: block;
-    height: 113px;
+    height: 105px;
   }
 }
