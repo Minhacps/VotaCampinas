@@ -80,9 +80,8 @@ exports.signupPost = function (req, res, next) {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
-    gender: req.body.gender,
-    birthDate: moment(req.body.birthDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-    ehVereador: req.body.ehVereador
+    ehVereador: req.body.ehVereador,
+    aceitaEmailsMobilizacao: req.body.aceitaEmailsMobilizacao
   }).save()
     .then(function (user) {
       if (!req.body.ehVereador) {
@@ -135,7 +134,6 @@ exports.accountPut = function (req, res, next) {
     user.save({
       email: req.body.email,
       name: req.body.name,
-      gender: req.body.gender,
       location: req.body.location,
       website: req.body.website
     }, { patch: true });
@@ -366,7 +364,6 @@ exports.authFacebook = function (req, res) {
                 user = new User();
                 user.set('name', profile.name);
                 user.set('email', profile.email);
-                user.set('gender', profile.gender);
                 user.set('location', profile.location && profile.location.name);
                 user.set('picture', 'https://graph.facebook.com/' + profile.id + '/picture?type=large');
                 user.set('facebook', profile.id);
