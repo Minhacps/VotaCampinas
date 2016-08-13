@@ -41,7 +41,7 @@ angular.module('votaCampinas', ['ngRoute', 'satellizer'])
         controller: 'prioridadesController',
         resolve: { loginRequired: loginRequired }
       })
-      .when('/perfil', {
+      .when('/perfil/:id', {
         templateUrl: 'partials/perfil/perfil.html',
         controller: 'perfilController',
         resolve: { loginRequired: loginRequired }
@@ -369,7 +369,7 @@ angular.module('votaCampinas')
           $auth.setToken(response);
           $rootScope.currentUser = response.data.user;
           $window.localStorage.user = JSON.stringify(response.data.user);
-          $location.path('/account');
+          $location.path('/prioridades');
         })
         .catch(function (response) {
           $scope.messages = {
