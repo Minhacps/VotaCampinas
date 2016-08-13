@@ -34,8 +34,11 @@
                <label for="resposta-3-{{perguntas[pagina]}}">Discordo plenamente</label>
              </li>
           </ul>
+
+          <br>
+
           <div class="row" ng-show="currentUser.ehVereador">
-            <div class="col s12 input-field">
+            <div class="col s12">
               <label for="justificativa">Justificativa</label>
               <input id="justificativa" name="justificativa" type="text" data-ng-model="perguntas[pagina].justificativa" maxlength="255">
             </div>

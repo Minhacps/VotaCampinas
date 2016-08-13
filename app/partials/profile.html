@@ -15,10 +15,6 @@
     <label for="name">Nome</label>
     <input type="text" name="name" id="name" ng-model="profile.name">
 
-    <label>Gravatar</label>
-    <img ng-src="{{profile.gravatar}}" class="gravatar" width="100" height="100">
-    <br>
-
     <button class="btn waves-effect waves-light" type="submit" name="action">Atualizar perfil
       <i class="material-icons right">send</i>
     </button>
@@ -30,10 +26,14 @@
   <h4>Alterar senha</h4>
 
   <form ng-submit="changePassword()">
-    <label for="password">Nova senha</label>
-    <input type="password" name="password" id="password" ng-model="profile.password">
-    <label for="confirm">Confirme sua senha</label>
-    <input type="password" name="confirm" id="confirm" ng-model="profile.confirm">
+    <div>
+      <label for="password">Nova senha</label>
+      <input type="password" name="password" id="password" ng-model="profile.password">
+    </div>
+    <div>
+      <label for="confirm">Confirme sua senha</label>
+      <input type="password" name="confirm" id="confirm" ng-model="profile.confirm">
+    </div>
     <br>
 
     <button class="btn waves-effect waves-light" type="submit" name="action">Atualizar senha
