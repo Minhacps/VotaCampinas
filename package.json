@@ -41,11 +41,11 @@
     "nodemailer": "^2.3.0",
     "request": "^2.69.0",
     "vinyl-buffer": "^1.0.0",
-    "yargs": "^4.3.2"
+    "yargs": "^4.3.2",
+    "browser-sync": "^2.13.0",
+    "gulp-nodemon": "^2.1.0"
   },
   "devDependencies": {
-    "browser-sync": "^2.13.0",
-    "gulp-nodemon": "^2.1.0",
     "jasmine": "^2.4.1",
     "karma": "^0.13.22",
     "karma-coverage": "^0.5.5",
