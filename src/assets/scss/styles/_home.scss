@@ -1,0 +1,24 @@
+.home{
+	h2 {margin-top: 0;}
+	.col {padding: 0;}
+	.row {margin: 0; width: 100%;}
+	.bg{
+	    background-image: url('../img/home-bg.jpg');
+    	color: white;
+    	background-size: cover;
+    	background-repeat: no-repeat;
+    	padding: 13% 0;
+	}
+}
+
+@media only screen and (max-width : 600px) {
+	.home{
+		.bg { padding: 25% 0;}
+		h2 { font-size: 2em;}
+		h5 {
+	    	font-size: 1.2em;
+    		line-height: 1.2em;
+    		padding: 0 10px;
+		}
+	}
+}

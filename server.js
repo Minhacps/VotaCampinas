@@ -21,6 +21,7 @@ var userController = require('./controllers/user');
 var contactController = require('./controllers/contact');
 var perguntasController = require('./controllers/perguntas');
 var respostasPerguntasController = require('./controllers/respostasPerguntas');
+var prioridadesController = require('./controllers/prioridades');
 
 var app = express();
 
@@ -71,10 +72,9 @@ app.get('/api/perguntas', perguntasController.obterPerguntas);
 app.post('/api/respostas', userController.ensureAuthenticated, respostasPerguntasController.inserirReposta);
 app.get('/api/respostas', userController.ensureAuthenticated, respostasPerguntasController.obterRespostas);
 
-var prioridadesController = require('./controllers/prioridades');
-app.get('/api/prioridades', prioridadesController.obterTodas);
-app.post('/api/prioridades', prioridadesController.inserirRespostas);
-app.get('/api/prioridades/:userId', prioridadesController.obterRespostas);
+app.get('/api/prioridades', userController.ensureAuthenticated, prioridadesController.obterTodas);
+app.post('/api/prioridades', userController.ensureAuthenticated, prioridadesController.inserirRespostas);
+app.get('/api/prioridades/:userId', userController.ensureAuthenticated, prioridadesController.obterRespostas);
 
 var rankingController = require('./controllers/ranking');
 app.get('/api/ranking', rankingController.obterMatches);

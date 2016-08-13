@@ -348,7 +348,6 @@ ul.staggered-list li {
 
 // Footer
 footer.page-footer {
-  margin-top: 20px;
   padding-top: 20px;
   background-color: $footer-bg-color;
 
@@ -749,6 +748,10 @@ nav ul a span.badge {
   float: right !important;
 }
 
+.container-fluid{
+  padding: 0 !important;
+}
+
 // No Text Select
 .no-select {
   -webkit-touch-callout: none;
@@ -778,4 +781,15 @@ nav ul a span.badge {
 
 .no-padding {
   padding: 0 !important;
+}
+
+.page-content{
+  min-height: 100%;
+  margin-bottom: -105px;
+
+  &:after{
+    content: "";
+    display: block;
+    height: 105px;
+  }
 }

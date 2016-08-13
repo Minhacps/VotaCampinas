@@ -1,6 +1,6 @@
-html {
+html, body {
   position: relative;
-  min-height: 100%; }
+  height: 100%; }
 
 ul, ol {
   list-style: none; }
@@ -55,16 +55,104 @@ input.invalid + label:focus {
 
 footer {
   display: block;
-  margin-top: 30px;
-  height: auto;
+  height: 105px;
   padding: 0 30px 5px;
   width: 100%; }
+  footer .row {
+    margin-bottom: 0; }
 
 .footer-links {
-  float: right; }
+  float: right;
+  margin: 0;
+  position: relative;
+  top: 6px; }
+  .footer-links .fa-facebook {
+    left: 4px;
+    position: relative; }
+  .footer-links span {
+    float: left;
+    color: #fff;
+    margin: 17px 15px 0 0; }
   .footer-links li {
+    float: left; }
+  .footer-links li a {
     float: left;
     padding: 0 10px; }
+  .footer-links li a {
+    position: relative;
+    width: 50px;
+    height: 28.87px;
+    background-color: transparent;
+    margin: 14.43px 0;
+    margin-right: 7px;
+    border-left: solid 2px #fff;
+    border-right: solid 2px #fff;
+    float: left;
+    padding: 0 10px; }
+  .footer-links li a:before,
+  .footer-links li a:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    width: 35.36px;
+    height: 35.36px;
+    -webkit-transform: scaleY(0.5774) rotate(-45deg);
+    -ms-transform: scaleY(0.5774) rotate(-45deg);
+    transform: scaleY(0.5774) rotate(-45deg);
+    background-color: inherit;
+    left: 5.3223px; }
+  .footer-links li a:before {
+    top: -17.6777px;
+    border-top: solid 2.8284px #fff;
+    border-right: solid 2.8284px #fff; }
+  .footer-links li a:after {
+    bottom: -17.6777px;
+    border-bottom: solid 2.8284px #fff;
+    border-left: solid 2.8284px #fff; }
+
+@media only screen and (max-width: 600px) {
+  footer {
+    height: 180px; }
+    footer span {
+      display: none; }
+    footer ul {
+      top: 15px;
+      left: 10px; }
+    footer .row {
+      margin-bottom: 0;
+      position: relative;
+      right: 10px; } }
 
 .pular {
   float: right; }
+
+.home h2 {
+  margin-top: 0; }
+
+.home .col {
+  padding: 0; }
+
+.home .row {
+  margin: 0;
+  width: 100%; }
+
+.home .bg {
+  background-image: url("../img/home-bg.jpg");
+  color: white;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 13% 0; }
+
+@media only screen and (max-width: 600px) {
+  .home .bg {
+    padding: 25% 0; }
+  .home h2 {
+    font-size: 2em; }
+  .home h5 {
+    font-size: 1.2em;
+    line-height: 1.2em;
+    padding: 0 10px; } }
+
+.opcoes {
+  position: relative;
+  min-height: 250px; }

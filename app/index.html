@@ -14,11 +14,11 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body ng-app="votaCampinas">
-  <header ng-include src="'partials/header.html'" class="deep-purple darken-4"></header>
-  <main class="container">
-    <div ng-view></div>
-  </main>
-  <footer class="page-footer deep-purple darken-4" ng-include src="'partials/footer.html'"></footer>
+  <div class="page-content">
+    <header ng-include src="'partials/header.html'" class="deep-purple darken-4"></header>
+      <main ng-view></main>
+  </div>
+  <footer class="page-footer" ng-include src="'partials/footer.html'"></footer>
 
   <script src="/js/lib/angular.js"></script>
   <script src="/js/lib/angular-route.js"></script>

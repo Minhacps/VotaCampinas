@@ -1,7 +1,7 @@
 nav {
   color: $navbar-font-color;
   @extend .z-depth-1;
-  background-color: $primary-color;
+  background-color: #57455c;
   width: 100%;
   height: $navbar-height-mobile;
   line-height: $navbar-height-mobile;
@@ -20,6 +20,7 @@ nav {
   .nav-wrapper {
     position: relative;
     height: 100%;
+    padding: 0;
   }
 
   @media #{$large-and-up} {
@@ -29,7 +30,7 @@ nav {
 
   // Collapse button
   .button-collapse {
-    float: left;
+    float: right;
     position: relative;
     z-index: 1;
     height: $navbar-height-mobile;

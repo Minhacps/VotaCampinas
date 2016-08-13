@@ -2272,9 +2272,8 @@ ul.staggered-list li {
     text-align: center; } }
 
 footer.page-footer {
-  margin-top: 20px;
   padding-top: 20px;
-  background-color: #ee6e73; }
+  background-color: #57455c; }
   footer.page-footer .footer-copyright {
     overflow: hidden;
     height: 50px;
@@ -2556,6 +2555,9 @@ nav ul a span.badge {
 .right {
   float: right !important; }
 
+.container-fluid {
+  padding: 0 !important; }
+
 .no-select, input[type=range],
 input[type=range] + .thumb {
   -webkit-touch-callout: none;
@@ -2581,6 +2583,14 @@ input[type=range] + .thumb {
 
 .no-padding {
   padding: 0 !important; }
+
+.page-content {
+  min-height: 100%;
+  margin-bottom: -105px; }
+  .page-content:after {
+    content: "";
+    display: block;
+    height: 105px; }
 
 /* This is needed for some mobile phones to display the Google Icon font properly */
 .material-icons {
@@ -3030,7 +3040,7 @@ input[type=range] + .thumb {
 
 nav {
   color: #fff;
-  background-color: #ee6e73;
+  background-color: #57455c;
   width: 100%;
   height: 56px;
   line-height: 56px; }
@@ -3045,12 +3055,13 @@ nav {
     line-height: 56px; }
   nav .nav-wrapper {
     position: relative;
-    height: 100%; }
+    height: 100%;
+    padding: 0; }
   @media only screen and (min-width: 993px) {
     nav a.button-collapse {
       display: none; } }
   nav .button-collapse {
-    float: left;
+    float: right;
     position: relative;
     z-index: 1;
     height: 56px; }
@@ -5097,7 +5108,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 .side-nav {
   position: fixed;
-  width: 300px;
+  width: 250px;
   left: 0;
   top: 0;
   margin: 0;
