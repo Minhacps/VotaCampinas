@@ -166,7 +166,7 @@ angular.module('votaCampinas')
         .then(function(response) {
           $rootScope.currentUser = response.data.user;
           $window.localStorage.user = JSON.stringify(response.data.user);
-          $location.path('/account');
+          $location.path('/prioridades');
         })
         .catch(function(response) {
           $scope.messages = {
@@ -291,7 +291,6 @@ angular.module('votaCampinas')
 angular.module('votaCampinas')
   .controller('SignupCtrl', ["$scope", "$rootScope", "$location", "$window", "$auth", function ($scope, $rootScope, $location, $window, $auth) {
     $scope.signup = function () {
-      console.log($scope.user)
       $auth.signup($scope.user)
         .then(function (response) {
           $auth.setToken(response);

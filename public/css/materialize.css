@@ -2272,9 +2272,8 @@ ul.staggered-list li {
     text-align: center; } }
 
 footer.page-footer {
-  margin-top: 20px;
   padding-top: 20px;
-  background-color: #ee6e73; }
+  background-color: #57455c; }
   footer.page-footer .footer-copyright {
     overflow: hidden;
     height: 50px;
@@ -2581,6 +2580,9 @@ input[type=range] + .thumb {
 
 .no-padding {
   padding: 0 !important; }
+
+.page-content {
+  min-height: 100%; }
 
 /* This is needed for some mobile phones to display the Google Icon font properly */
 .material-icons {
@@ -3030,7 +3032,7 @@ input[type=range] + .thumb {
 
 nav {
   color: #fff;
-  background-color: #ee6e73;
+  background-color: #57455c;
   width: 100%;
   height: 56px;
   line-height: 56px; }

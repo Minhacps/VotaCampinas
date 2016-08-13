@@ -49,7 +49,8 @@ gulp.task('materialize', function () {
 gulp.task('styles', function () {
   return gulp.src('src/assets/scss/votacampinas.scss')
     .pipe(sass())
-    .pipe(gulp.dest('public/css'));
+    .pipe(gulp.dest('public/css'))
+    .pipe(browserSync.stream());
 });
 
 gulp.task('templates', function () {
