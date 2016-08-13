@@ -2555,6 +2555,9 @@ nav ul a span.badge {
 .right {
   float: right !important; }
 
+.container-fluid {
+  padding: 0 !important; }
+
 .no-select, input[type=range],
 input[type=range] + .thumb {
   -webkit-touch-callout: none;
@@ -2583,11 +2586,11 @@ input[type=range] + .thumb {
 
 .page-content {
   min-height: 100%;
-  margin-bottom: -113px; }
+  margin-bottom: -105px; }
   .page-content:after {
     content: "";
     display: block;
-    height: 113px; }
+    height: 105px; }
 
 /* This is needed for some mobile phones to display the Google Icon font properly */
 .material-icons {
@@ -6396,7 +6399,3 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 @media (min-height: 40.125em) {
   .picker--time .picker__box {
     margin-bottom: 5em; } }
-
-.opcoes {
-  position: relative;
-  min-height: 250px; }

@@ -1,15 +1,71 @@
 footer {
-  display: block;
-  height: 113px;
-  padding: 0 30px 5px;
-  width: 100%;
+	display: block;
+	height: 105px;
+	padding: 0 30px 5px;
+	width: 100%;
+	.row{ margin-bottom: 0; }
 }
 
 .footer-links {
-  float: right;
+	float: right;
+    margin: 0;
+    position: relative;
+    top: 6px;
 
-  li {
-    float: left;
-    padding: 0 10px;
-  }
+	.fa-facebook {
+		left: 4px;
+		position: relative;
+	}
+
+	span{
+		float: left;
+		color: #fff;
+		margin: 17px 15px 0 0
+	}
+
+	li {float: left;}
+
+	li a {
+		float: left;
+		padding: 0 10px;
+	}
+
+	li a {
+		position: relative;
+		width: 50px; 
+		height: 28.87px;
+		background-color: transparent;
+		margin: 14.43px 0;
+		margin-right: 7px;
+		border-left: solid 2px #fff;
+		border-right: solid 2px #fff;
+		float: left;
+		padding: 0 10px;
+	}
+
+	li a:before,
+	li a:after {
+		content: "";
+		position: absolute;
+		z-index: 1;
+		width: 35.36px;
+		height: 35.36px;
+		-webkit-transform: scaleY(0.5774) rotate(-45deg);
+		-ms-transform: scaleY(0.5774) rotate(-45deg);
+		transform: scaleY(0.5774) rotate(-45deg);
+		background-color: inherit;
+		left: 5.3223px;
+	}
+
+	li a:before {
+		top: -17.6777px;
+		border-top: solid 2.8284px #fff;
+		border-right: solid 2.8284px #fff;
+	}
+
+	li a:after {
+		bottom: -17.6777px;
+		border-bottom: solid 2.8284px #fff;
+		border-left: solid 2.8284px #fff;
+	}
 }
