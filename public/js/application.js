@@ -166,7 +166,7 @@ angular.module('votaCampinas')
         .then(function(response) {
           $rootScope.currentUser = response.data.user;
           $window.localStorage.user = JSON.stringify(response.data.user);
-          $location.path('/account');
+          $location.path('/prioridades');
         })
         .catch(function(response) {
           $scope.messages = {
@@ -291,7 +291,6 @@ angular.module('votaCampinas')
 angular.module('votaCampinas')
   .controller('SignupCtrl', ["$scope", "$rootScope", "$location", "$window", "$auth", function ($scope, $rootScope, $location, $window, $auth) {
     $scope.signup = function () {
-      console.log($scope.user)
       $auth.signup($scope.user)
         .then(function (response) {
           $auth.setToken(response);
@@ -587,6 +586,7 @@ angular.module('votaCampinas')
 
   	$scope.next = function(){
       $scope.enviando = true;
+      $scope.returned = false;
   		if(!inTransition){
         var opcoes  = $scope.opcoes,
             opcao   = $scope.model.prioridade,
@@ -607,7 +607,7 @@ angular.module('votaCampinas')
             opcoes.splice(idx, 1);
             opcao = '';
             $scope.pagina += 1;
-            $('.opcoes').animate({left: '600', opacity: 0}, 400).animate({left: '-400'}, 400).animate({left: '0', opacity: 1}, 400);
+            $('.opcoes').animate({left: '-400', opacity: 0}, 400).animate({left: '600'}, 400).animate({left: '0', opacity: 1}, 400);
             return inTransition = false;
           }, 500);
 
@@ -619,11 +619,17 @@ angular.module('votaCampinas')
   	}
 
   	$scope.back = function(){
-      if($scope.submitOk){ $scope.respostas.pop(); $scope.submitOk = false; }
-      $scope.opcoes.push($scope.respostas.pop());
-  		$scope.model.prioridade = '';
-		  $scope.pagina -= 1;
-      $('.opcoes').animate({left: '-400', opacity: 0}, 400).animate({left: '500'}, 400).animate({left: '0', opacity: 1}, 400);
+      if($scope.submitOk){ 
+        $scope.respostas.pop(); 
+        return $scope.submitOk = false; 
+      }
+
+      var lastOption = $scope.respostas.pop();
+      $scope.returned = true;
+      $scope.opcoes.push(lastOption);
+      $scope.pagina -= 1;
+      $scope.model.prioridade = lastOption.id;
+      $('.opcoes').animate({left: '500', opacity: 0}, 400).animate({left: '-400'}, 400).animate({left: '0', opacity: 1}, 400);
   	}
 
     $scope.submit = function(){

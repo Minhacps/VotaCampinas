@@ -5,7 +5,7 @@ angular.module('votaCampinas')
         .then(function(response) {
           $rootScope.currentUser = response.data.user;
           $window.localStorage.user = JSON.stringify(response.data.user);
-          $location.path('/account');
+          $location.path('/prioridades');
         })
         .catch(function(response) {
           $scope.messages = {

@@ -1,7 +1,6 @@
 angular.module('votaCampinas')
   .controller('SignupCtrl', function ($scope, $rootScope, $location, $window, $auth) {
     $scope.signup = function () {
-      console.log($scope.user)
       $auth.signup($scope.user)
         .then(function (response) {
           $auth.setToken(response);
