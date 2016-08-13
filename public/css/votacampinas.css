@@ -110,6 +110,19 @@ footer {
     border-bottom: solid 2.8284px #fff;
     border-left: solid 2.8284px #fff; }
 
+@media only screen and (max-width: 600px) {
+  footer {
+    height: 180px; }
+    footer span {
+      display: none; }
+    footer ul {
+      top: 15px;
+      left: 10px; }
+    footer .row {
+      margin-bottom: 0;
+      position: relative;
+      right: 10px; } }
+
 .pular {
   float: right; }
 
@@ -129,6 +142,16 @@ footer {
   background-size: cover;
   background-repeat: no-repeat;
   padding: 13% 0; }
+
+@media only screen and (max-width: 600px) {
+  .home .bg {
+    padding: 25% 0; }
+  .home h2 {
+    font-size: 2em; }
+  .home h5 {
+    font-size: 1.2em;
+    line-height: 1.2em;
+    padding: 0 10px; } }
 
 .opcoes {
   position: relative;

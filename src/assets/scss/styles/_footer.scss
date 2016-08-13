@@ -69,3 +69,16 @@ footer {
 		border-left: solid 2.8284px #fff;
 	}
 }
+
+@media only screen and (max-width : 600px) {
+	footer{
+		height: 180px;
+		span {display: none;}
+		ul {top: 15px; left: 10px;}
+		.row {
+		    margin-bottom: 0;
+		    position: relative;
+		    right: 10px;
+		}
+	}
+}

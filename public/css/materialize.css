@@ -3055,12 +3055,13 @@ nav {
     line-height: 56px; }
   nav .nav-wrapper {
     position: relative;
-    height: 100%; }
+    height: 100%;
+    padding: 0; }
   @media only screen and (min-width: 993px) {
     nav a.button-collapse {
       display: none; } }
   nav .button-collapse {
-    float: left;
+    float: right;
     position: relative;
     z-index: 1;
     height: 56px; }
@@ -5107,7 +5108,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 .side-nav {
   position: fixed;
-  width: 300px;
+  width: 250px;
   left: 0;
   top: 0;
   margin: 0;

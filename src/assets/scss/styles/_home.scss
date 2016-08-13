@@ -10,3 +10,15 @@
     	padding: 13% 0;
 	}
 }
+
+@media only screen and (max-width : 600px) {
+	.home{
+		.bg { padding: 25% 0;}
+		h2 { font-size: 2em;}
+		h5 {
+	    	font-size: 1.2em;
+    		line-height: 1.2em;
+    		padding: 0 10px;
+		}
+	}
+}
