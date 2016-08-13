@@ -76,6 +76,11 @@ app.get('/api/prioridades', prioridadesController.obterTodas);
 app.post('/api/prioridades', prioridadesController.inserirRespostas);
 app.get('/api/prioridades/:userId', prioridadesController.obterRespostas);
 
+var rankingController = require('./controllers/ranking');
+app.get('/api/ranking', rankingController.obterMatches);
+
+
+
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'app', 'index.html'));
 });
