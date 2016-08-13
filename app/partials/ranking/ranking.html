@@ -3,20 +3,20 @@
     <h1>Ranking</h1>
   </div>
   <div class="col s12">
-    Aqui estão os candidatos que combina com suas escolhas
+    Aqui estão os candidatos que combinam com suas escolhas
   </div>
 
   <div class="col s12">
     <ul class="collection">
-      <li class="collection-item">
+      <li class="collection-item" data-ng-repeat="candidato in candidatos">
         <div class="row">
           <div class="col s12 m2 center-align">
             <img src="http://placehold.it/150x150" alt="" style="width: 100%;">
           </div>
           <div class="col s12 m10">
-            <h4>Nome</h4>
-            <p>Partido - Numero: 1234</p>
-            <p>% Afinidade: 80%</p>
+            <h4>{{candidato.nome}}</h4>
+            <p>{{candidato.partido}} - Numero: {{candidato.numero}}</p>
+            <p>Afinidade: {{candidato.pontuacao | pontuacaoFilter}}%</p>
 
           </div>
 
