@@ -5,6 +5,10 @@
   var app = angular.module('votaCampinas');
 
   var prioridadesController = function ($rootScope, $scope, $timeout, $http, $location) {
+    if (!$rootScope.currentUser) {
+      return false;
+    }
+
   	var inTransition = false;
 
     $scope.submitOk     = false;
@@ -66,9 +70,9 @@
   	}
 
   	$scope.back = function(){
-      if($scope.submitOk){ 
-        $scope.respostas.pop(); 
-        return $scope.submitOk = false; 
+      if($scope.submitOk){
+        $scope.respostas.pop();
+        return $scope.submitOk = false;
       }
 
       var lastOption = $scope.respostas.pop();

@@ -484,7 +484,7 @@ angular.module('votaCampinas')
 
     perguntasFactory.obterPerguntas()
       .success(function (perguntas) {
-        $scope.perguntas = perguntas.slice(0, 3);
+        $scope.perguntas = perguntas;
         $scope.perguntas.map(function (pergunta, indice) {
           if ($scope.respostas[indice]) {
             $scope.perguntas[indice].resposta = $scope.respostas[indice].resposta;
@@ -559,6 +559,10 @@ angular.module('votaCampinas')
   var app = angular.module('votaCampinas');
 
   var prioridadesController = function ($rootScope, $scope, $timeout, $http, $location) {
+    if (!$rootScope.currentUser) {
+      return false;
+    }
+
   	var inTransition = false;
 
     $scope.submitOk     = false;
@@ -620,9 +624,9 @@ angular.module('votaCampinas')
   	}
 
   	$scope.back = function(){
-      if($scope.submitOk){ 
-        $scope.respostas.pop(); 
-        return $scope.submitOk = false; 
+      if($scope.submitOk){
+        $scope.respostas.pop();
+        return $scope.submitOk = false;
       }
 
       var lastOption = $scope.respostas.pop();
