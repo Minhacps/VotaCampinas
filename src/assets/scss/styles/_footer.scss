@@ -3,27 +3,35 @@ footer {
 	height: 105px;
 	padding: 0 30px 5px;
 	width: 100%;
-	.row{ margin-bottom: 0; }
-}
-
-.footer-links {
-	float: right;
-    margin: 0;
-    position: relative;
-    top: 6px;
-
-	.fa-facebook {
-		left: 4px;
-		position: relative;
+	position: relative;
+	top: 10px;
+    z-index: 2;
+	.row { 
+		margin-bottom: 0; 
+		right: 0 !important;
+		.col {
+			text-align: center;
+		}
 	}
-
 	span{
 		float: left;
 		color: #fff;
-		margin: 17px 15px 0 0
+		margin: 30px 15px 0 0;
 	}
+	.brand-logo{ float: left; }
+}
 
-	li {float: left;}
+.footer-links {
+	margin: 10px auto;
+    width: auto;
+    display: block;
+    float: right;
+
+    .container {
+    	padding: 0;
+    }
+
+	li { display: inline-block; }
 
 	li a {
 		float: left;
@@ -35,8 +43,7 @@ footer {
 		width: 50px; 
 		height: 28.87px;
 		background-color: transparent;
-		margin: 14.43px 0;
-		margin-right: 7px;
+		margin: 14.43px 5px;
 		border-left: solid 2px #fff;
 		border-right: solid 2px #fff;
 		float: left;
@@ -70,11 +77,13 @@ footer {
 	}
 }
 
-@media only screen and (max-width : 600px) {
+@media only screen and (max-width : 770px) {
 	footer{
 		height: 180px;
 		span {display: none;}
 		ul {top: 15px; left: 10px;}
+		.brand-logo{ float: none; }
+		.footer-links{ float: none; width: 100%; }
 		.row {
 		    margin-bottom: 0;
 		    position: relative;
