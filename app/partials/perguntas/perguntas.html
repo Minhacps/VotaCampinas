@@ -49,8 +49,15 @@
             </div>
             <div class="col s6 m6 l6">
               <a ng-show="currentUser.ehVereador" class="btn right" ng-click="nextVereador()">Próxima</a>
-              <a ng-show="pagina === perguntas.length" class="btn right" href="/ranking">Finalizar</a>
-              <a class="red-text pular tooltipped" data-position="left" data-delay="30" data-tooltip="Você só pode pular a partir da 18ª questão" href="" disabled ng-hide="(pagina === perguntas.length || currentUser.ehVereador)">* Pular</a>
+              <a ng-show="pagina === perguntas.length || pagina >= 18" class="btn right" href="/ranking">Finalizar</a>
+              <a
+              class="btn white red-text pular tooltipped"
+              data-position="left"
+              data-delay="30"
+              data-tooltip="{{pagina >= 18 ? 'Salvar resposta em branco' : 'Você só pode pular a partir da 18ª questão'}}"
+              href=""
+              ng-click="pular()"
+              ng-hide="(pagina === perguntas.length || currentUser.ehVereador)">* Pular</a>
             </div>
           </div>
       </form>

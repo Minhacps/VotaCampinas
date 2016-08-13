@@ -31,6 +31,13 @@
       salvarResposta();
     };
 
+    $scope.pular = function () {
+      if ($scope.pagina < 18) {
+        return false;
+      }
+      salvarResposta();
+    };
+
     $scope.nextVereador = function () {
       salvarResposta();
     };
