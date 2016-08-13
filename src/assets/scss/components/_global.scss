@@ -781,4 +781,11 @@ nav ul a span.badge {
 
 .page-content{
   min-height: 100%;
+  margin-bottom: -113px;
+
+  &:after{
+    content: "";
+    display: block;
+    height: 113px;
+  }
 }
