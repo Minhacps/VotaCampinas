@@ -473,7 +473,7 @@ angular.module('votaCampinas')
 
   var app = angular.module('votaCampinas');
 
-  var perguntasController = function ($scope, $timeout, perguntasFactory) {
+  var perguntasController = function ($rootScope, $scope, $timeout, perguntasFactory) {
     $scope.pagina = 0;
 
     perguntasFactory.obterRespostas()
@@ -495,6 +495,17 @@ angular.module('votaCampinas')
     $scope.selecionadas = {};
 
     $scope.next = function () {
+      if ($rootScope.currentUser.ehVereador) {
+        return false;
+      }
+      salvarResposta();
+    };
+
+    $scope.nextVereador = function () {
+      salvarResposta();
+    };
+
+    function salvarResposta () {
       $scope.enviando = true;
 
       $timeout(function () {
@@ -505,13 +516,13 @@ angular.module('votaCampinas')
           $scope.enviando = false;
         });
       }, 700);
-    };
+    }
 
     $scope.back = function () {
       --$scope.pagina;
     };
   };
-  perguntasController.$inject = ["$scope", "$timeout", "perguntasFactory"];
+  perguntasController.$inject = ["$rootScope", "$scope", "$timeout", "perguntasFactory"];
 
   app.controller('perguntasController', perguntasController);
 }());

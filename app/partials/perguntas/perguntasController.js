@@ -3,7 +3,7 @@
 
   var app = angular.module('votaCampinas');
 
-  var perguntasController = function ($scope, $timeout, perguntasFactory) {
+  var perguntasController = function ($rootScope, $scope, $timeout, perguntasFactory) {
     $scope.pagina = 0;
 
     perguntasFactory.obterRespostas()
@@ -25,6 +25,17 @@
     $scope.selecionadas = {};
 
     $scope.next = function () {
+      if ($rootScope.currentUser.ehVereador) {
+        return false;
+      }
+      salvarResposta();
+    };
+
+    $scope.nextVereador = function () {
+      salvarResposta();
+    };
+
+    function salvarResposta () {
       $scope.enviando = true;
 
       $timeout(function () {
@@ -35,7 +46,7 @@
           $scope.enviando = false;
         });
       }, 700);
-    };
+    }
 
     $scope.back = function () {
       --$scope.pagina;

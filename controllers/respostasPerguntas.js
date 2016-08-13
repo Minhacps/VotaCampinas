@@ -19,7 +19,8 @@ exports.inserirReposta = function (req, res) {
     RespostaPergunta.forge({
       userId: req.body.usuarioId,
       perguntaId: req.body.pergunta.id,
-      resposta: req.body.pergunta.resposta
+      resposta: req.body.pergunta.resposta,
+      justificativa: req.body.pergunta.justificativa
     })
       .save()
       .then((reposta) => {
