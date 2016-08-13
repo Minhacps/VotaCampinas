@@ -14,10 +14,9 @@
     </div>
     <div class="col s12">
       <form novalidate>
-          <p>{{perguntas[pagina].pergunta}}</p>
-          <p ng-show="pagina === perguntas.length">{{perguntas[pagina - 1].pergunta}}</p>
-
-          <ul class="form-questoes">
+          <h4 class="center-align" ng-show="pagina === perguntas.length">Você finalizou as questões, muito obrigado! :)</h4>
+          <p ng-show="pagina < perguntas.length">{{perguntas[pagina].pergunta}}</p>
+          <ul class="form-questoes" ng-show="pagina < perguntas.length">
             <li>
               <input ng-click="next()" ng-model="perguntas[pagina].resposta" name="resposta-{{perguntas[pagina]}}" id="resposta-2-{{perguntas[pagina]}}" type="radio" value="2" ng-disabled="enviando"/>
               <label for="resposta-2-{{perguntas[pagina]}}">Concordo plenamente</label>

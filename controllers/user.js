@@ -76,6 +76,8 @@ exports.signupPost = function (req, res, next) {
     return res.status(400).send(errors);
   }
 
+  console.log(req.body)
+
   User.forge({
     name: req.body.name,
     email: req.body.email,
