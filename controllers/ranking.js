@@ -1,3 +1,5 @@
+'use strict';
+
 const async = require('async');
 const RespostaPrioridade = require('../models/RespostaPrioridade');
 const RespostaPergunta = require('../models/RespostaPergunta');
