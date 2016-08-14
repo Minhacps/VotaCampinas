@@ -42,12 +42,14 @@ gulp.task('angular', function () {
 
 gulp.task('materialize', function () {
   return gulp.src('src/assets/scss/materialize.scss')
+    .pipe(plumber())
     .pipe(sass())
     .pipe(gulp.dest('public/css'));
 });
 
 gulp.task('styles', function () {
   return gulp.src('src/assets/scss/votacampinas.scss')
+    .pipe(plumber())
     .pipe(sass())
     .pipe(gulp.dest('public/css'))
     .pipe(browserSync.stream());

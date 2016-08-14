@@ -2585,6 +2585,7 @@ input[type=range] + .thumb {
   padding: 0 !important; }
 
 .page-content {
+  height: 100%;
   min-height: 100%;
   margin-bottom: -105px; }
   .page-content:after {
