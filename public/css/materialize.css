@@ -2585,13 +2585,7 @@ input[type=range] + .thumb {
   padding: 0 !important; }
 
 .page-content {
-  height: 100%;
-  min-height: 100%;
-  margin-bottom: -105px; }
-  .page-content:after {
-    content: "";
-    display: block;
-    height: 105px; }
+  flex: 1; }
 
 /* This is needed for some mobile phones to display the Google Icon font properly */
 .material-icons {

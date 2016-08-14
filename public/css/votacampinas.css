@@ -1,7 +1,11 @@
 html, body {
   position: relative;
-  height: 100%;
   font-family: 'Quicksand', sans-serif; }
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column; }
 
 ul, ol {
   list-style: none; }
@@ -72,7 +76,6 @@ footer {
   padding: 0 30px 5px;
   width: 100%;
   position: relative;
-  top: 10px;
   z-index: 2; }
   footer .row {
     margin-bottom: 0;
@@ -171,12 +174,6 @@ footer {
     background-repeat: no-repeat;
     padding: 15% 0;
     height: 100%; }
-
-main {
-  height: 90%; }
-
-.page-content:after {
-  display: none; }
 
 @media only screen and (max-width: 420px) {
   .home .bg {

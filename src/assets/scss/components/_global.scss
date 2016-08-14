@@ -6,16 +6,6 @@ html {
 *, *:before, *:after {
  box-sizing: inherit;
 }
-
-body {
-  // display: flex;
-  // min-height: 100vh;
-  // flex-direction: column;
-}
-
-main {
-  // flex: 1 0 auto;
-}
   
 ul {
   &.browser-default,
@@ -784,13 +774,5 @@ nav ul a span.badge {
 }
 
 .page-content{
-  height: 100%;
-  min-height: 100%;
-  margin-bottom: -105px;
-
-  &:after{
-    content: "";
-    display: block;
-    height: 105px;
-  }
+  flex: 1;
 }

@@ -1,7 +1,12 @@
 html, body {
   position: relative;
-  height: 100%;
   font-family: 'Quicksand', sans-serif;
+}
+
+body{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 ul, ol {

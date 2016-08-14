@@ -13,14 +13,6 @@
 	}
 }
 
-main { height: 90%; }
-
-.page-content{
-	&:after{
-		display: none;
-	}
-}
-
 @media only screen and (max-width : 420px) {
 	.home{
 		.bg { padding: 50% 0;}
