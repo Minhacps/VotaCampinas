@@ -91,3 +91,9 @@ footer {
 		}
 	}
 }
+
+@media only screen and (min-width : 601px) and (max-width: 800px) {
+	footer{
+		height: 110px;
+	}
+}

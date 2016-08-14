@@ -9,24 +9,19 @@
     	background-size: cover;
     	background-repeat: no-repeat;
     	padding: 15% 0;
-    	height: 122%;
+    	height: 100%;
 	}
 }
 
 main { height: 90%; }
 
 .page-content{
-	// height: 100%;
 	&:after{
 		display: none;
 	}
-    .fp{
-        background-image: url('../img/fundopadrao.png');
-        color: white;
-    }
 }
 
-@media only screen and (max-width : 600px) {
+@media only screen and (max-width : 420px) {
 	.home{
 		.bg { padding: 50% 0;}
 		h2 { font-size: 2em;}
@@ -34,6 +29,32 @@ main { height: 90%; }
 	    	font-size: 1.2em;
     		line-height: 1.2em;
     		padding: 0 10px;
+		}
+	}
+}
+
+@media only screen and (min-width : 421px) and (max-width : 740px) {
+	.home {
+	    .bg {
+	    	padding: 10% 0 24%;
+	    }
+	    h2 {
+		    margin-top: 0;
+		    font-size: 2em;
+	    }
+	    h5 {
+	    	font-size: 1.2em;
+	    	padding: 0 15%;
+	    }
+	}
+}
+
+
+@media only screen and (min-width : 741px) and (max-width: 800px) {
+	.home{
+		.bg { 
+			padding: 40% 0;
+    		height: 100%;
 		}
 	}
 }

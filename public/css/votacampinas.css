@@ -59,6 +59,12 @@ object {
 .paddingRow {
   margin-bottom: 120px; }
 
+@media only screen and (max-width: 770px) {
+  .time {
+    padding: 0; }
+    .time .col {
+      width: 50% !important; } }
+
 footer {
   display: block;
   height: 105px;
@@ -140,6 +146,10 @@ footer {
       position: relative;
       right: 10px; } }
 
+@media only screen and (min-width: 601px) and (max-width: 800px) {
+  footer {
+    height: 110px; } }
+
 .pular {
   float: right; }
 
@@ -159,7 +169,7 @@ footer {
     background-size: cover;
     background-repeat: no-repeat;
     padding: 15% 0;
-    height: 122%; }
+    height: 100%; }
 
 main {
   height: 90%; }
@@ -167,11 +177,7 @@ main {
 .page-content:after {
   display: none; }
 
-.page-content .fp {
-  background-image: url("../img/fundopadrao.png");
-  color: white; }
-
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 420px) {
   .home .bg {
     padding: 50% 0; }
   .home h2 {
@@ -181,6 +187,44 @@ main {
     line-height: 1.2em;
     padding: 0 10px; } }
 
+@media only screen and (min-width: 421px) and (max-width: 740px) {
+  .home .bg {
+    padding: 10% 0 24%; }
+  .home h2 {
+    margin-top: 0;
+    font-size: 2em; }
+  .home h5 {
+    font-size: 1.2em;
+    padding: 0 15%; } }
+
+@media only screen and (min-width: 741px) and (max-width: 800px) {
+  .home .bg {
+    padding: 40% 0;
+    height: 100%; } }
+
 .opcoes {
   position: relative;
   min-height: 250px; }
+
+.comofunciona {
+  height: 100%; }
+  .comofunciona h2 {
+    margin-top: 0; }
+  .comofunciona .col {
+    padding: 0; }
+  .comofunciona .row {
+    margin: 0;
+    width: 100%;
+    height: 100%; }
+
+.fp {
+  background-image: url("../img/fundopadrao.png");
+  color: white;
+  background-size: cover;
+  padding: 2% 0 11% 0 !important; }
+  .fp .col {
+    margin: 2% 0; }
+
+@media only screen and (max-width: 600px) {
+  .paddingRowSmall {
+    margin-bottom: 100px; } }

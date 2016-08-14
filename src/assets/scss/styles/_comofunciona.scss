@@ -3,9 +3,20 @@
 	h2 {margin-top: 0;}
 	.col {padding: 0;}
 	.row {margin: 0; width: 100%; height: 100%;}
+}
+
+.fp {
+    background-image: url('../img/fundopadrao.png');
+    color: white;
+    background-size: cover;
+	padding: 2% 0 11% 0 !important;
+	.col {
+		margin: 2% 0;
 	}
-    .fp{
-        background-image: url('../img/fundopadrao.png');
-        color: white;
-    }
+}
+
+@media only screen and (max-width : 600px) {
+	.paddingRowSmall{
+		margin-bottom: 100px;
+	}
 }

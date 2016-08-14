@@ -76,3 +76,12 @@ object {
 .paddingRow {
   margin-bottom: 120px;
 }
+
+@media only screen and (max-width : 770px) {
+  .time { 
+    padding: 0;
+    .col {
+      width: 50% !important;
+    }
+  }
+}
