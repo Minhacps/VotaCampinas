@@ -155,7 +155,8 @@ footer {
     height: 110px; } }
 
 .pular {
-  float: right; }
+  float: right;
+  width: 100%; }
 
 .home {
   height: 100%; }
@@ -245,7 +246,7 @@ footer {
   color: white;
   background-size: cover;
   height: 100%;
-  padding: 2% 0 11% 0 !important; }
+  padding: 4% 0 10% 0 !important; }
   .fp .col {
     margin: 2% 0; }
 
