@@ -1,4 +1,20 @@
-.opcoes{
-	position: relative; 
-	min-height: 250px;
+.prioridades {
+	h1 {font-size: 2.5em; margin-top: 1.5em}
+	h2 {font-size: 2em}
+	h3 {font-size: 1.8em}
+	label {color: #484848}
+
+	#opcoes {margin-bottom: 100px}
+	.opcoes {
+		position: relative; 
+		min-height: 190px;
+	}
+}
+
+@media only screen and (max-width : 770px) {
+  .prioridades {
+  		padding: 0 1.5em;
+		h2 {font-size: 1.6em; margin-bottom: 5px}
+		h3 {font-size: 1.5em}
+	}
 }

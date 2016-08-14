@@ -202,9 +202,34 @@ main {
     padding: 40% 0;
     height: 100%; } }
 
-.opcoes {
+.prioridades h1 {
+  font-size: 2.5em;
+  margin-top: 1.5em; }
+
+.prioridades h2 {
+  font-size: 2em; }
+
+.prioridades h3 {
+  font-size: 1.8em; }
+
+.prioridades label {
+  color: #484848; }
+
+.prioridades #opcoes {
+  margin-bottom: 100px; }
+
+.prioridades .opcoes {
   position: relative;
-  min-height: 250px; }
+  min-height: 190px; }
+
+@media only screen and (max-width: 770px) {
+  .prioridades {
+    padding: 0 1.5em; }
+    .prioridades h2 {
+      font-size: 1.6em;
+      margin-bottom: 5px; }
+    .prioridades h3 {
+      font-size: 1.5em; } }
 
 .comofunciona {
   height: 100%; }
