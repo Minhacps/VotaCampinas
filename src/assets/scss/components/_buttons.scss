@@ -54,7 +54,7 @@
 .btn {
   text-decoration: none;
   color: $button-raised-color;
-  background-color: $button-raised-background;
+  background-color: #feb557;
   text-align: center;
   letter-spacing: .5px;
   @extend .z-depth-1;
@@ -62,7 +62,7 @@
   cursor: pointer;
 
   &:hover {
-    background-color: $button-raised-background-hover;
+    background-color: #feb557;
     @extend .z-depth-1-half;
   }
 }
