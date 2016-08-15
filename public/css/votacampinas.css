@@ -272,17 +272,30 @@ footer {
 
 .prioridades .opcoes {
   position: relative;
-  min-height: 190px; }
+  min-height: 190px;
+  margin-bottom: 40px; }
+
+.prioridades .priori-btn {
+  margin-top: 20px; }
 
 @media only screen and (max-width: 770px) {
   .prioridades {
     padding: 0 1.5em;
     height: 530px; }
+    .prioridades h1 {
+      font-size: 1.5em; }
     .prioridades h2 {
       font-size: 1.5em;
       margin-bottom: 5px; }
     .prioridades h3 {
-      font-size: 1.5em; } }
+      font-size: 1.5em; }
+    .prioridades .opcoes {
+      margin-bottom: 20px; }
+    .prioridades .opt-btn .col {
+      padding: 0; }
+    .prioridades .opt-btn input {
+      width: 100%;
+      margin-bottom: 20px; } }
 
 .comofunciona {
   height: 100%; }

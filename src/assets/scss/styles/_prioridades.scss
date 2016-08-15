@@ -8,14 +8,25 @@
 	.opcoes {
 		position: relative; 
 		min-height: 190px;
+		margin-bottom: 40px;
 	}
+
+	.priori-btn {margin-top: 20px}	
 }
 
 @media only screen and (max-width : 770px) {
   .prioridades {
   		padding: 0 1.5em;
   		height: 530px;
-		h2 {font-size: 1.5em; margin-bottom: 5px}
-		h3 {font-size: 1.5em}
+		
+		h1 { font-size: 1.5em }
+		h2 { font-size: 1.5em; margin-bottom: 5px }
+		h3 { font-size: 1.5em }
+		
+		.opcoes { margin-bottom: 20px }
+		.opt-btn {
+			.col {	padding: 0 }
+			input { width: 100%; margin-bottom: 20px }
+		}
 	}
 }
