@@ -708,7 +708,6 @@ angular.module('votaCampinas')
   app.controller('rankingController', rankingController);
 
 }());
-
 angular
   .module('votaCampinas')
   .factory('Ranking', Ranking);

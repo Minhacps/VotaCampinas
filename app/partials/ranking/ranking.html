@@ -9,20 +9,24 @@
 
     <div class="col s12">
       <ul class="collection">
-        <li class="collection-item" data-ng-repeat="candidato in candidatos">
+        <li class="collection-item" data-ng-repeat="candidato in candidatos | orderBy: '-pontuacao'">
           <div class="row">
             <div class="col s12 m2 center-align">
               <img src="http://placehold.it/150x150" alt="" style="width: 100%;">
             </div>
             <div class="col s12 m10">
               <h4>{{candidato.nome}}</h4>
-              <p>{{candidato.partido}} - Numero: {{candidato.numero}}</p>
-              <p>Afinidade: {{candidato.pontuacao | pontuacaoFilter}}%</p>
-
+              <div class="col s12 m8">
+                <p>{{candidato.partido}} - Numero: {{candidato.numero}}</p>
+                <p>Afinidade: {{candidato.pontuacao | pontuacaoFilter}}%</p>
+              </div>
+              
+              <div class="col s12 m4">
+                <a data-ng-href="/perfil/{{candidato.id}}" class="btn rank">Ver Perfil</a>
+              </div>
             </div>
 
             <div class="col s12 offset-m9 m3">
-              <a data-ng-href="/perfil/{{candidato.id}}" class="btn" style="width: 100%;">Ver Perfil</a>
             </div>
           </div>
         </li>

@@ -320,3 +320,15 @@ footer {
 @media only screen and (max-width: 600px) {
   .paddingRowSmall {
     margin-bottom: 100px; } }
+
+.collection {
+  margin-top: 30px; }
+
+.collection-item {
+  padding: 20px 20px 10px !important; }
+  .collection-item .row {
+    margin-bottom: 0; }
+
+.btn.rank {
+  width: 100%;
+  margin-top: 35px; }
