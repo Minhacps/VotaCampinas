@@ -2,3 +2,34 @@
 	float: right;
 	width: 100%;
 }
+
+.lg { width: 100% }
+.finalizar { 
+	background-color: #67546d;
+	&:hover {
+   		background-color: #866f8c;
+	}
+}
+
+.questoes {
+	margin-top: 20px;
+	h1 {font-size: 1.5em; display: inline-block}
+	span {
+	    display: inline-block;
+	    border: 1px solid;
+	    padding: 3px 8px;
+	    border-radius: 15px;
+	    margin-left: 10px;
+	}
+}
+
+@media only screen and (max-width : 600px) {
+	.questoes {
+		span { margin-left: 0; margin-bottom: 20px }
+		.pular { margin-top: 20px }
+	}
+	.material-tooltip {
+	    margin-left: 20px !important;
+	    font-size: 12px;
+	}
+}

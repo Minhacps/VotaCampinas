@@ -1,15 +1,16 @@
-<div class="container">
+<div class="container questoes">
   <div class="row">
     <div class="col s12">
-        <h1>Analise as afirmações - {{pagina}} / {{perguntas.length}}</h1>
+        <h1>Analise as afirmações</h1>
+        <span>{{pagina}} / {{perguntas.length}}</span>
     </div>
     <div class="col s12">
       <div class="progress">
         <div
           class="determinate"
           style="width: {{(pagina / perguntas.length)*100}}%"
-          ng-class="{red: pagina < perguntas.length}"
-        ></div>
+          ng-class="pagina < 18 ? 'red' : ''">
+        </div>
       </div>
     </div>
     <div class="col s12">
@@ -44,25 +45,31 @@
             </div>
           </div>
           <div class="row">
-            <div class="col s12 m7 l12">
-              <div class="col l6">
-                <input ng-click="back()" ng-show="pagina > 0" type="button" class="btn" value="Voltar">
+            <div class="col s12 m12 l12">
+              <div class="col s12 m4 l3">
+                <input ng-click="back()" ng-show="pagina > 0" type="button" class="btn lg" value="Voltar">
               </div>
 
-              <div class="col l6">
+              <div class="col s12 m4 l3 right">
                 <a ng-show="currentUser.ehVereador" class="btn right" ng-click="nextVereador()">Próxima</a>
-                <a ng-show="pagina === perguntas.length || pagina >= 18" class="btn right" href="/ranking">Finalizar</a>
+
+                <a class="btn pular tooltipped lg right"
+                   data-position="left"
+                   data-delay="30"
+                   data-tooltip="{{pagina >= 18 ? 'Salvar resposta em branco' : 'Você só pode pular a partir da 18ª questão'}}"
+                   href=""
+                   ng-click="pular()"
+                   ng-hide="(pagina === perguntas.length || currentUser.ehVereador)">
+                   * Pular
+                </a>
               </div>
             </div>
-            <div class="col s12 m3 l2">
-              <a
-              class="btn white red-text pular tooltipped"
-              data-position="left"
-              data-delay="30"
-              data-tooltip="{{pagina >= 18 ? 'Salvar resposta em branco' : 'Você só pode pular a partir da 18ª questão'}}"
-              href=""
-              ng-click="pular()"
-              ng-hide="(pagina === perguntas.length || currentUser.ehVereador)">* Pular</a>
+          </div>
+          <div class="row">
+            <div class="col s12 m12 l12">
+              <div class="col s12 m4 l3 right">
+                <a ng-show="pagina === perguntas.length || pagina >= 18" class="btn right lg finalizar" href="/ranking">Finalizar</a>
+              </div>
             </div>
           </div>
       </form>

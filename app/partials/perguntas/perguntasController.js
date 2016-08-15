@@ -6,6 +6,7 @@
   var perguntasController = function ($rootScope, $scope, $timeout, perguntasFactory) {
     $scope.pagina = 0;
 
+
     perguntasFactory.obterRespostas()
     .success(function (respostas) {
       $scope.respostas = respostas;
@@ -56,7 +57,7 @@
     }
 
     $scope.back = function () {
-      --$scope.pagina;
+      --$scope.pagina;      
     };
   };
 
