@@ -1,13 +1,12 @@
 <div class="container prioridades">
   <div class="row">
     <hgroup class="col s12">
-        <h1>Questões</h1>
-        <h2>Para você, quais são as principais prioridades para Campinas?</h2>
+        <h2>Para você, quais são as 3 principais prioridades para Campinas em ordem de importância?</h2>
     </hgroup>
     <div class="col s12">
       <form id="opcoes" novalidate>
         <div class="opcoes">
-          <h3>Prioridade nível {{pagina}}</h3>
+          <h3>Prioridade {{pagina}}</h3>
           <div ng-if="opcoes" ng-repeat="opcao in opcoes | orderBy: 'prioridade'">
             <input ng-click="next()" ng-disabled="enviando" ng-model="model.prioridade" name="prioridade" type="radio" value="{{opcao.id}}" id="prioridade-{{$index}}" />
             <label for="prioridade-{{$index}}">{{opcao.prioridade}}</label>
