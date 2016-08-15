@@ -132,9 +132,17 @@ footer {
     border-bottom: solid 2.8284px #fff;
     border-left: solid 2.8284px #fff; }
 
+.disclaimer span {
+  margin-top: 4px;
+  font-size: 10px;
+  line-height: 11px;
+  position: relative;
+  top: 10px;
+  display: block; }
+
 @media only screen and (max-width: 770px) {
   footer {
-    height: 180px; }
+    height: 280px; }
     footer span {
       display: none; }
     footer ul {
@@ -148,15 +156,60 @@ footer {
     footer .row {
       margin-bottom: 0;
       position: relative;
-      right: 10px; } }
+      right: 10px; }
+    footer .disclaimer {
+      width: 100%;
+      padding: 0;
+      margin-bottom: 20px; }
+      footer .disclaimer span {
+        margin: 0; }
+    footer .container {
+      padding: 0;
+      width: 100%; } }
 
-@media only screen and (min-width: 601px) and (max-width: 800px) {
+@media only screen and (min-width: 640px) and (max-width: 1023px) {
   footer {
-    height: 110px; } }
+    height: 130px; }
+    footer span {
+      font-size: 8px !important;
+      top: 0px !important;
+      left: 5px; }
+    footer .col {
+      margin-left: 0; } }
 
 .pular {
   float: right;
   width: 100%; }
+
+.lg {
+  width: 100%; }
+
+.finalizar {
+  background-color: #67546d; }
+  .finalizar:hover {
+    background-color: #866f8c; }
+
+.questoes {
+  margin-top: 20px; }
+  .questoes h1 {
+    font-size: 1.5em;
+    display: inline-block; }
+  .questoes span {
+    display: inline-block;
+    border: 1px solid;
+    padding: 3px 8px;
+    border-radius: 15px;
+    margin-left: 10px; }
+
+@media only screen and (max-width: 600px) {
+  .questoes span {
+    margin-left: 0;
+    margin-bottom: 20px; }
+  .questoes .pular {
+    margin-top: 20px; }
+  .material-tooltip {
+    margin-left: 20px !important;
+    font-size: 12px; } }
 
 .home {
   height: 100%; }
@@ -223,9 +276,10 @@ footer {
 
 @media only screen and (max-width: 770px) {
   .prioridades {
-    padding: 0 1.5em; }
+    padding: 0 1.5em;
+    height: 530px; }
     .prioridades h2 {
-      font-size: 1.6em;
+      font-size: 1.5em;
       margin-bottom: 5px; }
     .prioridades h3 {
       font-size: 1.5em; } }
