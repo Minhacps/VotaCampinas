@@ -378,15 +378,20 @@ angular.module('votaCampinas')
       }
     }
   }
-
 })();
 
 (function () {
   'use strict';
   var app = angular.module('votaCampinas');
-  var cadastroController = function ($scope, $rootScope, $location, $window, $auth) {
+  var cadastroController = function ($scope, $rootScope, $location, $window, $auth, Partidos) {
     $scope.user = {};
     $scope.required = true;
+
+    Partidos.obterTodos()
+    .then(function (res) {
+      $scope.partidos = res;
+      $('select').material_select();
+    });
 
     $scope.enviar = function () {
       $scope.user.gender = $('#sexo').val();
@@ -428,7 +433,7 @@ angular.module('votaCampinas')
     $('select').material_select();
     $('#data-nascimento').mask('00/00/0000');
   };
-  cadastroController.$inject = ["$scope", "$rootScope", "$location", "$window", "$auth"];
+  cadastroController.$inject = ["$scope", "$rootScope", "$location", "$window", "$auth", "Partidos"];
 
   app.controller('cadastroController', cadastroController);
 }());

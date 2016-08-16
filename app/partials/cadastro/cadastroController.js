@@ -1,9 +1,15 @@
 (function () {
   'use strict';
   var app = angular.module('votaCampinas');
-  var cadastroController = function ($scope, $rootScope, $location, $window, $auth) {
+  var cadastroController = function ($scope, $rootScope, $location, $window, $auth, Partidos) {
     $scope.user = {};
     $scope.required = true;
+
+    Partidos.obterTodos()
+    .then(function (res) {
+      $scope.partidos = res;
+      $('select').material_select();
+    });
 
     $scope.enviar = function () {
       $scope.user.gender = $('#sexo').val();

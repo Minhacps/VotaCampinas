@@ -25,8 +25,9 @@
           <div class="exclusivo-candidato" data-ng-show="user.ehVereador">
             <div class="row">
               <div class="input-field col s6">
-                <input id="cod-j-e" type="text" class="validate" data-ng-model="user.vereador.partido" maxlength="5" ng-required="user.ehVereador">
-                <label for="cod-j-e">Partido</label>
+                <select class="browser-default" data-ng-model="user.vereador.partidoId" data-ng-options="partido.numero as partido.sigla for partido in partidos">
+                  <option value="">Selecione um partido</option>
+                </select>
               </div>
               <div class="input-field col s6">
                 <input id="cod-j-e" type="number" class="validate" data-ng-model="user.vereador.numero" ng-required="user.ehVereador">
