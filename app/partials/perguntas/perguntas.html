@@ -68,7 +68,7 @@
           <div class="row">
             <div class="col s12 m12 l12">
               <div class="col s12 m4 l3 right">
-                <a ng-show="pagina === perguntas.length || pagina >= 18" class="btn right lg finalizar" href="/ranking">Finalizar</a>
+                <a ng-show="pagina === perguntas.length || pagina >= 18 && !currentUser.ehVereador" class="btn right lg finalizar" href="/ranking">Finalizar</a>
               </div>
             </div>
           </div>

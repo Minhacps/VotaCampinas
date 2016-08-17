@@ -34,7 +34,7 @@ exports.obterMatches = (req, res) => {
         'users.name as nome',
         'respostasPrioridades.userId',
         'respostasPrioridades.prioridadeId',
-        'vereadores.partido',
+        'vereadores.partidoId',
         'vereadores.numero'
       ]
     })
