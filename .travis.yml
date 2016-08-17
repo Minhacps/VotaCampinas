@@ -1,16 +1,15 @@
 language: node_js
-
 node_js:
-  - "6.1"
-
+- '6.1'
 branches:
   only:
-    - master
-
+  - master
 install:
-  - npm install -g bower
-  - npm install
-
+- npm install -g bower
+- npm install
 after_success:
-  - git remote add production $DEPLOY_REMOTE
-  - git push production master
+- git remote add production ${DEPLOY_REMOTE}
+- git push production master
+env:
+  global:
+    secure: fHAHaJ2fJt1SC9BGe6uom7l44hzBMJQAkRQ90Q2v7N8DH+8w6kFHBHxLQryX8/XFw9w6fGG99CA8QPwbuw8DLRgev94HaFteNz66HDBHeuOC9GVdGqcY49Z/NZYnirWRFMooK5kmyvoqlxRY7i/+yEJHZ4PkEDE+RN82wUm5+4tb1HwKwMOPD2flc/M57fHes4FxWyMDp5ODDEVBZImsqA7F74JiS1xKNNcXbTqfkxx31ONtyICzQYVQ1HfdkEewMDqeJhg9B4zMW640Pq+VsjAIZHjLYAiyNYfTDu/E7UgIPKQrNBDUPXuS1QEk3AKI1zv37l6VfpAZrj3Q3SkuXLc9ZXRU85/0yYEWbnrbuNh0aJLKIcqIrKXZJ4DGuw9NYDE3ufj6ONfriSS4IVuoOLdQo2VlJpks3KP8NvuCpwVK6pXpLw/cbV3GZCX72FNL1YzdEgOpTnF09Rxg9poY5Oias/SF4Kg6hqrShM2Kg+lioTtPGOpr26OzaN0SmSZbkPmAo1wBiSMcqd4yYzy/AUAIH4fa49mazgxsbdfJPOhQXA/fKfiyoo45wnHvQ7wBzQ6IpvX0ahFvkZtzAWXbCA+0245aSsSrqCQhyniYcgzw4fveqXinSEOy3S+FXydJOH6WMFsmoeCp7UcZ9Nvj8UpjfxtlLUqVNjhwSVtnhxY=
