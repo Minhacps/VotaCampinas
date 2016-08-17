@@ -47,8 +47,7 @@ exports.ensureAuthenticated = function (req, res, next) {
       .fetch()
       .then(function (user) {
         if (!user) {
-          return res.status(401).send({ msg: 'The email address ' + req.body.email + ' is not associated with any account. ' +
-          'Double-check your email address and try again.'
+          return res.status(401).send({ msg: 'O e-mail ' + req.body.email + ' não está cadastrado.'
           });
         }
         user.comparePassword(req.body.password, function (err, isMatch) {
