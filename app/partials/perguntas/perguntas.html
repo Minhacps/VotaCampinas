@@ -2,13 +2,13 @@
   <div class="row">
     <div class="col s12">
         <h1>Analise as afirmações</h1>
-        <span>{{pagina}} / {{perguntas.length}}</span>
+        <span>{{pagina + 3}} / {{perguntas.length + 3}}</span>
     </div>
     <div class="col s12">
       <div class="progress">
         <div
           class="determinate"
-          style="width: {{(pagina / perguntas.length)*100}}%"
+          style="width: {{((pagina + 3) / (perguntas.length + 3))*100}}%"
           ng-class="pagina < 18 ? 'red' : ''">
         </div>
       </div>
