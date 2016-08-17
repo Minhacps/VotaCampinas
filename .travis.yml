@@ -1,0 +1,11 @@
+language: node_js
+
+branches:
+  only:
+  - master
+
+install:
+- npm install
+
+after_success:
+- git push https://$DEPLOY_USER@$DEPLOY_PWD@$DEPLOY_URL master
