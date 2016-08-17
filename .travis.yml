@@ -12,4 +12,5 @@ install:
   - npm install
 
 after_success:
-  - git push https://$DEPLOY_USER@$DEPLOY_PWD@$DEPLOY_URL master
+  - git remote add production $DEPLOY_REMOTE
+  - git push production master
