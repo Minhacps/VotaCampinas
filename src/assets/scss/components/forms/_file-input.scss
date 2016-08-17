@@ -15,6 +15,10 @@
     float: left;
     height: $input-height;
     line-height: $input-height;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   span {

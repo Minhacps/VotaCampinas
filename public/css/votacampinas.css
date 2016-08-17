@@ -199,10 +199,10 @@ footer {
     display: inline-block; }
   .questoes span {
     display: inline-block;
-    border: 1px solid;
+    border: 1px solid #ccc;
     padding: 3px 8px;
-    border-radius: 15px;
-    margin-left: 10px; }
+    border-radius: 2px;
+    box-shadow: 1px 2px 6px #ccc; }
 
 @media only screen and (max-width: 600px) {
   .questoes span {

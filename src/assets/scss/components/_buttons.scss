@@ -63,6 +63,7 @@
 
   &:hover {
     background-color: #feb557;
+    text-decoration: none;
     @extend .z-depth-1-half;
   }
 }
