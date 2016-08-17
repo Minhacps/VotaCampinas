@@ -1,11 +1,17 @@
 language: node_js
 
+node_js:
+  - "6.1"
+
 branches:
   only:
-  - master
+    - master
+
+before_script:
+  - npm install -g bower
 
 install:
-- npm install
+  - npm install
 
 after_success:
-- git push https://$DEPLOY_USER@$DEPLOY_PWD@$DEPLOY_URL master
+  - git push https://$DEPLOY_USER@$DEPLOY_PWD@$DEPLOY_URL master
