@@ -485,20 +485,6 @@ angular.module('votaCampinas')
 
 }());
 
-(function() {
-
-  'use strict';
-
-  var app = angular.module('votaCampinas');
-
-  var perfilController = function($scope) {    
-  }
-  perfilController.$inject = ["$scope"];
-
-  app.controller('perfilController', perfilController);
-
-}());
-
 (function () {
   'use strict';
 
@@ -601,6 +587,20 @@ angular.module('votaCampinas')
 
   app.factory('perguntasFactory', perguntasFactory);
 })();
+
+(function() {
+
+  'use strict';
+
+  var app = angular.module('votaCampinas');
+
+  var perfilController = function($scope) {    
+  }
+  perfilController.$inject = ["$scope"];
+
+  app.controller('perfilController', perfilController);
+
+}());
 
 (function() {
 
