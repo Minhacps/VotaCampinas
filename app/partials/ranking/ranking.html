@@ -17,7 +17,10 @@
             <div class="col s12 m10">
               <h4>{{candidato.nome}}</h4>
               <div class="col s12 m8">
-                <p>{{candidato.partido}} - Numero: {{candidato.numero}}</p>
+                <p>
+                  <strong title={{candidato.partido.nome}}>{{candidato.partido.sigla}}</strong>
+                   - Numero: <strong>{{candidato.numero}}</strong>
+                 </p>
                 <p>Afinidade: {{candidato.pontuacao | pontuacaoFilter}}%</p>
               </div>
 

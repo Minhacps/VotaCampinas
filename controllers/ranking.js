@@ -22,6 +22,7 @@ exports.obterMatches = (req, res) => {
       qb
         .join('users', 'respostasPrioridades.userId', 'users.id')
         .join('vereadores', 'users.id', 'vereadores.userId')
+        .join('partidos', 'vereadores.partidoId', 'partidos.id')
         .where('ehVereador', '=', 1);
     })
     .orderBy('userId')
@@ -32,10 +33,13 @@ exports.obterMatches = (req, res) => {
         'respostasPrioridades.userId',
         'respostasPrioridades.prioridadeId',
         'vereadores.partidoId',
-        'vereadores.numero'
+        'vereadores.numero',
+        'partidos.nome as partidoNome',
+        'partidos.sigla as partidoSigla'
       ]
     })
     .then((prioridadesVereadores) => {
+      console.log(prioridadesVereadores.toJSON())
       callback(null, prioridadesVereadores.toJSON());
     });
   };
@@ -81,7 +85,10 @@ exports.obterMatches = (req, res) => {
           id: prioridadeVereador.userId,
           nome: prioridadeVereador.nome,
           foto: prioridadeVereador.picture,
-          partido: prioridadeVereador.partido,
+          partido: {
+            nome: prioridadeVereador.partidoNome,
+            sigla: prioridadeVereador.partidoSigla,
+          },
           numero: prioridadeVereador.numero,
           prioridades: [prioridadeVereador.prioridadeId],
           respostas: respostasVereadores
