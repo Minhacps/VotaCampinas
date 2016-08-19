@@ -5,10 +5,6 @@ const RespostaPrioridade = require('../models/RespostaPrioridade');
 const RespostaPergunta = require('../models/RespostaPergunta');
 
 exports.obterMatches = (req, res) => {
-  req.user = {
-    id: 1
-  };
-
   const prioridadeUsuario = (callback) => {
     new RespostaPrioridade()
       .where('userId', '=', req.user.id )
