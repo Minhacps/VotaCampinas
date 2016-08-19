@@ -740,6 +740,8 @@ nav ul a span.badge {
 
 .container-fluid{
   padding: 0 !important;
+  flex: 1;
+  width: 100%;
 }
 
 // No Text Select
@@ -774,5 +776,12 @@ nav ul a span.badge {
 }
 
 .page-content{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.main-view{
+  display: flex;
+  flex-direction: column;
   flex: 1;
 }
