@@ -7,7 +7,7 @@ const RespostaPergunta = require('../models/RespostaPergunta');
 exports.obterMatches = (req, res) => {
   const prioridadeUsuario = (callback) => {
     new RespostaPrioridade()
-      .where('userId', '=', req.user.id )
+      .where('userId', '=', req.user.id)
       .orderBy('id')
       .fetchAll()
       .then((prioridadesUsuario) => {
@@ -28,6 +28,7 @@ exports.obterMatches = (req, res) => {
     .fetchAll({
       columns: [
         'users.name as nome',
+        'users.picture as picture',
         'respostasPrioridades.userId',
         'respostasPrioridades.prioridadeId',
         'vereadores.partidoId',
@@ -79,6 +80,7 @@ exports.obterMatches = (req, res) => {
         red.push({
           id: prioridadeVereador.userId,
           nome: prioridadeVereador.nome,
+          foto: prioridadeVereador.picture,
           partido: prioridadeVereador.partido,
           numero: prioridadeVereador.numero,
           prioridades: [prioridadeVereador.prioridadeId],

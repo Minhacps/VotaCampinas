@@ -12,7 +12,7 @@
         <li class="collection-item" data-ng-repeat="candidato in candidatos | orderBy: '-pontuacao'">
           <div class="row">
             <div class="col s12 m2 center-align">
-              <img src="http://placehold.it/150x150" alt="" style="width: 100%;">
+              <img src="{{candidato.foto ? candidato.foto : 'img/avatar.jpg'}}" alt="" style="width: 100%;">
             </div>
             <div class="col s12 m10">
               <h4>{{candidato.nome}}</h4>
@@ -20,7 +20,7 @@
                 <p>{{candidato.partido}} - Numero: {{candidato.numero}}</p>
                 <p>Afinidade: {{candidato.pontuacao | pontuacaoFilter}}%</p>
               </div>
-              
+
               <div class="col s12 m4">
                 <a data-ng-href="/perfil/{{candidato.id}}" class="btn rank">Ver Perfil</a>
               </div>
@@ -33,4 +33,4 @@
       </ul>
     </div>
   </div>
-</div>  
+</div>
