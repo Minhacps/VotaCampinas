@@ -3,27 +3,24 @@
 
   var app = angular.module('votaCampinas');
 
-  var perguntasController = function ($rootScope, $scope, $timeout, perguntasFactory) {
+  var perguntasController = function ($rootScope, $scope, $timeout, $q, perguntasFactory) {
     $scope.pagina = 0;
-
-
-    perguntasFactory.obterRespostas()
-    .success(function (respostas) {
-      $scope.respostas = respostas;
-      $scope.pagina = respostas.length;
-    });
-
-    perguntasFactory.obterPerguntas()
-      .success(function (perguntas) {
-        $scope.perguntas = perguntas;
-        $scope.perguntas.map(function (pergunta, indice) {
-          if ($scope.respostas[indice]) {
-            $scope.perguntas[indice].resposta = $scope.respostas[indice].resposta;
-          }
-        });
-      });
-
     $scope.selecionadas = {};
+
+    $q.all([
+      perguntasFactory.obterRespostas(),
+      perguntasFactory.obterPerguntas()
+    ])
+    .then(function (res) {
+      $scope.respostas = res[0].data;
+      $scope.pagina = res[0].data.length;
+      $scope.perguntas = res[1].data;
+      $scope.perguntas.map(function (pergunta, indice) {
+        if ($scope.respostas[indice]) {
+          $scope.perguntas[indice].resposta = $scope.respostas[indice].resposta;
+        }
+      });
+    });
 
     $scope.next = function () {
       if ($rootScope.currentUser.ehVereador) {
@@ -57,7 +54,7 @@
     }
 
     $scope.back = function () {
-      --$scope.pagina;      
+      --$scope.pagina;
     };
   };
 
