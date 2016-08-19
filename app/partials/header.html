@@ -12,6 +12,7 @@
         <li ng-class="{ active: isActive('/cadastro')}" ng-if="!isAuthenticated()"><a href="/cadastro">Cadastre-se</a></li>
         <li ng-class="{ active: isActive('/account')}" ng-if="isAuthenticated()"><a href="/account">Meu perfil</a></li>
         <li ng-class="{ active: isActive('/perguntas')}" ng-if="isAuthenticated()"><a href="/perguntas">Questões</a></li>
+        <li ng-class="{ active: isActive('/ranking')}" ng-if="isAuthenticated() && !currentUser.ehVereador && pagina >= 18"><a href="/ranking">Ranking</a></li>
         <li ng-if="isAuthenticated()"><a href="#" ng-click="logout()">Sair</a></li>
       </ul>
        <ul class="side-nav" id="mobile-demo">
