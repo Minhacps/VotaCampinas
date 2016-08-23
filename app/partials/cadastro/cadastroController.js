@@ -49,7 +49,7 @@
     };
 
     $('select').material_select();
-    $('#data-nascimento').mask('00/00/0000');
+    $('#cod-j-e').mask('00.000.000/0000-00');
   };
 
   app.controller('cadastroController', cadastroController);
