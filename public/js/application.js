@@ -431,7 +431,7 @@ angular.module('votaCampinas')
     };
 
     $('select').material_select();
-    $('#data-nascimento').mask('00/00/0000');
+    $('#cod-j-e').mask('00.000.000/0000-00');
   };
   cadastroController.$inject = ["$scope", "$rootScope", "$location", "$window", "$auth", "Partidos"];
 
@@ -505,7 +505,7 @@ angular.module('votaCampinas')
   var app = angular.module('votaCampinas');
 
   var perguntasController = function ($rootScope, $scope, $timeout, $q, perguntasFactory) {
-    $scope.pagina = 0;
+    $rootScope.pagina = 0;
     $scope.selecionadas = {};
 
     $q.all([
@@ -514,7 +514,7 @@ angular.module('votaCampinas')
     ])
     .then(function (res) {
       $scope.respostas = res[0].data;
-      $scope.pagina = res[0].data.length;
+      $rootScope.pagina = res[0].data.length;
       $scope.perguntas = res[1].data;
       $scope.perguntas.map(function (pergunta, indice) {
         if ($scope.respostas[indice]) {
@@ -531,7 +531,7 @@ angular.module('votaCampinas')
     };
 
     $scope.pular = function () {
-      if ($scope.pagina < 18) {
+      if ($rootScope.pagina < 18) {
         return false;
       }
       salvarResposta();
@@ -545,17 +545,17 @@ angular.module('votaCampinas')
       $scope.enviando = true;
 
       $timeout(function () {
-        var pergunta = angular.copy($scope.perguntas[$scope.pagina]);
+        var pergunta = angular.copy($scope.perguntas[$rootScope.pagina]);
         perguntasFactory.salvarResposta(pergunta)
         .success(function () {
-          ++$scope.pagina;
+          ++$rootScope.pagina;
           $scope.enviando = false;
         });
       }, 700);
     }
 
     $scope.back = function () {
-      --$scope.pagina;
+      --$rootScope.pagina;
     };
   };
   perguntasController.$inject = ["$rootScope", "$scope", "$timeout", "$q", "perguntasFactory"];
