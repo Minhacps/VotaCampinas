@@ -2556,7 +2556,9 @@ nav ul a span.badge {
   float: right !important; }
 
 .container-fluid {
-  padding: 0 !important; }
+  padding: 0 !important;
+  flex: 1;
+  width: 100%; }
 
 .no-select, input[type=range],
 input[type=range] + .thumb {
@@ -2585,6 +2587,13 @@ input[type=range] + .thumb {
   padding: 0 !important; }
 
 .page-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column; }
+
+.main-view {
+  display: flex;
+  flex-direction: column;
   flex: 1; }
 
 /* This is needed for some mobile phones to display the Google Icon font properly */

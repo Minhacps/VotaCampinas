@@ -4,6 +4,11 @@
         <h1>Cadastro</h1>
     </div>
 
+
+    <div ng-if="messages.error" role="alert" class="text-danger col s12">
+      <p class="center-align" ng-repeat="error in messages.error">{{error.msg}}</p>
+    </div>
+    
     <div class="col s12">
       <form name="cadastro" ng-submit="enviar()">
         <div class="dados-pessoais">
