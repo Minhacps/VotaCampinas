@@ -89,7 +89,7 @@ exports.signupPost = function (req, res, next) {
 
       Vereador.forge({
         userId: user.id,
-        codigoJusticaEleitoral: req.body.vereador.codigoJusticaEleitoral,
+        cnpj: req.body.vereador.cnpj,
         partidoId: req.body.vereador.partidoId,
         numero: req.body.vereador.numero,
         descricao: req.body.vereador.descricao
@@ -100,7 +100,9 @@ exports.signupPost = function (req, res, next) {
     .catch(function (err) {
       console.log(err);
       if (err.code === 'ER_DUP_ENTRY' || err.code === '23505') {
-        return res.status(400).send({ msg: 'The email address you have entered is already associated with another account.' });
+        res.status(400).send({ msg: 'Esse e-mail já está sendo utilizado.' });
+      } else {
+        res.status(500).send({ err });
       }
     });
 };
