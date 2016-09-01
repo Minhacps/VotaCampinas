@@ -5,15 +5,20 @@
     $scope.user = {};
     $scope.required = true;
 
-    Partidos.obterTodos()
-    .then(function (res) {
-      $scope.partidos = res;
-      $('select').material_select();
+    $scope.$watchCollection('user.ehVereador', function (ehVereador) {
+      if (ehVereador && !$scope.partidos) {
+        Partidos.obterTodos()
+        .then(function (res) {
+          $scope.partidos = res;
+          $('select').material_select();
+        });
+      }
     });
 
     $scope.enviar = function () {
       $scope.user.gender = $('#sexo').val();
 
+      console.log($scope.user)
       $auth.signup($scope.user)
         .then(function (response) {
           $auth.setToken(response);
@@ -22,6 +27,7 @@
           $location.path('/prioridades');
         })
         .catch(function (response) {
+          window.scrollTo(0, 0);
           $scope.messages = {
             error: Array.isArray(response.data) ? response.data : [response.data]
           };
@@ -48,8 +54,7 @@
         });
     };
 
-    $('select').material_select();
-    $('#cod-j-e').mask('00.000.000/0000-00');
+    $('#cnpj').mask('00.000.000/0000-00');
   };
 
   app.controller('cadastroController', cadastroController);

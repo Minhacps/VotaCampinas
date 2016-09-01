@@ -374,6 +374,7 @@ angular.module('votaCampinas')
         .then(obterTodosComplete);
 
       function obterTodosComplete (res) {
+        console.log(res);
         return res.data;
       }
     }
@@ -387,15 +388,20 @@ angular.module('votaCampinas')
     $scope.user = {};
     $scope.required = true;
 
-    Partidos.obterTodos()
-    .then(function (res) {
-      $scope.partidos = res;
-      $('select').material_select();
+    $scope.$watchCollection('user.ehVereador', function (ehVereador) {
+      if (ehVereador && !$scope.partidos) {
+        Partidos.obterTodos()
+        .then(function (res) {
+          $scope.partidos = res;
+          $('select').material_select();
+        });
+      }
     });
 
     $scope.enviar = function () {
       $scope.user.gender = $('#sexo').val();
 
+      console.log($scope.user)
       $auth.signup($scope.user)
         .then(function (response) {
           $auth.setToken(response);
@@ -404,6 +410,7 @@ angular.module('votaCampinas')
           $location.path('/prioridades');
         })
         .catch(function (response) {
+          window.scrollTo(0, 0);
           $scope.messages = {
             error: Array.isArray(response.data) ? response.data : [response.data]
           };
@@ -430,8 +437,7 @@ angular.module('votaCampinas')
         });
     };
 
-    $('select').material_select();
-    $('#cod-j-e').mask('00.000.000/0000-00');
+    $('#cnpj').mask('00.000.000/0000-00');
   };
   cadastroController.$inject = ["$scope", "$rootScope", "$location", "$window", "$auth", "Partidos"];
 
@@ -482,20 +488,6 @@ angular.module('votaCampinas')
   loginController.$inject = ["$scope", "$rootScope", "$location", "$window", "$auth"];
 
   app.controller('loginController', loginController);
-
-}());
-
-(function() {
-
-  'use strict';
-
-  var app = angular.module('votaCampinas');
-
-  var perfilController = function($scope) {    
-  }
-  perfilController.$inject = ["$scope"];
-
-  app.controller('perfilController', perfilController);
 
 }());
 
@@ -598,6 +590,20 @@ angular.module('votaCampinas')
 
   app.factory('perguntasFactory', perguntasFactory);
 })();
+
+(function() {
+
+  'use strict';
+
+  var app = angular.module('votaCampinas');
+
+  var perfilController = function($scope) {    
+  }
+  perfilController.$inject = ["$scope"];
+
+  app.controller('perfilController', perfilController);
+
+}());
 
 (function() {
 

@@ -30,7 +30,7 @@
           <div class="exclusivo-candidato" data-ng-show="user.ehVereador">
             <div class="row">
               <div class="input-field col s6">
-                <select class="browser-default" data-ng-model="user.vereador.partidoId" data-ng-options="partido.numero as partido.sigla for partido in partidos">
+                <select class="browser-default" data-ng-model="user.vereador.partidoId" data-ng-options="partido.id as partido.sigla for partido in partidos" required>
                   <option value="">Selecione um partido</option>
                 </select>
               </div>
@@ -42,8 +42,8 @@
 
              <div class="row">
                <div class="input-field col s12">
-                 <input id="cod-j-e" type="text" class="validate" data-ng-model="user.vereador.codigoJusticaEleitoral" ng-required="user.ehVereador">
-                 <label for="cod-j-e">Repita o número do candidato(a)</label>
+                 <input id="cnpj" type="text" class="validate" data-ng-model="user.vereador.cnpj" ng-required="user.ehVereador" ng-minlength="18">
+                 <label for="cnpj">CNPJ</label>
                </div>
              </div>
 
