@@ -4,6 +4,11 @@
         <h1>Cadastro</h1>
     </div>
 
+
+    <div ng-if="messages.error" role="alert" class="text-danger col s12">
+      <p class="center-align" ng-repeat="error in messages.error">{{error.msg}}</p>
+    </div>
+
     <div class="col s12">
       <form name="cadastro" ng-submit="enviar()">
         <div class="dados-pessoais">
@@ -25,20 +30,20 @@
           <div class="exclusivo-candidato" data-ng-show="user.ehVereador">
             <div class="row">
               <div class="input-field col s6">
-                <select class="browser-default" data-ng-model="user.vereador.partidoId" data-ng-options="partido.numero as partido.sigla for partido in partidos">
+                <select class="browser-default" data-ng-model="user.vereador.partidoId" data-ng-options="partido.id as partido.sigla for partido in partidos" required>
                   <option value="">Selecione um partido</option>
                 </select>
               </div>
               <div class="input-field col s6">
-                <input id="cod-j-e" type="number" class="validate" data-ng-model="user.vereador.numero" ng-required="user.ehVereador">
-                <label for="cod-j-e">Número</label>
+                <input id="vereador-numero" type="number" class="validate" data-ng-model="user.vereador.numero" ng-required="user.ehVereador">
+                <label for="vereador-numero">Número do candidato(a)</label>
               </div>
             </div>
 
              <div class="row">
                <div class="input-field col s12">
-                 <input id="cod-j-e" type="number" class="validate" data-ng-model="user.vereador.codigoJusticaEleitoral" ng-required="user.ehVereador">
-                 <label for="cod-j-e">Cod. Justiça Eleitoral</label>
+                 <input id="cnpj" type="text" class="validate" data-ng-model="user.vereador.cnpj" ng-required="user.ehVereador" ng-minlength="18">
+                 <label for="cnpj">CNPJ</label>
                </div>
              </div>
 
@@ -89,7 +94,15 @@
         <button class="btn right waves-effect waves-light" type="submit" name="action" data-ng-disabled="cadastro.$invalid">Cadastrar
             <i class="material-icons right">send</i>
         </button>
+
+
       </form>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <h1>Se o sistema não avançar aguarde alguns minutos e
+          tente se logar com o e-mail e senha que cadastrou.</h1>
+      </div
     </div>
   </div>
 </div>
