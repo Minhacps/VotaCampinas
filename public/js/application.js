@@ -491,6 +491,65 @@ angular.module('votaCampinas')
 
 }());
 
+(function() {
+
+  'use strict';
+
+  var app = angular.module('votaCampinas');
+
+  var perfilController = function($scope, perfilFactory) {
+    $scope.possiveisRespostas = {
+      1: 'Discordo',
+      2: 'Concordo plenamente',
+      3: 'Discordo plenamente',
+      4: 'Concordo'
+    };
+
+    perfilFactory.obterPerguntas().then(function(res) { $scope.perguntas = res.data; });
+    perfilFactory.obterRespostas().then(function(res) { $scope.respostas = res.data; });
+  };
+  perfilController.$inject = ["$scope", "perfilFactory"];
+
+  app.controller('perfilController', perfilController);
+
+}());
+
+(function () {
+  'use strict';
+
+  var app = angular.module('votaCampinas');
+
+  var perfilFactory = function ($rootScope, $http) {
+    return {
+      obterPerguntas: obterPerguntas,
+      salvarResposta: salvarResposta,
+      obterRespostas: obterRespostas
+    };
+
+    function obterPerguntas () {
+      return $http.get('/api/perguntas');
+    }
+
+    function salvarResposta (pergunta) {
+      delete pergunta.pergunta;
+
+      var obj = {
+        usuarioId: $rootScope.currentUser.id,
+        pergunta: pergunta
+      };
+
+      return $http.post('/api/respostas', obj);
+    }
+
+    function obterRespostas () {
+      return $http.get('/api/respostas/');
+    }
+  };
+  perfilFactory.$inject = ["$rootScope", "$http"];
+
+  app.factory('perfilFactory', perfilFactory);
+})();
+
 (function () {
   'use strict';
 
@@ -590,66 +649,6 @@ angular.module('votaCampinas')
 
   app.factory('perguntasFactory', perguntasFactory);
 })();
-
-(function() {
-
-  'use strict';
-
-  var app = angular.module('votaCampinas');
-
-  var pontuacaoFilter = function () {
-    return function(pontuacao) {
-      var pontuacaoMaxima = 90;
-
-      return Math.round(pontuacao * 100 / pontuacaoMaxima);
-    }
-  };
-
-  app.filter('pontuacaoFilter', pontuacaoFilter);
-
-}());
-
-(function() {
-
-  'use strict';
-
-  var app = angular.module('votaCampinas');
-
-  var rankingController = function ($scope, Ranking) {
-    Ranking.obterMatches()
-    .then(function (res) {
-      $scope.candidatos = res;
-    });
-  };
-  rankingController.$inject = ["$scope", "Ranking"];
-
-  app.controller('rankingController', rankingController);
-
-}());
-angular
-  .module('votaCampinas')
-  .factory('Ranking', Ranking);
-
-function Ranking ($http) {
-  return {
-    obterMatches: obterMatches
-  };
-
-  function obterMatches () {
-    return $http
-    .get('/api/ranking')
-    .then(obterMatchesComplete)
-    .catch(obterMatchesFailed);
-
-    function obterMatchesComplete (res) {
-      return res.data;
-    }
-
-    function obterMatchesFailed (err) {
-      return err;
-    }
-  }
-}
 
 (function() {
 
@@ -759,55 +758,56 @@ function Ranking ($http) {
 
   var app = angular.module('votaCampinas');
 
-  var perfilController = function($scope, perfilFactory) {
-    $scope.possiveisRespostas = {
-      1: 'Discordo',
-      2: 'Concordo plenamente',
-      3: 'Discordo plenamente',
-      4: 'Concordo'
-    };
+  var pontuacaoFilter = function () {
+    return function(pontuacao) {
+      var pontuacaoMaxima = 90;
 
-    perfilFactory.obterPerguntas().then(function(res) { $scope.perguntas = res.data; });
-    perfilFactory.obterRespostas().then(function(res) { $scope.respostas = res.data; });
+      return Math.round(pontuacao * 100 / pontuacaoMaxima);
+    }
   };
-  perfilController.$inject = ["$scope", "perfilFactory"];
 
-  app.controller('perfilController', perfilController);
+  app.filter('pontuacaoFilter', pontuacaoFilter);
 
 }());
 
-(function () {
+(function() {
+
   'use strict';
 
   var app = angular.module('votaCampinas');
 
-  var perfilFactory = function ($rootScope, $http) {
-    return {
-      obterPerguntas: obterPerguntas,
-      salvarResposta: salvarResposta,
-      obterRespostas: obterRespostas
-    };
-
-    function obterPerguntas () {
-      return $http.get('/api/perguntas');
-    }
-
-    function salvarResposta (pergunta) {
-      delete pergunta.pergunta;
-
-      var obj = {
-        usuarioId: $rootScope.currentUser.id,
-        pergunta: pergunta
-      };
-
-      return $http.post('/api/respostas', obj);
-    }
-
-    function obterRespostas () {
-      return $http.get('/api/respostas/');
-    }
+  var rankingController = function ($scope, Ranking) {
+    Ranking.obterMatches()
+    .then(function (res) {
+      $scope.candidatos = res;
+    });
   };
-  perfilFactory.$inject = ["$rootScope", "$http"];
+  rankingController.$inject = ["$scope", "Ranking"];
 
-  app.factory('perfilFactory', perfilFactory);
-})();
+  app.controller('rankingController', rankingController);
+
+}());
+angular
+  .module('votaCampinas')
+  .factory('Ranking', Ranking);
+
+function Ranking ($http) {
+  return {
+    obterMatches: obterMatches
+  };
+
+  function obterMatches () {
+    return $http
+    .get('/api/ranking')
+    .then(obterMatchesComplete)
+    .catch(obterMatchesFailed);
+
+    function obterMatchesComplete (res) {
+      return res.data;
+    }
+
+    function obterMatchesFailed (err) {
+      return err;
+    }
+  }
+}
