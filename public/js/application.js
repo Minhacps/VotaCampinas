@@ -497,13 +497,58 @@ angular.module('votaCampinas')
 
   var app = angular.module('votaCampinas');
 
-  var perfilController = function($scope) {    
-  }
-  perfilController.$inject = ["$scope"];
+  var perfilController = function($scope, perfilFactory) {
+    $scope.possiveisRespostas = {
+      1: 'Discordo',
+      2: 'Concordo plenamente',
+      3: 'Discordo plenamente',
+      4: 'Concordo'
+    };
+
+    perfilFactory.obterPerguntas().then(function(res) { $scope.perguntas = res.data; });
+    perfilFactory.obterRespostas().then(function(res) { $scope.respostas = res.data; });
+  };
+  perfilController.$inject = ["$scope", "perfilFactory"];
 
   app.controller('perfilController', perfilController);
 
 }());
+
+(function () {
+  'use strict';
+
+  var app = angular.module('votaCampinas');
+
+  var perfilFactory = function ($rootScope, $http) {
+    return {
+      obterPerguntas: obterPerguntas,
+      salvarResposta: salvarResposta,
+      obterRespostas: obterRespostas
+    };
+
+    function obterPerguntas () {
+      return $http.get('/api/perguntas');
+    }
+
+    function salvarResposta (pergunta) {
+      delete pergunta.pergunta;
+
+      var obj = {
+        usuarioId: $rootScope.currentUser.id,
+        pergunta: pergunta
+      };
+
+      return $http.post('/api/respostas', obj);
+    }
+
+    function obterRespostas () {
+      return $http.get('/api/respostas/');
+    }
+  };
+  perfilFactory.$inject = ["$rootScope", "$http"];
+
+  app.factory('perfilFactory', perfilFactory);
+})();
 
 (function () {
   'use strict';

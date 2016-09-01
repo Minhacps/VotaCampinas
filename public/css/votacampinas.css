@@ -74,29 +74,29 @@ nav ul a:hover {
   text-decoration: none; }
 
 footer {
-  display: block;
-  height: 105px;
-  padding: 0 30px 5px;
-  width: 100%;
   position: relative;
-  z-index: 2; }
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 105px;
+  padding: 0 30px 5px; }
   footer .row {
-    margin-bottom: 0;
-    right: 0 !important; }
+    right: 0 !important;
+    margin-bottom: 0; }
     footer .row .col {
       text-align: center; }
   footer span {
     float: left;
-    color: #fff;
-    margin: 30px 15px 0 0; }
+    margin: 30px 15px 0 0;
+    color: #fff; }
   footer .brand-logo {
     float: left; }
 
 .footer-links {
-  margin: 10px auto;
-  width: auto;
   display: block;
-  float: right; }
+  float: right;
+  width: auto;
+  margin: 10px auto; }
   .footer-links .container {
     padding: 0; }
   .footer-links li {
@@ -106,26 +106,26 @@ footer {
     padding: 0 10px; }
   .footer-links li a {
     position: relative;
+    float: left;
     width: 50px;
     height: 28.87px;
-    background-color: transparent;
     margin: 14.43px 5px;
-    border-left: solid 2px #fff;
+    padding: 0 10px;
     border-right: solid 2px #fff;
-    float: left;
-    padding: 0 10px; }
+    border-left: solid 2px #fff;
+    background-color: transparent; }
   .footer-links li a:before,
   .footer-links li a:after {
-    content: "";
     position: absolute;
     z-index: 1;
+    left: 5.3223px;
     width: 35.36px;
     height: 35.36px;
+    content: '';
     -webkit-transform: scaleY(0.5774) rotate(-45deg);
     -ms-transform: scaleY(0.5774) rotate(-45deg);
     transform: scaleY(0.5774) rotate(-45deg);
-    background-color: inherit;
-    left: 5.3223px; }
+    background-color: inherit; }
   .footer-links li a:before {
     top: -17.6777px;
     border-top: solid 2.8284px #fff;
@@ -136,12 +136,12 @@ footer {
     border-left: solid 2.8284px #fff; }
 
 .disclaimer span {
-  margin-top: 4px;
   font-size: 10px;
   line-height: 11px;
   position: relative;
   top: 10px;
-  display: block; }
+  display: block;
+  margin-top: 4px; }
 
 @media only screen and (max-width: 770px) {
   footer {
@@ -157,25 +157,25 @@ footer {
       float: none;
       width: 100%; }
     footer .row {
-      margin-bottom: 0;
       position: relative;
-      right: 10px; }
+      right: 10px;
+      margin-bottom: 0; }
     footer .disclaimer {
       width: 100%;
-      padding: 0;
-      margin-bottom: 20px; }
+      margin-bottom: 20px;
+      padding: 0; }
       footer .disclaimer span {
         margin: 0; }
     footer .container {
-      padding: 0;
-      width: 100%; } }
+      width: 100%;
+      padding: 0; } }
 
 @media only screen and (min-width: 640px) and (max-width: 1023px) {
   footer {
     height: 130px; }
     footer span {
       font-size: 8px !important;
-      top: 0px !important;
+      top: 0 !important;
       left: 5px; }
     footer .col {
       margin-left: 0; } }
@@ -229,12 +229,12 @@ footer {
     color: white;
     background-size: cover;
     background-repeat: no-repeat;
-    padding: 15% 0;
+    padding: 10% 0;
     height: 100%; }
 
 @media only screen and (max-width: 420px) {
   .home .bg {
-    padding: 50% 0; }
+    padding: 5% 0; }
   .home h2 {
     font-size: 2em; }
   .home h5 {
@@ -244,7 +244,7 @@ footer {
 
 @media only screen and (min-width: 421px) and (max-width: 740px) {
   .home .bg {
-    padding: 10% 0 24%; }
+    padding: 5% 0 24%; }
   .home h2 {
     margin-top: 0;
     font-size: 2em; }
@@ -254,7 +254,7 @@ footer {
 
 @media only screen and (min-width: 741px) and (max-width: 800px) {
   .home .bg {
-    padding: 40% 0;
+    padding: 5% 0;
     height: 100%; } }
 
 .prioridades h1 {
@@ -335,3 +335,6 @@ footer {
 .btn.rank {
   width: 100%;
   margin-top: 35px; }
+
+.perfil-candidato .btn {
+  margin: 40px 0 50px; }
