@@ -30,7 +30,7 @@
           <div class="exclusivo-candidato" data-ng-show="user.ehVereador">
             <div class="row">
               <div class="input-field col s6">
-                <select class="browser-default" data-ng-model="user.vereador.partidoId" data-ng-options="partido.id as partido.sigla for partido in partidos" required>
+                <select class="browser-default" data-ng-model="user.vereador.partidoId" data-ng-options="partido.id as partido.sigla for partido in partidos" ng-required="user.ehVereador">
                   <option value="">Selecione um partido</option>
                 </select>
               </div>
