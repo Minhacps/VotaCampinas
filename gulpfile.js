@@ -31,7 +31,8 @@ gulp.task('angular', function () {
     'app/app.js',
     'app/controllers/*.js',
     'app/services/*.js',
-    'app/partials/**/*.js'
+    'app/partials/**/*.js',
+    'app/filters/*.js'
   ])
     .pipe(plumber())
     .pipe(concat('application.js'))
