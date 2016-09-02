@@ -1,3 +1,4 @@
+newrelic_agent.log
 .env
 node_modules/
 src/components/

@@ -1,3 +1,4 @@
+require('newrelic');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
@@ -7,8 +8,6 @@ var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var dotenv = require('dotenv');
 var jwt = require('jsonwebtoken');
-var moment = require('moment');
-var request = require('request');
 
 // Load environment variables from .env file
 dotenv.load();

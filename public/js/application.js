@@ -550,106 +550,6 @@ angular.module('votaCampinas')
   app.factory('perfilFactory', perfilFactory);
 })();
 
-(function () {
-  'use strict';
-
-  var app = angular.module('votaCampinas');
-
-  var perguntasController = function ($rootScope, $scope, $timeout, $q, perguntasFactory) {
-    $rootScope.pagina = 0;
-    $scope.selecionadas = {};
-
-    $q.all([
-      perguntasFactory.obterRespostas(),
-      perguntasFactory.obterPerguntas()
-    ])
-    .then(function (res) {
-      $scope.respostas = res[0].data;
-      $rootScope.pagina = res[0].data.length;
-      $scope.perguntas = res[1].data;
-      $scope.perguntas.map(function (pergunta, indice) {
-        if ($scope.respostas[indice]) {
-          $scope.perguntas[indice].resposta = $scope.respostas[indice].resposta;
-        }
-      });
-    });
-
-    $scope.next = function () {
-      if ($rootScope.currentUser.ehVereador) {
-        return false;
-      }
-      salvarResposta();
-    };
-
-    $scope.pular = function () {
-      if ($rootScope.pagina < 18) {
-        return false;
-      }
-      salvarResposta();
-    };
-
-    $scope.nextVereador = function () {
-      salvarResposta();
-    };
-
-    function salvarResposta () {
-      $scope.enviando = true;
-
-      $timeout(function () {
-        var pergunta = angular.copy($scope.perguntas[$rootScope.pagina]);
-        perguntasFactory.salvarResposta(pergunta)
-        .success(function () {
-          ++$rootScope.pagina;
-          $scope.enviando = false;
-        });
-      }, 700);
-    }
-
-    $scope.back = function () {
-      --$rootScope.pagina;
-    };
-  };
-  perguntasController.$inject = ["$rootScope", "$scope", "$timeout", "$q", "perguntasFactory"];
-
-  app.controller('perguntasController', perguntasController);
-}());
-
-(function () {
-  'use strict';
-
-  var app = angular.module('votaCampinas');
-
-  var perguntasFactory = function ($rootScope, $http) {
-    return {
-      obterPerguntas: obterPerguntas,
-      salvarResposta: salvarResposta,
-      obterRespostas: obterRespostas
-    };
-
-    function obterPerguntas () {
-      return $http.get('/api/perguntas');
-    }
-
-    function salvarResposta (pergunta) {
-      delete pergunta.pergunta;
-
-      var obj = {
-        usuarioId: $rootScope.currentUser.id,
-        pergunta: pergunta
-      };
-
-      return $http.post('/api/respostas', obj);
-    }
-
-    function obterRespostas () {
-      return $http.get('/api/respostas/');
-    }
-  };
-  perguntasFactory.$inject = ["$rootScope", "$http"];
-
-  app.factory('perguntasFactory', perguntasFactory);
-})();
-
 (function() {
 
   'use strict';
@@ -751,6 +651,106 @@ angular.module('votaCampinas')
   app.controller('prioridadesController', prioridadesController);
 
 }());
+
+(function () {
+  'use strict';
+
+  var app = angular.module('votaCampinas');
+
+  var perguntasController = function ($rootScope, $scope, $timeout, $q, perguntasFactory) {
+    $rootScope.pagina = 0;
+    $scope.selecionadas = {};
+
+    $q.all([
+      perguntasFactory.obterRespostas(),
+      perguntasFactory.obterPerguntas()
+    ])
+    .then(function (res) {
+      $scope.respostas = res[0].data;
+      $rootScope.pagina = res[0].data.length;
+      $scope.perguntas = res[1].data;
+      $scope.perguntas.map(function (pergunta, indice) {
+        if ($scope.respostas[indice]) {
+          $scope.perguntas[indice].resposta = $scope.respostas[indice].resposta;
+        }
+      });
+    });
+
+    $scope.next = function () {
+      if ($rootScope.currentUser.ehVereador) {
+        return false;
+      }
+      salvarResposta();
+    };
+
+    $scope.pular = function () {
+      if ($rootScope.pagina < 18) {
+        return false;
+      }
+      salvarResposta();
+    };
+
+    $scope.nextVereador = function () {
+      salvarResposta();
+    };
+
+    function salvarResposta () {
+      $scope.enviando = true;
+
+      $timeout(function () {
+        var pergunta = angular.copy($scope.perguntas[$rootScope.pagina]);
+        perguntasFactory.salvarResposta(pergunta)
+        .success(function () {
+          ++$rootScope.pagina;
+          $scope.enviando = false;
+        });
+      }, 700);
+    }
+
+    $scope.back = function () {
+      --$rootScope.pagina;
+    };
+  };
+  perguntasController.$inject = ["$rootScope", "$scope", "$timeout", "$q", "perguntasFactory"];
+
+  app.controller('perguntasController', perguntasController);
+}());
+
+(function () {
+  'use strict';
+
+  var app = angular.module('votaCampinas');
+
+  var perguntasFactory = function ($rootScope, $http) {
+    return {
+      obterPerguntas: obterPerguntas,
+      salvarResposta: salvarResposta,
+      obterRespostas: obterRespostas
+    };
+
+    function obterPerguntas () {
+      return $http.get('/api/perguntas');
+    }
+
+    function salvarResposta (pergunta) {
+      delete pergunta.pergunta;
+
+      var obj = {
+        usuarioId: $rootScope.currentUser.id,
+        pergunta: pergunta
+      };
+
+      return $http.post('/api/respostas', obj);
+    }
+
+    function obterRespostas () {
+      return $http.get('/api/respostas/');
+    }
+  };
+  perguntasFactory.$inject = ["$rootScope", "$http"];
+
+  app.factory('perguntasFactory', perguntasFactory);
+})();
 
 (function() {
 
