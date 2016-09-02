@@ -1,0 +1,15 @@
+.perfil-candidato {
+  .desenvolvimento { font-size: 18px; margin: -10px 0 20px 0;}
+  .foto-candidato { img { width: 100%; max-width: 180px; }}
+}
+
+@media only screen and (max-width : 770px) {
+  .card-panel { padding: 0; }
+  .card .card-content .card-title.nome-candidato { font-size: 20px; line-height: 20px; }
+  .foto-candidato {
+    text-align: center;
+    padding: 0;
+    margin-bottom: 20px;
+    img { max-width: auto; }
+  }
+}

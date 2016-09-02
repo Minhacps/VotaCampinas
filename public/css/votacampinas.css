@@ -64,6 +64,11 @@ object {
 .paddingRow {
   margin-bottom: 120px; }
 
+.time div {
+  text-align: center; }
+  .time div.left-align {
+    margin: 0 !important; }
+
 @media only screen and (max-width: 770px) {
   .time {
     padding: 0; }
@@ -338,3 +343,24 @@ footer {
 
 .perfil-candidato .btn {
   margin: 40px 0 50px; }
+
+.perfil-candidato .desenvolvimento {
+  font-size: 18px;
+  margin: -10px 0 20px 0; }
+
+.perfil-candidato .foto-candidato img {
+  width: 100%;
+  max-width: 180px; }
+
+@media only screen and (max-width: 770px) {
+  .card-panel {
+    padding: 0; }
+  .card .card-content .card-title.nome-candidato {
+    font-size: 20px;
+    line-height: 20px; }
+  .foto-candidato {
+    text-align: center;
+    padding: 0;
+    margin-bottom: 20px; }
+    .foto-candidato img {
+      max-width: auto; } }

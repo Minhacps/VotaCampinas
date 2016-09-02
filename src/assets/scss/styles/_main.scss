@@ -83,8 +83,13 @@ object {
   margin-bottom: 120px;
 }
 
+.time div {
+  text-align: center;
+  &.left-align { margin: 0 !important; }
+}
+
 @media only screen and (max-width : 770px) {
-  .time { 
+  .time {
     padding: 0;
     .col {
       width: 50% !important;
