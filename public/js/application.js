@@ -444,53 +444,6 @@ angular.module('votaCampinas')
   app.controller('cadastroController', cadastroController);
 }());
 
-(function () {
-
-  'use strict';
-
-  var app = angular.module('votaCampinas');
-
-  var loginController = function ($scope, $rootScope, $location, $window, $auth) {
-    $scope.enviar = function () {
-      $auth.login($scope.user)
-        .then(function (response) {
-          $rootScope.currentUser = response.data.user;
-          $window.localStorage.user = JSON.stringify(response.data.user);
-          $location.path('/prioridades');
-        })
-        .catch(function (response) {
-          $scope.messages = {
-            error: Array.isArray(response.data) ? response.data : [response.data]
-          };
-        });
-    };
-
-    $scope.authenticate = function (provider) {
-      $auth.authenticate(provider)
-        .then(function (response) {
-          $rootScope.currentUser = response.data.user;
-          $window.localStorage.user = JSON.stringify(response.data.user);
-          $location.path('/');
-        })
-        .catch(function (response) {
-          if (response.error) {
-            $scope.messages = {
-              error: [{ msg: response.error }]
-            };
-          } else if (response.data) {
-            $scope.messages = {
-              error: [response.data]
-            };
-          }
-        });
-    };
-  };
-  loginController.$inject = ["$scope", "$rootScope", "$location", "$window", "$auth"];
-
-  app.controller('loginController', loginController);
-
-}());
-
 (function() {
 
   'use strict';
@@ -549,6 +502,53 @@ angular.module('votaCampinas')
 
   app.factory('perfilFactory', perfilFactory);
 })();
+
+(function () {
+
+  'use strict';
+
+  var app = angular.module('votaCampinas');
+
+  var loginController = function ($scope, $rootScope, $location, $window, $auth) {
+    $scope.enviar = function () {
+      $auth.login($scope.user)
+        .then(function (response) {
+          $rootScope.currentUser = response.data.user;
+          $window.localStorage.user = JSON.stringify(response.data.user);
+          $location.path('/prioridades');
+        })
+        .catch(function (response) {
+          $scope.messages = {
+            error: Array.isArray(response.data) ? response.data : [response.data]
+          };
+        });
+    };
+
+    $scope.authenticate = function (provider) {
+      $auth.authenticate(provider)
+        .then(function (response) {
+          $rootScope.currentUser = response.data.user;
+          $window.localStorage.user = JSON.stringify(response.data.user);
+          $location.path('/');
+        })
+        .catch(function (response) {
+          if (response.error) {
+            $scope.messages = {
+              error: [{ msg: response.error }]
+            };
+          } else if (response.data) {
+            $scope.messages = {
+              error: [response.data]
+            };
+          }
+        });
+    };
+  };
+  loginController.$inject = ["$scope", "$rootScope", "$location", "$window", "$auth"];
+
+  app.controller('loginController', loginController);
+
+}());
 
 (function () {
   'use strict';
@@ -811,3 +811,16 @@ function Ranking ($http) {
     }
   }
 }
+
+angular.module('votaCampinas')
+  .filter('capitalize', function() {
+    return function(input){
+      input = input.replace(/[0-9]/g, '').toLowerCase().split(" ");
+      input.pop(input.indexOf(''));
+      input.pop(input.indexOf('-'));
+
+      return input.map(function(e){
+        return e.charAt(0).toUpperCase() + e.substr(1);
+      }).join(' ');
+    };
+});
