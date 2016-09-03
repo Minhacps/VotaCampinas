@@ -42,9 +42,9 @@ Ranking.$inject = ["$http"];angular.module('votaCampinas', ['ngRoute', 'satelliz
         controller: 'prioridadesController',
         resolve: { loginRequired: loginRequired }
       })
-      .when('/perfil/:id', {
-        templateUrl: 'partials/perfil/perfil.html',
-        controller: 'perfilController',
+      .when('/candidato/:id', {
+        templateUrl: 'partials/candidato/candidato.html',
+        controller: 'candidatoController',
         resolve: { loginRequired: loginRequired }
       })
       .when('/perguntas', {
@@ -445,6 +445,56 @@ angular.module('votaCampinas')
 }());
 
 (function () {
+  'use strict';
+
+  var app = angular.module('votaCampinas');
+
+  var candidatoController = function ($scope, $routeParams, candidatoFactory, perguntasFactory) {
+    var candidatoId = $routeParams.id;
+
+    $scope.possiveisRespostas = {
+      1: 'Discordo',
+      2: 'Concordo plenamente',
+      3: 'Discordo plenamente',
+      4: 'Concordo'
+    };
+
+    candidatoFactory.obterCandidato(candidatoId).then(function (candidato) { $scope.candidato = candidato.data; });
+    candidatoFactory.obterRespostas(candidatoId).then(function (respostas) { $scope.candidato.respostas = respostas.data; });
+
+    perguntasFactory.obterPerguntas().then(function (perguntas) { $scope.perguntas = perguntas.data; });
+    perguntasFactory.obterRespostas().then(function (respostas) { $scope.respostasEleitor = respostas.data; });
+  };
+  candidatoController.$inject = ["$scope", "$routeParams", "candidatoFactory", "perguntasFactory"];
+
+  app.controller('candidatoController', candidatoController);
+}());
+
+(function () {
+  'use strict';
+
+  var app = angular.module('votaCampinas');
+
+  var candidatoFactory = function ($rootScope, $http) {
+    return {
+      obterCandidato: obterCandidato,
+      obterRespostas: obterRespostas
+    };
+
+    function obterCandidato (candidatoId) {
+      return $http.get('/api/candidato/' + candidatoId);
+    }
+
+    function obterRespostas (candidatoId) {
+      return $http.get('/api/candidato/' + candidatoId + '/respostas');
+    }
+  };
+  candidatoFactory.$inject = ["$rootScope", "$http"];
+
+  app.factory('candidatoFactory', candidatoFactory);
+})();
+
+(function () {
 
   'use strict';
 
@@ -490,65 +540,6 @@ angular.module('votaCampinas')
   app.controller('loginController', loginController);
 
 }());
-
-(function() {
-
-  'use strict';
-
-  var app = angular.module('votaCampinas');
-
-  var perfilController = function($scope, perfilFactory) {
-    $scope.possiveisRespostas = {
-      1: 'Discordo',
-      2: 'Concordo plenamente',
-      3: 'Discordo plenamente',
-      4: 'Concordo'
-    };
-
-    perfilFactory.obterPerguntas().then(function(res) { $scope.perguntas = res.data; });
-    perfilFactory.obterRespostas().then(function(res) { $scope.respostas = res.data; });
-  };
-  perfilController.$inject = ["$scope", "perfilFactory"];
-
-  app.controller('perfilController', perfilController);
-
-}());
-
-(function () {
-  'use strict';
-
-  var app = angular.module('votaCampinas');
-
-  var perfilFactory = function ($rootScope, $http) {
-    return {
-      obterPerguntas: obterPerguntas,
-      salvarResposta: salvarResposta,
-      obterRespostas: obterRespostas
-    };
-
-    function obterPerguntas () {
-      return $http.get('/api/perguntas');
-    }
-
-    function salvarResposta (pergunta) {
-      delete pergunta.pergunta;
-
-      var obj = {
-        usuarioId: $rootScope.currentUser.id,
-        pergunta: pergunta
-      };
-
-      return $http.post('/api/respostas', obj);
-    }
-
-    function obterRespostas () {
-      return $http.get('/api/respostas/');
-    }
-  };
-  perfilFactory.$inject = ["$rootScope", "$http"];
-
-  app.factory('perfilFactory', perfilFactory);
-})();
 
 (function () {
   'use strict';

@@ -39,9 +39,9 @@ angular.module('votaCampinas', ['ngRoute', 'satellizer'])
         controller: 'prioridadesController',
         resolve: { loginRequired: loginRequired }
       })
-      .when('/perfil/:id', {
-        templateUrl: 'partials/perfil/perfil.html',
-        controller: 'perfilController',
+      .when('/candidato/:id', {
+        templateUrl: 'partials/candidato/candidato.html',
+        controller: 'candidatoController',
         resolve: { loginRequired: loginRequired }
       })
       .when('/perguntas', {

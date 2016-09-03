@@ -19,14 +19,13 @@
               <h4>{{candidato.nome}}</h4>
               <div class="col s12 m8">
                 <p>
-                  <!--<strong title={{candidato.partido.nome}}>{{candidato.partido.sigla}}</strong> -->
                    Numero: <strong>{{candidato.numero}}</strong>
                  </p>
                 <p>Afinidade: {{candidato.pontuacao | pontuacaoFilter}}%</p>
               </div>
 
               <div class="col s12 m4">
-                <a data-ng-href="/perfil/{{candidato.id}}" class="btn rank">Ver Perfil</a>
+                <a data-ng-href="/candidato/{{candidato.id}}" class="btn rank">Ver Perfil</a>
               </div>
             </div>
 

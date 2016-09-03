@@ -81,6 +81,9 @@ app.get('/api/ranking', rankingController.obterMatches);
 const partidosController = require('./controllers/partidos');
 app.get('/api/partidos', partidosController.obterPartidos);
 
+const candidatoController = require('./controllers/candidato');
+app.get('/api/candidato/:userId', candidatoController.obterCandidato);
+app.get('/api/candidato/:userId/respostas', candidatoController.obterRespostas);
 
 
 app.get('/', function(req, res) {
