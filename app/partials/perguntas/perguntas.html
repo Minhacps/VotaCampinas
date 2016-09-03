@@ -38,7 +38,7 @@
 
           <br>
 
-          <div class="row" ng-show="currentUser.ehVereador" ng-hide="pagina === perguntas.length">
+          <div class="row" ng-show="currentUser.ehVereador && pagina !== perguntas.length">
             <div class="col s12">
               <label for="justificativa">Justificativa</label>
               <input id="justificativa" name="justificativa" type="text" data-ng-model="perguntas[pagina].justificativa" maxlength="255">
