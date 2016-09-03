@@ -374,7 +374,6 @@ angular.module('votaCampinas')
         .then(obterTodosComplete);
 
       function obterTodosComplete (res) {
-        console.log(res);
         return res.data;
       }
     }
@@ -394,14 +393,15 @@ angular.module('votaCampinas')
         .then(function (res) {
           $scope.partidos = res;
           $('select').material_select();
+        })
+        .catch(function (err) {
+          console.error(err);
         });
       }
     });
 
     $scope.enviar = function () {
       $scope.user.gender = $('#sexo').val();
-
-      console.log($scope.user)
       $auth.signup($scope.user)
         .then(function (response) {
           $auth.setToken(response);
@@ -681,6 +681,7 @@ angular.module('votaCampinas')
 
     $http.get('/api/prioridades')
     .success(function (suc) {
+      console.log(suc)
       $scope.opcoes = suc;
     })
     .error(function (err) {

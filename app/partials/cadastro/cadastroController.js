@@ -11,14 +11,15 @@
         .then(function (res) {
           $scope.partidos = res;
           $('select').material_select();
+        })
+        .catch(function (err) {
+          console.error(err);
         });
       }
     });
 
     $scope.enviar = function () {
       $scope.user.gender = $('#sexo').val();
-
-      console.log($scope.user)
       $auth.signup($scope.user)
         .then(function (response) {
           $auth.setToken(response);

@@ -16,7 +16,6 @@
         .then(obterTodosComplete);
 
       function obterTodosComplete (res) {
-        console.log(res);
         return res.data;
       }
     }
