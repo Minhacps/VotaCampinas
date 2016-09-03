@@ -8,7 +8,7 @@
 			  <div class="card-panel large">
 			  <div class="card-content row">
           <div class="col s12 m3 foto-candidato">
-            <img src="http://placehold.it/150x150" alt="Foto do cadidato {{candidato.nome}}">
+            <img src="{{candidato.foto ? candidato.foto : 'img/avatar.jpg'}}" alt="Foto do cadidato {{candidato.nome}}">
           </div>
           <div class="col s12 m9">
             <span class="card-title grey-text text-darken-4 nome-candidato">
