@@ -31,33 +31,36 @@ exports.ensureAuthenticated = function (req, res, next) {
    * POST /login
    * Sign in with email and password
    */
-  exports.loginPost = function (req, res, next) {
-    req.assert('email', 'Email is not valid').isEmail();
-    req.assert('email', 'Email cannot be blank').notEmpty();
-    req.assert('password', 'Password cannot be blank').notEmpty();
-    req.sanitize('email').normalizeEmail({ remove_dots: false });
+exports.loginPost = function (req, res, next) {
+  req.assert('email', 'Email is not valid').isEmail();
+  req.assert('email', 'Email cannot be blank').notEmpty();
+  req.assert('password', 'Password cannot be blank').notEmpty();
+  req.sanitize('email').normalizeEmail({ remove_dots: false });
 
-    var errors = req.validationErrors();
+  var errors = req.validationErrors();
 
-    if (errors) {
-      return res.status(400).send(errors);
-    }
+  if (errors) {
+    return res.status(400).send(errors);
+  }
 
-    new User({ email: req.body.email })
-      .fetch()
-      .then(function (user) {
-        if (!user) {
-          return res.status(401).send({ msg: 'O e-mail ' + req.body.email + ' não está cadastrado.'
-          });
-        }
-        user.comparePassword(req.body.password, function (err, isMatch) {
-          if (!isMatch) {
-            return res.status(401).send({ msg: 'Invalid email or password' });
-          }
-          res.send({ token: generateToken(user), user: user.toJSON() });
+  new User({ email: req.body.email })
+    .fetch()
+    .then(function (user) {
+      if (!user) {
+        return res.status(401).send({ msg: 'O e-mail ' + req.body.email + ' não está cadastrado.'
         });
+      }
+      user.comparePassword(req.body.password, function (err, isMatch) {
+        if (err) {
+          return res.status(500).send({err});
+        }
+        if (!isMatch) {
+          return res.status(401).send({ msg: 'E-mail ou senha inválidos' });
+        }
+        res.send({ token: generateToken(user), user: user.toJSON() });
       });
-  };
+    });
+};
 
 /**
  * POST /signup
@@ -182,10 +185,10 @@ exports.unlink = function (req, res, next) {
           user.set('vk', null);
           break;
         default:
-        return res.status(400).send({ msg: 'Invalid OAuth Provider' });
+          return res.status(400).send({ msg: 'Invalid OAuth Provider' });
       }
       user.save(user.changed, { patch: true }).then(function () {
-      res.send({ msg: 'Your account has been unlinked.' });
+        res.send({ msg: 'Your account has been unlinked.' });
       });
     });
 };
@@ -216,7 +219,7 @@ exports.forgotPost = function (req, res, next) {
         .fetch()
         .then(function (user) {
           if (!user) {
-        return res.status(400).send({ msg: 'The email address ' + req.body.email + ' is not associated with any account.' });
+            return res.status(400).send({ msg: 'The email address ' + req.body.email + ' is not associated with any account.' });
           }
           user.set('passwordResetToken', token);
           user.set('passwordResetExpires', new Date(Date.now() + 3600000)); // expire in 1 hour
@@ -260,7 +263,7 @@ exports.resetPost = function (req, res, next) {
   var errors = req.validationErrors();
 
   if (errors) {
-      return res.status(400).send(errors);
+    return res.status(400).send(errors);
   }
 
   async.waterfall([
@@ -270,13 +273,13 @@ exports.resetPost = function (req, res, next) {
         .fetch()
         .then(function (user) {
           if (!user) {
-          return res.status(400).send({ msg: 'Password reset token is invalid or has expired.' });
+            return res.status(400).send({ msg: 'Password reset token is invalid or has expired.' });
           }
           user.set('password', req.body.password);
           user.set('passwordResetToken', null);
           user.set('passwordResetExpires', null);
           user.save(user.changed, { patch: true }).then(function () {
-          done(err, user.toJSON());
+            done(err, user.toJSON());
           });
         });
     },
@@ -296,6 +299,9 @@ exports.resetPost = function (req, res, next) {
         'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
       };
       transporter.sendMail(mailOptions, function (err) {
+        if (err) {
+          return res.status(500).send({err});
+        }
         res.send({ msg: 'Your password has been changed successfully.' });
       });
     }
@@ -320,12 +326,20 @@ exports.authFacebook = function (req, res) {
 
   // Step 1. Exchange authorization code for access token.
   request.get({ url: accessTokenUrl, qs: params, json: true }, function (err, response, accessToken) {
+    if (err) {
+      return res.status(500).send({err});
+    }
+
     if (accessToken.error) {
       return res.status(500).send({ msg: accessToken.error.message });
     }
 
     // Step 2. Retrieve user's profile information.
     request.get({ url: graphApiUrl, qs: accessToken, json: true }, function (err, response, profile) {
+      if (err) {
+        return res.status(500).send({err});
+      }
+
       if (profile.error) {
         return res.status(500).send({ msg: profile.error.message });
       }
@@ -359,7 +373,7 @@ exports.authFacebook = function (req, res) {
               .fetch()
               .then(function (user) {
                 if (user) {
-                  return res.status(400).send({ msg: user.get('email') + ' is already associated with another account.' })
+                  return res.status(400).send({ msg: user.get('email') + ' is already associated with another account.' });
                 }
                 user = new User();
                 user.set('name', profile.name);

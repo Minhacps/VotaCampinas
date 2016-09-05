@@ -36,7 +36,8 @@
       salvarResposta();
     };
 
-    $scope.nextVereador = function () {
+    $scope.nextVereador = function (resposta) {
+      if (!resposta) return false;
       salvarResposta();
     };
 

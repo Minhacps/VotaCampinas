@@ -1,4 +1,4 @@
-require('newrelic');
+if (process.env.NODE_ENV === 'production') require('newrelic');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
@@ -81,6 +81,9 @@ app.get('/api/ranking', rankingController.obterMatches);
 const partidosController = require('./controllers/partidos');
 app.get('/api/partidos', partidosController.obterPartidos);
 
+const candidatoController = require('./controllers/candidato');
+app.get('/api/candidato/:userId', candidatoController.obterCandidato);
+app.get('/api/candidato/:userId/respostas', candidatoController.obterRespostas);
 
 
 app.get('/', function(req, res) {

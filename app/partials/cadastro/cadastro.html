@@ -49,8 +49,8 @@
 
              <div class="row">
               <div class="input-field col s12">
-                <textarea id="descricao" class="materialize-textarea" length="120" data-ng-model="user.vereador.descricao" ng-required="user.ehVereador"></textarea>
-                <label for="descricao">Descrição - Esta será a descrição do seu perfil para o eleitor</label>
+                <textarea id="descricao" class="materialize-textarea" maxlength="255" data-ng-model="user.vereador.descricao" ng-required="user.ehVereador"></textarea>
+                <label for="descricao">Descrição - Esta será a descrição do seu perfil para o eleitor (No máximo 255 caracteres)</label>
               </div>
             </div>
           </div>

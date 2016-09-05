@@ -38,7 +38,7 @@
 
           <br>
 
-          <div class="row" ng-show="currentUser.ehVereador">
+          <div class="row" ng-show="currentUser.ehVereador && pagina !== perguntas.length">
             <div class="col s12">
               <label for="justificativa">Justificativa</label>
               <input id="justificativa" name="justificativa" type="text" data-ng-model="perguntas[pagina].justificativa" maxlength="255">
@@ -50,27 +50,31 @@
                 <input ng-click="back()" ng-show="pagina > 0" type="button" class="btn lg" value="Voltar">
               </div>
 
-              <div class="col s12 m4 l3 right">
-                <a ng-show="currentUser.ehVereador" class="btn right" ng-click="nextVereador()">Próxima</a>
-
+              <div class="col s12 m4 l3 right" ng-hide="">
+                <a class="btn right"
+                  ng-show="currentUser.ehVereador && pagina !== perguntas.length"
+                  ng-click="nextVereador(perguntas[pagina].resposta)"
+                  ng-disabled="!perguntas[pagina].resposta">
+                  Próxima
+                </a>
                 <a class="btn pular tooltipped lg right"
                    data-position="left"
                    data-delay="30"
                    data-tooltip="{{pagina >= 18 ? 'Salvar resposta em branco' : 'Você só pode pular a partir da 18ª questão'}}"
                    href=""
                    ng-click="pular()"
-                   ng-hide="(pagina === perguntas.length || currentUser.ehVereador)">
+                   ng-hide="(currentUser.ehVereador)">
                    * Pular
+                </a>
+                <a class="btn right lg finalizar"
+                  ng-show="pagina === perguntas.length || pagina >= 18 && !currentUser.ehVereador"
+                  href="/ranking">
+                  Finalizar
                 </a>
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col s12 m12 l12">
-              <div class="col s12 m4 l3 right">
-                <a ng-show="pagina === perguntas.length || pagina >= 18 && !currentUser.ehVereador" class="btn right lg finalizar" href="/ranking">Finalizar</a>
-              </div>
-            </div>
           </div>
       </form>
     </div>

@@ -1,0 +1,39 @@
+<div class="container perfil-candidato">
+  <div class="col s12">
+      <h1>Perfil do Candidato</h1>
+  </div>
+  <div class="dados-candidato">
+	  <div class="col s12 m12">
+			<div class="card">
+			  <div class="card-panel large">
+			  <div class="card-content row">
+          <div class="col s12 m3 foto-candidato">
+            <img src="{{candidato.foto ? candidato.foto : 'img/avatar.jpg'}}" alt="Foto do cadidato {{candidato.nome}}">
+          </div>
+          <div class="col s12 m9">
+            <span class="card-title grey-text text-darken-4 nome-candidato">
+  			  		{{candidato.nome}} - {{candidato.numero}}
+  			  	</span>
+  			  	<p>{{candidato.partidoSigla}} ({{candidato.partidoNome}})</p>
+  			  	<p>{{candidato.descricao}}</p>
+          </div>
+			  </div>
+			  </div>
+			</div>
+	  </div>
+  </div>
+  <div class="respostas-candidato">
+  	<h2>Respostas</h2>
+
+    <div class="perguntasErespostas" ng-repeat="pergunta in perguntas">
+       <p class="pergunta"><strong>{{pergunta.pergunta}}</strong></p>
+       <p>
+         <strong>Sua Resposta: </strong> <span>{{possiveisRespostas[respostasEleitor[$index].resposta]}}</span><br>
+         <strong>Resposta do candidato:</strong> <span>{{possiveisRespostas[candidato.respostas[$index].resposta]}}</span><br>
+         <strong ng-show="candidato.respostas[$index].justificativa">Justificativa do candidato:</strong> <span>{{candidato.respostas[$index].justificativa}}</span>
+       </p>
+       <hr>
+    </div>
+  </div>
+  <a href="/ranking" class="btn">Voltar</a>
+</div>
