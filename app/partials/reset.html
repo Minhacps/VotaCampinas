@@ -6,14 +6,14 @@
     <div ng-repeat="success in messages.success">{{success.msg}}</div>
   </div>
 
-  <h4>Reset Password</h4>
+  <h4>Troca de senha</h4>
 
   <form ng-submit="resetPassword()">
-    <label for="password">New Password</label>
-    <input type="password" name="password" id="password" placeholder="New password" ng-model="user.password" autofocus>
-    <label for="confirm">Confirm Password</label>
-    <input type="password" name="confirm" id="confirm" placeholder="Confirm password" ng-model="user.confirm">
+    <label for="password">Nova senha</label>
+    <input type="password" name="password" id="password" placeholder="Nova senha" ng-model="user.password" autofocus>
+    <label for="confirm">Confirme sua nova senha</label>
+    <input type="password" name="confirm" id="confirm" placeholder="Confirmar senha" ng-model="user.confirm">
     <br>
-    <button type="submit">Change Password</button>
+    <button type="submit">Trocar senha</button>
   </form>
 </div>

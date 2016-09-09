@@ -238,15 +238,15 @@ exports.forgotPost = function (req, res, next) {
       });
       var mailOptions = {
         to: user.email,
-        from: 'support@yourdomain.com',
-        subject: '✔ Reset your password on Mega Boilerplate',
-        text: 'You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n' +
-        'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+        from: 'contato@votacampinas.org.br',
+        subject: '✔ Redefina sua senha no Vota Campinas',
+        text: 'Você está recebendo este e-mail porque você (ou outra pessoa) solicitou a redefinição da senha de sua conta.\n\n' +
+        'Por favor, clique no link a seguir, ou copie e cole este em seu navegador para concluir o processo:\n\n' +
         'http://' + req.headers.host + '/reset/' + token + '\n\n' +
-        'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+        'Se você não solicitou esta operação, por favor ignore este e-mail e sua senha permanecerá inalterada.\n'
       };
       transporter.sendMail(mailOptions, function (err) {
-        res.send({ msg: 'An email has been sent to ' + user.email + ' with further instructions.' });
+        res.send({ msg: 'Um e-mail foi enviado para ' + user.email + ' com mais instruções.' });
         done(err);
       });
     }
