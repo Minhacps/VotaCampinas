@@ -4,7 +4,7 @@
 
   var app = angular.module('votaCampinas');
 
-  var loginController = function ($scope, $rootScope, $location, $window, $auth) {
+  var loginController = function ($scope, $rootScope, $location, $window, $auth, Account) {
     $scope.enviar = function () {
       $auth.login($scope.user)
         .then(function (response) {
@@ -38,6 +38,7 @@
           }
         });
     };
+
   };
 
   app.controller('loginController', loginController);

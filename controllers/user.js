@@ -238,15 +238,15 @@ exports.forgotPost = function (req, res, next) {
       });
       var mailOptions = {
         to: user.email,
-        from: 'support@yourdomain.com',
-        subject: '✔ Reset your password on Mega Boilerplate',
-        text: 'You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n' +
-        'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+        from: 'contato@votacampinas.org.br',
+        subject: '✔ Redefina sua senha no Vota Campinas',
+        text: 'Você está recebendo este e-mail porque você (ou outra pessoa) solicitou a redefinição da senha de sua conta.\n\n' +
+        'Por favor, clique no link a seguir, ou copie e cole este em seu navegador para concluir o processo:\n\n' +
         'http://' + req.headers.host + '/reset/' + token + '\n\n' +
-        'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+        'Se você não solicitou esta operação, por favor ignore este e-mail e sua senha permanecerá inalterada.\n'
       };
       transporter.sendMail(mailOptions, function (err) {
-        res.send({ msg: 'An email has been sent to ' + user.email + ' with further instructions.' });
+        res.send({ msg: 'Um e-mail foi enviado para ' + user.email + ' com mais instruções.' });
         done(err);
       });
     }
@@ -272,13 +272,14 @@ exports.resetPost = function (req, res, next) {
         .where('passwordResetExpires', '>', new Date())
         .fetch()
         .then(function (user) {
+          console.log(user);
           if (!user) {
-            return res.status(400).send({ msg: 'Password reset token is invalid or has expired.' });
+            return res.status(400).send({ msg: 'O token para alteração de senha é inválido ou expirou.' });
           }
           user.set('password', req.body.password);
           user.set('passwordResetToken', null);
           user.set('passwordResetExpires', null);
-          user.save(user.changed, { patch: true }).then(function () {
+          user.save(user.changed, { patch: true }).then(function (err) {
             done(err, user.toJSON());
           });
         });
@@ -292,17 +293,17 @@ exports.resetPost = function (req, res, next) {
         }
       });
       var mailOptions = {
-        from: 'support@yourdomain.com',
+        from: 'contato@votacampinas.org.br',
         to: user.email,
-        subject: 'Your Mega Boilerplate password has been changed',
+        subject: 'Sua senha do Vota Campinas foi alterada',
         text: 'Hello,\n\n' +
-        'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+        'Esta é uma confirmação de que a senha de sua conta ' + user.email + ' acabou de ser alterada.\n'
       };
       transporter.sendMail(mailOptions, function (err) {
         if (err) {
           return res.status(500).send({err});
         }
-        res.send({ msg: 'Your password has been changed successfully.' });
+        res.send({ msg: 'Sua senha foi alterada com sucesso.' });
       });
     }
   ]);

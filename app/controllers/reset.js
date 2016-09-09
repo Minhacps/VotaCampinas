@@ -1,7 +1,10 @@
 angular.module('votaCampinas')
-  .controller('ResetCtrl', function($scope, Account) {
+  .controller('ResetCtrl', function($scope, $location, Account) {
+    
+    var token = $location.$$path.split('reset/')[1];
+
     $scope.resetPassword = function() {
-      Account.resetPassword($scope.user)
+      Account.resetPassword($scope.user, token)
         .then(function(response) {
           $scope.messages = {
             success: [response.data]

@@ -59,7 +59,7 @@ angular.module('votaCampinas', ['ngRoute', 'satellizer'])
         controller: 'ProfileCtrl',
         resolve: { loginRequired: loginRequired }
       })
-      .when('/forgot', {
+      .when('/recuperar-senha', {
         templateUrl: 'partials/forgot.html',
         controller: 'ForgotCtrl',
         resolve: { skipIfAuthenticated: skipIfAuthenticated }
