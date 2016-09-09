@@ -29,7 +29,6 @@
 
     $http.get('/api/prioridades')
     .success(function (suc) {
-      console.log(suc)
       $scope.opcoes = suc;
     })
     .error(function (err) {
