@@ -344,6 +344,24 @@ footer {
 .perfil-candidato .btn {
   margin: 40px 0 50px; }
 
+.twitter-share-button {
+  background-color: #039be5;
+  color: white;
+  padding: 3px 7px 3px 4px;
+  border-radius: 4px;
+  font-family: arial;
+  font-size: 13px; }
+  .twitter-share-button .bird {
+    background-image: url("../img/twitter-bird.png");
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-size: 100%;
+    position: relative;
+    top: 5px; }
+  .twitter-share-button:hover {
+    text-decoration: none; }
+
 .perfil-candidato .desenvolvimento {
   font-size: 18px;
   margin: -10px 0 20px 0; }

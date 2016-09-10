@@ -10,3 +10,22 @@
 }
 
 .perfil-candidato .btn { margin: 40px 0 50px }
+
+.twitter-share-button {
+	background-color: #039be5;
+  color: white;
+  padding: 3px 7px 3px 4px;
+  border-radius: 4px;
+  font-family: arial;
+  font-size: 13px;
+	.bird {
+		background-image: url('../img/twitter-bird.png');
+		width: 20px;
+		height: 20px;
+		display: inline-block;
+		background-size: 100%;
+		position: relative;
+		top: 5px;
+	}
+	&:hover { text-decoration: none; }
+}
