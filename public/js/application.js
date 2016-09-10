@@ -62,7 +62,7 @@ Ranking.$inject = ["$http"];angular.module('votaCampinas', ['ngRoute', 'satelliz
         controller: 'ProfileCtrl',
         resolve: { loginRequired: loginRequired }
       })
-      .when('/forgot', {
+      .when('/recuperar-senha', {
         templateUrl: 'partials/forgot.html',
         controller: 'ForgotCtrl',
         resolve: { skipIfAuthenticated: skipIfAuthenticated }
@@ -273,13 +273,18 @@ angular.module('votaCampinas')
     };
   }]);
 angular.module('votaCampinas')
-  .controller('ResetCtrl', ["$scope", "Account", function($scope, Account) {
+  .controller('ResetCtrl', ["$scope", "$location", "Account", function($scope, $location, Account) {
+    
+    var token = $location.$$path.split('reset/')[1];
+
     $scope.resetPassword = function() {
-      Account.resetPassword($scope.user)
+      Account.resetPassword($scope.user, token)
         .then(function(response) {
           $scope.messages = {
             success: [response.data]
           };
+
+          $location.path('/login');
         })
         .catch(function(response) {
           $scope.messages = {
@@ -342,8 +347,8 @@ angular.module('votaCampinas')
       forgotPassword: function(data) {
         return $http.post('/forgot', data);
       },
-      resetPassword: function(data) {
-        return $http.post('/reset', data);
+      resetPassword: function(data, token) {
+        return $http.post('/reset/' + token, data);
       }
     };
   }]);
@@ -500,7 +505,7 @@ angular.module('votaCampinas')
 
   var app = angular.module('votaCampinas');
 
-  var loginController = function ($scope, $rootScope, $location, $window, $auth) {
+  var loginController = function ($scope, $rootScope, $location, $window, $auth, Account) {
     $scope.enviar = function () {
       $auth.login($scope.user)
         .then(function (response) {
@@ -534,13 +539,13 @@ angular.module('votaCampinas')
           }
         });
     };
+
   };
-  loginController.$inject = ["$scope", "$rootScope", "$location", "$window", "$auth"];
+  loginController.$inject = ["$scope", "$rootScope", "$location", "$window", "$auth", "Account"];
 
   app.controller('loginController', loginController);
 
 }());
-
 (function () {
   'use strict';
 
@@ -673,7 +678,6 @@ angular.module('votaCampinas')
 
     $http.get('/api/prioridades')
     .success(function (suc) {
-      console.log(suc)
       $scope.opcoes = suc;
     })
     .error(function (err) {
@@ -770,12 +774,29 @@ angular.module('votaCampinas')
     .then(function (res) {
       $scope.candidatos = res;
     });
+
+    (function(d, s, id) {
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) return;
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.7&appId=245108102541730";
+     fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+
+     (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, "script", "twitter-wjs"));
   };
   rankingController.$inject = ["$scope", "Ranking"];
 
   app.controller('rankingController', rankingController);
 
 }());
+
 angular
   .module('votaCampinas')
   .factory('Ranking', Ranking);
