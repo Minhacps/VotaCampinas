@@ -9,6 +9,8 @@ angular.module('votaCampinas')
           $scope.messages = {
             success: [response.data]
           };
+
+          $location.path('/login');
         })
         .catch(function(response) {
           $scope.messages = {
