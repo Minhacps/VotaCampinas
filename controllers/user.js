@@ -272,16 +272,19 @@ exports.resetPost = function (req, res, next) {
         .where('passwordResetExpires', '>', new Date())
         .fetch()
         .then(function (user) {
-          console.log(user);
           if (!user) {
             return res.status(400).send({ msg: 'O token para alteração de senha é inválido ou expirou.' });
           }
           user.set('password', req.body.password);
           user.set('passwordResetToken', null);
           user.set('passwordResetExpires', null);
-          user.save(user.changed, { patch: true }).then(function (err) {
-            done(err, user.toJSON());
-          });
+          user.save(user.changed, { patch: true })
+            .then(function (user) {
+              done(null, user.toJSON());
+            })
+            .catch(function (err) {
+              done(err);
+            });
         });
     },
     function (user, done) {
