@@ -299,7 +299,7 @@ exports.resetPost = function (req, res, next) {
         from: 'contato@votacampinas.org.br',
         to: user.email,
         subject: 'Sua senha do Vota Campinas foi alterada',
-        text: 'Hello,\n\n' +
+        text: 'Olá,\n\n' +
         'Esta é uma confirmação de que a senha de sua conta ' + user.email + ' acabou de ser alterada.\n'
       };
       transporter.sendMail(mailOptions, function (err) {
