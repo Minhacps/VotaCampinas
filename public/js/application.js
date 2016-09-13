@@ -387,6 +387,56 @@ angular.module('votaCampinas')
 
 (function () {
   'use strict';
+
+  var app = angular.module('votaCampinas');
+
+  var candidatoController = function ($scope, $routeParams, candidatoFactory, perguntasFactory) {
+    var candidatoId = $routeParams.id;
+
+    $scope.possiveisRespostas = {
+      1: 'Discordo',
+      2: 'Concordo plenamente',
+      3: 'Discordo plenamente',
+      4: 'Concordo'
+    };
+
+    candidatoFactory.obterCandidato(candidatoId).then(function (candidato) { $scope.candidato = candidato.data; });
+    candidatoFactory.obterRespostas(candidatoId).then(function (respostas) { $scope.candidato.respostas = respostas.data; });
+
+    perguntasFactory.obterPerguntas().then(function (perguntas) { $scope.perguntas = perguntas.data; });
+    perguntasFactory.obterRespostas().then(function (respostas) { $scope.respostasEleitor = respostas.data; });
+  };
+  candidatoController.$inject = ["$scope", "$routeParams", "candidatoFactory", "perguntasFactory"];
+
+  app.controller('candidatoController', candidatoController);
+}());
+
+(function () {
+  'use strict';
+
+  var app = angular.module('votaCampinas');
+
+  var candidatoFactory = function ($rootScope, $http) {
+    return {
+      obterCandidato: obterCandidato,
+      obterRespostas: obterRespostas
+    };
+
+    function obterCandidato (candidatoId) {
+      return $http.get('/api/candidato/' + candidatoId);
+    }
+
+    function obterRespostas (candidatoId) {
+      return $http.get('/api/candidato/' + candidatoId + '/respostas');
+    }
+  };
+  candidatoFactory.$inject = ["$rootScope", "$http"];
+
+  app.factory('candidatoFactory', candidatoFactory);
+})();
+
+(function () {
+  'use strict';
   var app = angular.module('votaCampinas');
   var cadastroController = function ($scope, $rootScope, $location, $window, $auth, Partidos) {
     $scope.user = {};
@@ -450,56 +500,6 @@ angular.module('votaCampinas')
 }());
 
 (function () {
-  'use strict';
-
-  var app = angular.module('votaCampinas');
-
-  var candidatoController = function ($scope, $routeParams, candidatoFactory, perguntasFactory) {
-    var candidatoId = $routeParams.id;
-
-    $scope.possiveisRespostas = {
-      1: 'Discordo',
-      2: 'Concordo plenamente',
-      3: 'Discordo plenamente',
-      4: 'Concordo'
-    };
-
-    candidatoFactory.obterCandidato(candidatoId).then(function (candidato) { $scope.candidato = candidato.data; });
-    candidatoFactory.obterRespostas(candidatoId).then(function (respostas) { $scope.candidato.respostas = respostas.data; });
-
-    perguntasFactory.obterPerguntas().then(function (perguntas) { $scope.perguntas = perguntas.data; });
-    perguntasFactory.obterRespostas().then(function (respostas) { $scope.respostasEleitor = respostas.data; });
-  };
-  candidatoController.$inject = ["$scope", "$routeParams", "candidatoFactory", "perguntasFactory"];
-
-  app.controller('candidatoController', candidatoController);
-}());
-
-(function () {
-  'use strict';
-
-  var app = angular.module('votaCampinas');
-
-  var candidatoFactory = function ($rootScope, $http) {
-    return {
-      obterCandidato: obterCandidato,
-      obterRespostas: obterRespostas
-    };
-
-    function obterCandidato (candidatoId) {
-      return $http.get('/api/candidato/' + candidatoId);
-    }
-
-    function obterRespostas (candidatoId) {
-      return $http.get('/api/candidato/' + candidatoId + '/respostas');
-    }
-  };
-  candidatoFactory.$inject = ["$rootScope", "$http"];
-
-  app.factory('candidatoFactory', candidatoFactory);
-})();
-
-(function () {
 
   'use strict';
 
@@ -546,107 +546,6 @@ angular.module('votaCampinas')
   app.controller('loginController', loginController);
 
 }());
-(function () {
-  'use strict';
-
-  var app = angular.module('votaCampinas');
-
-  var perguntasController = function ($rootScope, $scope, $timeout, $q, perguntasFactory) {
-    $rootScope.pagina = 0;
-    $scope.selecionadas = {};
-
-    $q.all([
-      perguntasFactory.obterRespostas(),
-      perguntasFactory.obterPerguntas()
-    ])
-    .then(function (res) {
-      $scope.respostas = res[0].data;
-      $rootScope.pagina = res[0].data.length;
-      $scope.perguntas = res[1].data;
-      $scope.perguntas.map(function (pergunta, indice) {
-        if ($scope.respostas[indice]) {
-          $scope.perguntas[indice].resposta = $scope.respostas[indice].resposta;
-        }
-      });
-    });
-
-    $scope.next = function () {
-      if ($rootScope.currentUser.ehVereador) {
-        return false;
-      }
-      salvarResposta();
-    };
-
-    $scope.pular = function () {
-      if ($rootScope.pagina < 18) {
-        return false;
-      }
-      salvarResposta();
-    };
-
-    $scope.nextVereador = function (resposta) {
-      if (!resposta) return false;
-      salvarResposta();
-    };
-
-    function salvarResposta () {
-      $scope.enviando = true;
-
-      $timeout(function () {
-        var pergunta = angular.copy($scope.perguntas[$rootScope.pagina]);
-        perguntasFactory.salvarResposta(pergunta)
-        .success(function () {
-          ++$rootScope.pagina;
-          $scope.enviando = false;
-        });
-      }, 700);
-    }
-
-    $scope.back = function () {
-      --$rootScope.pagina;
-    };
-  };
-  perguntasController.$inject = ["$rootScope", "$scope", "$timeout", "$q", "perguntasFactory"];
-
-  app.controller('perguntasController', perguntasController);
-}());
-
-(function () {
-  'use strict';
-
-  var app = angular.module('votaCampinas');
-
-  var perguntasFactory = function ($rootScope, $http) {
-    return {
-      obterPerguntas: obterPerguntas,
-      salvarResposta: salvarResposta,
-      obterRespostas: obterRespostas
-    };
-
-    function obterPerguntas () {
-      return $http.get('/api/perguntas');
-    }
-
-    function salvarResposta (pergunta) {
-      delete pergunta.pergunta;
-
-      var obj = {
-        usuarioId: $rootScope.currentUser.id,
-        pergunta: pergunta
-      };
-
-      return $http.post('/api/respostas', obj);
-    }
-
-    function obterRespostas () {
-      return $http.get('/api/respostas/');
-    }
-  };
-  perguntasFactory.$inject = ["$rootScope", "$http"];
-
-  app.factory('perguntasFactory', perguntasFactory);
-})();
-
 (function() {
 
   'use strict';
@@ -748,6 +647,107 @@ angular.module('votaCampinas')
   app.controller('prioridadesController', prioridadesController);
 
 }());
+
+(function () {
+  'use strict';
+
+  var app = angular.module('votaCampinas');
+
+  var perguntasController = function ($rootScope, $scope, $timeout, $q, perguntasFactory) {
+    $rootScope.pagina = 0;
+    $scope.selecionadas = {};
+
+    $q.all([
+      perguntasFactory.obterRespostas(),
+      perguntasFactory.obterPerguntas()
+    ])
+    .then(function (res) {
+      $scope.respostas = res[0].data;
+      $rootScope.pagina = res[0].data.length;
+      $scope.perguntas = res[1].data;
+      $scope.perguntas.map(function (pergunta, indice) {
+        if ($scope.respostas[indice]) {
+          $scope.perguntas[indice].resposta = $scope.respostas[indice].resposta;
+        }
+      });
+    });
+
+    $scope.next = function () {
+      if ($rootScope.currentUser.ehVereador) {
+        return false;
+      }
+      salvarResposta();
+    };
+
+    $scope.pular = function () {
+      if ($rootScope.pagina < 18) {
+        return false;
+      }
+      salvarResposta();
+    };
+
+    $scope.nextVereador = function (resposta) {
+      if (!resposta) return false;
+      salvarResposta();
+    };
+
+    function salvarResposta () {
+      $scope.enviando = true;
+
+      $timeout(function () {
+        var pergunta = angular.copy($scope.perguntas[$rootScope.pagina]);
+        perguntasFactory.salvarResposta(pergunta)
+        .success(function () {
+          ++$rootScope.pagina;
+          $scope.enviando = false;
+        });
+      }, 700);
+    }
+
+    $scope.back = function () {
+      --$rootScope.pagina;
+    };
+  };
+  perguntasController.$inject = ["$rootScope", "$scope", "$timeout", "$q", "perguntasFactory"];
+
+  app.controller('perguntasController', perguntasController);
+}());
+
+(function () {
+  'use strict';
+
+  var app = angular.module('votaCampinas');
+
+  var perguntasFactory = function ($rootScope, $http) {
+    return {
+      obterPerguntas: obterPerguntas,
+      salvarResposta: salvarResposta,
+      obterRespostas: obterRespostas
+    };
+
+    function obterPerguntas () {
+      return $http.get('/api/perguntas');
+    }
+
+    function salvarResposta (pergunta) {
+      delete pergunta.pergunta;
+
+      var obj = {
+        usuarioId: $rootScope.currentUser.id,
+        pergunta: pergunta
+      };
+
+      return $http.post('/api/respostas', obj);
+    }
+
+    function obterRespostas () {
+      return $http.get('/api/respostas/');
+    }
+  };
+  perguntasFactory.$inject = ["$rootScope", "$http"];
+
+  app.factory('perguntasFactory', perguntasFactory);
+})();
 
 (function () {
   'use strict';

@@ -1,102 +1,138 @@
-html, body {
-  position: relative;
-  font-family: 'Quicksand', sans-serif;
+html,
+body
+{
+    font-family: 'Quicksand', sans-serif;
+
+    position: relative;
 }
 
-body{
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+body
+{
+    display: flex;
+    flex-direction: column;
+
+    min-height: 100vh;
 }
 
-ul, ol {
-  list-style: none;
+ul,
+ol
+{
+    list-style: none;
 }
 
-a {
-  &:hover {
-    text-decoration: underline;
-  }
+a
+{
+    &:hover
+    {
+        text-decoration: underline;
+    }
 }
 
-label {
-  display: block;
-  line-height: 1.8;
+label
+{
+    line-height: 1.8;
+
+    display: block;
 }
 
-input[type="radio"] + label,
-input[type="checkbox"] + label {
-  display: inline-block;
-  margin: 0 5px;
+input[type='radio'] + label,
+input[type='checkbox'] + label
+{
+    display: inline-block;
+
+    margin: 0 5px;
 }
 
-form button[type="submit"] {
-  margin-top: 1em;
+form button[type='submit']
+{
+    margin-top: 1em;
 }
 
-.list-inline {
-  display: inline-block;
-  padding-left: 0;
-  list-style: none;
+.list-inline
+{
+    display: inline-block;
+
+    padding-left: 0;
+
+    list-style: none;
 }
 
-.list-inline > li {
-  display: inline-block;
-  padding: 0 5px;
+.list-inline > li
+{
+    display: inline-block;
+
+    padding: 0 5px;
 }
 
-.container {
-  padding-right: 2rem;
-  padding-left: 2rem;
+.container
+{
+    padding: 2rem;
 }
 
-.text-success {
-  color: #29b35b;
+.text-success
+{
+    color: #29b35b;
 }
 
-.text-danger {
-  color: #b61b17;
+.text-danger
+{
+    color: #b61b17;
 }
 
-.text-info {
-  color: #31708f;
+.text-info
+{
+    color: #31708f;
 }
 
-.avatar {
-  margin-right: 5px;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  vertical-align: middle;
+.avatar
+{
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+
+    vertical-align: middle;
+
+    border-radius: 50%;
 }
 
 input.invalid + label,
-input.invalid + label:focus {
-  color: #F44336 !important;
+input.invalid + label:focus
+{
+    color: #f44336 !important;
 }
 
-object {
-  position: absolute;
+object
+{
+    position: absolute;
 }
 
-.paddingRow {
-  margin-bottom: 120px;
+.paddingRow
+{
+    margin-bottom: 120px;
 }
 
-.time div {
-  text-align: center;
-  &.left-align { margin: 0 !important; }
-}
-
-@media only screen and (max-width : 770px) {
-  .time {
-    padding: 0;
-    .col {
-      width: 50% !important;
+.time div
+{
+    text-align: center;
+    &.left-align
+    {
+        margin: 0 !important;
     }
-  }
 }
 
-nav ul a:hover {
-	text-decoration: none;
+@media only screen and (max-width : 770px)
+{
+    .time
+    {
+        padding: 0;
+        .col
+        {
+            width: 50% !important;
+        }
+    }
+}
+
+nav ul a:hover
+{
+    text-decoration: none;
 }
