@@ -1,28 +1,30 @@
-html, body {
-  position: relative;
-  font-family: 'Quicksand', sans-serif; }
+html,
+body {
+  font-family: 'Quicksand', sans-serif;
+  position: relative; }
 
 body {
   display: flex;
-  min-height: 100vh;
-  flex-direction: column; }
+  flex-direction: column;
+  min-height: 100vh; }
 
-ul, ol {
+ul,
+ol {
   list-style: none; }
 
 a:hover {
   text-decoration: underline; }
 
 label {
-  display: block;
-  line-height: 1.8; }
+  line-height: 1.8;
+  display: block; }
 
-input[type="radio"] + label,
-input[type="checkbox"] + label {
+input[type='radio'] + label,
+input[type='checkbox'] + label {
   display: inline-block;
   margin: 0 5px; }
 
-form button[type="submit"] {
+form button[type='submit'] {
   margin-top: 1em; }
 
 .list-inline {
@@ -35,8 +37,7 @@ form button[type="submit"] {
   padding: 0 5px; }
 
 .container {
-  padding-right: 2rem;
-  padding-left: 2rem; }
+  padding: 2rem; }
 
 .text-success {
   color: #29b35b; }
@@ -48,15 +49,15 @@ form button[type="submit"] {
   color: #31708f; }
 
 .avatar {
-  margin-right: 5px;
-  border-radius: 50%;
   width: 30px;
   height: 30px;
-  vertical-align: middle; }
+  margin-right: 5px;
+  vertical-align: middle;
+  border-radius: 50%; }
 
 input.invalid + label,
 input.invalid + label:focus {
-  color: #F44336 !important; }
+  color: #f44336 !important; }
 
 object {
   position: absolute; }
@@ -150,7 +151,7 @@ footer {
 
 @media only screen and (max-width: 770px) {
   footer {
-    height: 280px; }
+    min-height: 310px; }
     footer span {
       display: none; }
     footer ul {
@@ -204,20 +205,23 @@ footer {
     display: inline-block; }
   .questoes span {
     display: inline-block;
-    border: 1px solid #ccc;
     padding: 3px 8px;
+    border: 1px solid #ccc;
     border-radius: 2px;
     box-shadow: 1px 2px 6px #ccc; }
 
 @media only screen and (max-width: 600px) {
   .questoes span {
-    margin-left: 0;
-    margin-bottom: 20px; }
+    margin-bottom: 20px;
+    margin-left: 0; }
   .questoes .pular {
-    margin-top: 20px; }
+    margin: 20px 0; }
   .material-tooltip {
-    margin-left: 20px !important;
-    font-size: 12px; } }
+    font-size: 12px;
+    margin-left: 20px !important; } }
+
+.form-questoes li {
+  padding: 5px 0; }
 
 .home {
   height: 100%; }
@@ -288,8 +292,8 @@ footer {
 
 @media only screen and (max-width: 770px) {
   .prioridades {
-    padding: 0 1.5em;
-    height: 530px; }
+    height: 530px;
+    padding: 0 1.5em; }
     .prioridades h1 {
       font-size: 1.5em; }
     .prioridades h2 {
