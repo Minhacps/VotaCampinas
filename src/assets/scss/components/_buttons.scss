@@ -60,6 +60,7 @@
   @extend .z-depth-1;
   transition: .2s ease-out;
   cursor: pointer;
+  margin-bottom: 15px;
 
   &:hover {
     background-color: #feb557;
