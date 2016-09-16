@@ -2271,10 +2271,15 @@ ul.staggered-list li {
   .center-on-small-only {
     text-align: center; } }
 
-footer.page-footer {
-  padding-top: 20px;
-  background-color: #57455c; }
-  footer.page-footer .footer-copyright {
+footer {
+  background-color: #57455c;
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  padding-top: 35px;
+  padding-bottom: 35px; }
+  footer .footer-copyright {
     overflow: hidden;
     height: 50px;
     line-height: 50px;
@@ -3258,7 +3263,7 @@ strong {
 small {
   font-size: 75%; }
 
-.light, footer.page-footer .footer-copyright {
+.light, footer .footer-copyright {
   font-weight: 300; }
 
 .thin {
@@ -3648,7 +3653,8 @@ small {
   text-align: center;
   letter-spacing: .5px;
   transition: .2s ease-out;
-  cursor: pointer; }
+  cursor: pointer;
+  margin-bottom: 15px; }
   .btn:hover, .btn-large:hover {
     background-color: #feb557;
     text-decoration: none; }
