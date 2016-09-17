@@ -25,7 +25,8 @@ exports.obterMatches = (req, res) => {
         .join('partidos', 'vereadores.partidoId', 'partidos.id')
         .where('ehVereador', '=', 1);
     })
-    .orderBy('userId')
+    .orderBy('respostasPrioridades.userId')
+    .orderBy('respostasPrioridades.id')
     .fetchAll({
       columns: [
         'users.name as nome',
