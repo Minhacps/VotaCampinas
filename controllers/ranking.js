@@ -40,7 +40,6 @@ exports.obterMatches = (req, res) => {
       ]
     })
     .then((prioridadesVereadores) => {
-      console.log(prioridadesVereadores.toJSON())
       callback(null, prioridadesVereadores.toJSON());
     });
   };
@@ -136,7 +135,8 @@ exports.obterMatches = (req, res) => {
     respostasUsuario,
     respostasVereadores
   ], (err, results) => {
-    console.error(err);
+    if(err)
+      return res.status(500).send(err);
 
     res.send(
       pontuarVereadores(reduzirVereadores(results[1], results[3]), results[0], results[2])
