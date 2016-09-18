@@ -36,9 +36,6 @@ form button[type='submit'] {
   display: inline-block;
   padding: 0 5px; }
 
-.container {
-  padding: 2rem; }
-
 .text-success {
   color: #29b35b; }
 
@@ -150,17 +147,16 @@ nav ul a:hover {
   .finalizar:hover {
     background-color: #866f8c; }
 
-.questoes {
-  margin-top: 20px; }
-  .questoes h1 {
-    font-size: 1.5em;
-    display: inline-block; }
-  .questoes span {
-    display: inline-block;
-    padding: 3px 8px;
-    border: 1px solid #ccc;
-    border-radius: 2px;
-    box-shadow: 1px 2px 6px #ccc; }
+.questoes h1 {
+  font-size: 1.5em;
+  display: inline-block; }
+
+.questoes span {
+  display: inline-block;
+  padding: 3px 8px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  box-shadow: 1px 2px 6px #ccc; }
 
 @media only screen and (max-width: 600px) {
   .questoes span {

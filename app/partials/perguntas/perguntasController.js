@@ -30,14 +30,16 @@
     };
 
     $scope.pular = function () {
-      if ($rootScope.pagina < 18) {
+      if ($rootScope.pagina < 15) {
         return false;
       }
       salvarResposta();
+      $scope.enviando = true;
     };
 
     $scope.nextVereador = function (resposta) {
       if (!resposta) return false;
+      $scope.enviando = true;
       salvarResposta();
     };
 

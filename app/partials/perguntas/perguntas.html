@@ -1,3 +1,4 @@
+<div class="loading-bar-container"></div>
 <div class="container questoes">
   <div class="row">
     <div class="col s12" data-ng-hide="pagina === perguntas.length">
@@ -9,7 +10,7 @@
         <div
           class="determinate"
           style="width: {{((pagina + 3) / (perguntas.length + 3))*100}}%"
-          ng-class="pagina < 18 ? 'red' : ''">
+          ng-class="pagina < 15 ? 'red' : ''">
         </div>
       </div>
     </div>
@@ -48,13 +49,14 @@
             <div class="col s12 m12 l12">
               
 
-              <div class="col s12 m4 l3 right" ng-hide="">
-                <a class="btn right"
+              <div class="col s12 m4 l3 right">
+                <button class="btn right"
+                  type="button" 
                   ng-show="currentUser.ehVereador && pagina !== perguntas.length"
                   ng-click="nextVereador(perguntas[pagina].resposta)"
-                  ng-disabled="!perguntas[pagina].resposta">
+                  ng-disabled="!perguntas[pagina].resposta || enviando">
                   Próxima
-                </a>
+                </button>
 
                 <a class="btn right lg finalizar"
                   ng-show="pagina === perguntas.length || pagina >= 18 && !currentUser.ehVereador"
@@ -63,19 +65,19 @@
                 </a>
                 
               </div>
-
               <div class="col s12 m4 l3">
                 <input ng-click="back()" ng-show="pagina > 0" type="button" class="btn lg" value="Voltar">
 
-                <a class="btn pular tooltipped lg right"
+                <button class="btn pular tooltipped lg right"
+                   type="button"
                    data-position="left"
                    data-delay="30"
-                   data-tooltip="{{pagina >= 18 ? 'Salvar resposta em branco' : 'Você só pode pular a partir da 18ª questão'}}"
-                   href=""
+                   data-tooltip="{{pagina >= 15 ? 'Salvar resposta em branco' : 'Você só pode pular a partir da 18ª questão'}}"
                    ng-click="pular()"
-                   ng-hide="(currentUser.ehVereador) || pagina === perguntas.length">
+                   ng-hide="(currentUser.ehVereador) || pagina === perguntas.length"
+                   data-ng-disabled="enviando">
                    * Pular
-                </a>
+                </button>
               </div>
             </div>
           </div>

@@ -32,6 +32,9 @@
           $scope.messages = {
             error: Array.isArray(response.data) ? response.data : [response.data]
           };
+        })
+         .finally(function() {
+            $scope.cadastro.$setPristine();
         });
     };
 

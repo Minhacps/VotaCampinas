@@ -1,3 +1,4 @@
+<div class="loading-bar-container"></div>
 <div class="container">
   <div class="row">
     <div class="col s12">
@@ -20,7 +21,7 @@
       </div>
 
       <div class="col s12 input-field">
-        <button type="submit" class="btn" ng-disabled="formLogin.$invalid">Entrar</button>
+        <button type="submit" class="btn" ng-disabled="formLogin.$invalid || formLogin.$submitted">Entrar</button>
       </div>
     </form>
 

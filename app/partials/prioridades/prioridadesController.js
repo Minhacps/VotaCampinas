@@ -21,19 +21,19 @@
     };
 
     $http.get('/api/prioridades/' + $rootScope.currentUser.id)
-    .success(function (res) {
-      if (res.length === 3) {
-        $location.path('perguntas');
-      }
-    });
+      .success(function (res) {
+        if (res.length === 3) {
+          $location.path('perguntas');
+        }
+      });
 
     $http.get('/api/prioridades')
-    .success(function (suc) {
-      $scope.opcoes = suc;
-    })
-    .error(function (err) {
-      console.log(err);
-    });
+      .success(function (suc) {
+        $scope.opcoes = suc;
+      })
+      .error(function (err) {
+        console.log(err);
+      });
 
   	$scope.next = function(){
       $scope.enviando = true;
@@ -91,6 +91,9 @@
       .error(function(err){
         console.log(err);
       })
+      .finally(function() {
+        $scope.formPrioridades.$setPristine();
+      });
     }
 
   }

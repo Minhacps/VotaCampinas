@@ -1,6 +1,8 @@
-angular.module('votaCampinas', ['ngRoute', 'satellizer'])
-  .config(function ($routeProvider, $locationProvider, $authProvider) {
+angular.module('votaCampinas', ['ngRoute', 'satellizer', 'angular-loading-bar'])
+  .config(function ($routeProvider, $locationProvider, $authProvider, cfpLoadingBarProvider) {
     $locationProvider.html5Mode(true);
+
+    cfpLoadingBarProvider.parentSelector = '.loading-bar-container';
 
     $routeProvider
       .when('/', {
@@ -98,3 +100,4 @@ angular.module('votaCampinas', ['ngRoute', 'satellizer'])
       $rootScope.currentUser = JSON.parse($window.localStorage.user);
     }
   });
+

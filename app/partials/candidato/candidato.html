@@ -1,3 +1,4 @@
+<div class="loading-bar-container"></div>
 <div class="container perfil-candidato">
   <div class="col s12">
       <h1>Perfil do Candidato</h1>
@@ -26,7 +27,7 @@
   	<h2>Respostas</h2>
 
     <div class="perguntasErespostas" ng-repeat="pergunta in perguntas">
-       <p class="pergunta"><strong>{{pergunta.pergunta}}</strong></p>
+       <p class="pergunta">{{$index + 1}}. <strong>{{pergunta.pergunta}}</strong></p>
        <p>
          <strong>Sua Resposta: </strong> <span>{{possiveisRespostas[respostasEleitor[$index].resposta]}}</span><br>
          <strong>Resposta do candidato:</strong> <span>{{possiveisRespostas[candidato.respostas[$index].resposta]}}</span><br>

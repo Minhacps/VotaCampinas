@@ -2601,6 +2601,29 @@ input[type=range] + .thumb {
   flex-direction: column;
   flex: 1; }
 
+.loading-bar-container {
+  position: relative;
+  height: 55px; }
+
+#loading-bar {
+  height: 5px;
+  position: absolute;
+  top: 0;
+  width: 100%; }
+  #loading-bar .bar {
+    position: relative;
+    height: 5px;
+    background: #feb557; }
+
+#loading-bar-spinner {
+  position: absolute;
+  top: 20px; }
+  #loading-bar-spinner .spinner-icon {
+    width: 30px;
+    height: 30px;
+    border-top-color: #feb557;
+    border-left-color: #feb557; }
+
 /* This is needed for some mobile phones to display the Google Icon font properly */
 .material-icons {
   text-rendering: optimizeLegibility;

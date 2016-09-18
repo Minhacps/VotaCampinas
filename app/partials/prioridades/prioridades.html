@@ -1,3 +1,4 @@
+<div class="loading-bar-container"></div>
 <div class="container questoes">
   <div class="row">
     <div class="col s12">
@@ -5,7 +6,7 @@
         <span>{{respostas.length}} / {{41 + 3}}</span>
     </div>
     <div class="col s12 prioridades">
-      <form id="opcoes" novalidate>
+      <form id="opcoes" novalidate name="formPrioridades" data-ng-submit="submit()">
         <div class="col s12">
         <div class="progress">
           <div
@@ -28,7 +29,7 @@
             </div>
             <div class="col s12 m6 l6">
               <input ng-click="next()" ng-if="returned" type="button" class="btn right" value="Próxima">
-              <input ng-click="submit()" ng-show="submitOk" type="button" class="btn right finalizar" value="Enviar">
+              <button ng-show="submitOk" class="btn right finalizar" data-ng-disabled="formPrioridades.$invalid || formPrioridades.$submitted">Enviar</button>
             </div>
           </div>
           <div class="col s12">
