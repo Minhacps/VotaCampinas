@@ -28,7 +28,7 @@
 
     <div class="perguntasErespostas" ng-repeat="pergunta in perguntas">
        <p class="pergunta">{{$index + 1}}. <strong>{{pergunta.pergunta}}</strong></p>
-       <p>
+       <p class="respostas">
          <strong>Sua Resposta: </strong> <span>{{possiveisRespostas[respostasEleitor[$index].resposta]}}</span><br>
          <strong>Resposta do candidato:</strong> <span>{{possiveisRespostas[candidato.respostas[$index].resposta]}}</span><br>
          <strong ng-show="candidato.respostas[$index].justificativa">Justificativa do candidato:</strong> <span>{{candidato.respostas[$index].justificativa}}</span>

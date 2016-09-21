@@ -2,7 +2,7 @@ html,
 body
 {
     font-family: 'Quicksand', sans-serif;
-
+    font-weight: normal;
     position: relative;
 }
 
@@ -10,7 +10,6 @@ body
 {
     display: flex;
     flex-direction: column;
-
     min-height: 100vh;
 }
 

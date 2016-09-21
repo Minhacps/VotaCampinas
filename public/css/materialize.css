@@ -3375,7 +3375,7 @@ small {
   transition: box-shadow .25s;
   border-radius: 2px; }
   .card .card-title {
-    font-size: 24px;
+    font-size: 30px;
     font-weight: 300; }
     .card .card-title.activator {
       cursor: pointer; }
@@ -3446,6 +3446,7 @@ small {
     padding: 20px;
     border-radius: 0 0 2px 2px; }
     .card .card-content p {
+      font-size: 20px;
       margin: 0;
       color: inherit; }
     .card .card-content .card-title {

@@ -3,6 +3,14 @@
   .foto-candidato { img { width: 100%; max-width: 180px; }}
 }
 
+.perguntasErespostas {
+  .pergunta {
+    font-size: 25px;
+  }
+  .respostas {
+    font-size: 20px;
+  }
+}
 @media only screen and (max-width : 770px) {
   .card-panel { padding: 0; }
   .card .card-content .card-title.nome-candidato { font-size: 20px; line-height: 20px; }

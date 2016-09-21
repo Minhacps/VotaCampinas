@@ -19,7 +19,7 @@
 
 
   .card-title {
-    font-size: 24px;
+    font-size: 30px;
     font-weight: 300;
     &.activator {
       cursor: pointer;
@@ -142,6 +142,7 @@
     border-radius: 0 0 2px 2px;
 
     p {
+      font-size: 20px;
       margin: 0;
       color: inherit;
     }
