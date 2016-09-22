@@ -46,10 +46,12 @@
   "devDependencies": {
     "bower": "^1.7.9",
     "jasmine": "^2.4.1",
+    "jasmine-core": "^2.5.2",
     "karma": "^0.13.22",
     "karma-coverage": "^0.5.5",
     "karma-jasmine": "^0.3.7",
     "karma-phantomjs-launcher": "^1.0.0",
+    "karma-spec-reporter": "0.0.26",
     "phantomjs-prebuilt": "^2.1.7",
     "semistandard": "^8.0.0"
   },
