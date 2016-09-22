@@ -44,6 +44,7 @@
     "yargs": "^4.3.2"
   },
   "devDependencies": {
+    "bower": "^1.7.9",
     "jasmine": "^2.4.1",
     "karma": "^0.13.22",
     "karma-coverage": "^0.5.5",
