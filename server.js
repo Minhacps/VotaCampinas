@@ -76,7 +76,7 @@ app.post('/api/prioridades', userController.ensureAuthenticated, prioridadesCont
 app.get('/api/prioridades/:userId', userController.ensureAuthenticated, prioridadesController.obterRespostas);
 
 const rankingController = require('./controllers/ranking');
-app.get('/api/ranking', rankingController.obterMatches);
+app.get('/api/ranking', userController.ensureAuthenticated, rankingController.obterMatches);
 
 const partidosController = require('./controllers/partidos');
 app.get('/api/partidos', partidosController.obterPartidos);
