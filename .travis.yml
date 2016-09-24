@@ -12,6 +12,8 @@ install:
 - npm install
 
 deploy:
+  verbose: true
+  on: master
   provider: azure_web_apps
   username: $AZURE_WA_USERNAME
   password: $AZURE_WA_PASSWORD
