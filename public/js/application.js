@@ -1,5 +1,14 @@
 
-Ranking.$inject = ["$http"];angular.module('votaCampinas', ['ngRoute', 'satellizer', 'angular-loading-bar'])
+Ranking.$inject = ["$http"];(function() {
+'use strict';
+
+/**
+ * @name votaCampinas
+ * @description Web App to Find Candidatos that Match with you
+ * # Angular Module
+ */
+ 
+angular.module('votaCampinas', ['ngRoute', 'satellizer', 'angular-loading-bar'])
   .config(["$routeProvider", "$locationProvider", "$authProvider", "cfpLoadingBarProvider", function ($routeProvider, $locationProvider, $authProvider, cfpLoadingBarProvider) {
     skipIfAuthenticated.$inject = ["$location", "$auth"];
     loginRequired.$inject = ["$location", "$auth"];
@@ -103,7 +112,7 @@ Ranking.$inject = ["$http"];angular.module('votaCampinas', ['ngRoute', 'satelliz
       $rootScope.currentUser = JSON.parse($window.localStorage.user);
     }
   }]);
-
+})();
 
 angular.module('votaCampinas')
   .controller('ContactCtrl', ["$scope", "Contact", function($scope, Contact) {
@@ -765,7 +774,7 @@ angular.module('votaCampinas')
 }());
 
 (function () {
-  'use strict';
+ 'use strict';
   var app = angular.module('votaCampinas');
 
   var pontuacaoFilter = function () {

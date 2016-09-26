@@ -1,3 +1,12 @@
+(function() {
+'use strict';
+
+/**
+ * @name votaCampinas
+ * @description Web App to Find Candidatos that Match with you
+ * # Angular Module
+ */
+ 
 angular.module('votaCampinas', ['ngRoute', 'satellizer', 'angular-loading-bar'])
   .config(function ($routeProvider, $locationProvider, $authProvider, cfpLoadingBarProvider) {
     $locationProvider.html5Mode(true);
@@ -100,4 +109,4 @@ angular.module('votaCampinas', ['ngRoute', 'satellizer', 'angular-loading-bar'])
       $rootScope.currentUser = JSON.parse($window.localStorage.user);
     }
   });
-
+})();
