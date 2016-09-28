@@ -7,7 +7,8 @@
     "build:production": "gulp build --production",
     "postinstall": "bower install && npm run build:production",
     "start": "node server.js",
-    "watch": "gulp"
+    "watch": "gulp",
+    "test": "karma start ./app/karma.conf.js"
   },
   "dependencies": {
     "async": "^1.5.2",
