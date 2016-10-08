@@ -16,9 +16,9 @@ describe('Controller - Reset Password', function() {
     });
   });
 
-  describe('Given a sucessful password reset', function() {
+  describe('Dada uma redefinição de senha com sucesso', function() {
 
-    it('Should set the success message', function() {
+    it('Deve definir a mensagem de sucesso', function() {
       var responseData = {
         data: 'Success'
       };
@@ -33,7 +33,7 @@ describe('Controller - Reset Password', function() {
       expect($scope.messages.success).toEqual(['Success']);
     });
 
-    it('Should redirect to login page', function() {
+    it('Deve redirecionar para a página de autenticação', function() {
       var responseData = {
         data: 'Success'
       };
@@ -51,9 +51,9 @@ describe('Controller - Reset Password', function() {
 
   });
 
-  describe('Given an unsuccessful password reset', function() {
+  describe('Dada uma redefinição de senha malsucedida', function() {
 
-    it('Should set the error message when the API returns a non-array value', function() {
+    it('Deve definir a mensagem de erro quando a API retornar um erro que não seja um array', function() {
       var responseData = {
         data: 'Erro'
       };
@@ -68,7 +68,7 @@ describe('Controller - Reset Password', function() {
       expect($scope.messages.error).toEqual(['Erro']);
     });
 
-    it('Should set the error message when the API returns an array value', function() {
+    it('Deve definir a mensagem de erro quando a API retornar um erro que seja um array', function() {
       var responseData = {
         data: ['Erro 1', 'Erro 2']
       };
