@@ -1,15 +1,14 @@
 language: node_js
 node_js:
 - '6.1'
-branches:
-  only:
-  - master
+before_install:
+    - export DISPLAY=:99.0
+    - sh -e /etc/init.d/xvfb start
 install:
-- npm install -g bower
 - npm install
-after_success:
-- git remote add production ${DEPLOY_REMOTE}
-- git push production master
+deploy:
+  provider: azure_web_apps
+  on: master
 env:
   global:
   - secure: vBoKFuQZZxpLVg7IECsbV9V1pgJSIdtQ6Xi8JNAA4dUVOcxCQHHanZiDxtXQb/4K1wvD8+cikLmTdnJs7jU6WcCg//1+L9PLgIYFzfOZhIa5me7e1W08qSqUNTCjgKyr6UYnohj9p760HoJXTyRfg+nj1MqADtsHM7UWbBufUW554yaXs3ou3UXL+yKMl2LuLMYEeED2lz7a9hovXV/eBRHWf7y3dkuju4vTjbvYJB01S2g2hEBhPRA4b2PpnroPLbB4t6f0NeCS22tNNAG+rntFKeB1yNd7ZZa8lW7DzLaClS4e60i1oj2zz5KdHCFkVurjFJRQyCVBVt5EF4bgy6+cK2daIGYZ+Av+8+o+j8Be5FJbQpVzSXJMs3WSfWEAkYhjfCrtJjs1qMFW1V07Nyk4DrhZ5LUaK06QEv6eMHz9O2Ws/5ECDK5Y8/7Ty6ew2B/NsIE3onKGBTg+uV0DozUXgvEITukf7ChC/ouaTJoHMLoJ8VKdeCq+EuL4pVcO8uGYCHYrB8yy8Iae7HYOjcl96DvPqKm1RPsSopCisLvDlbHWk7JY/cfoqHaVN7gebZjCcOSX/33FAvt1OxZ5BoUJviVEQ3HsuO+hzBVM6Op/c0gH9i+e558Db8Sm6Klkg06LgqsxOtAFmvRW7DWafHv/wS4emMlzgXELOfGlaxo=
