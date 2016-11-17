@@ -4,8 +4,8 @@
         <img src="img/logo.png" alt="" style="height: 100%;">
       </a>
       <a href="#" class="button-collapse" data-activates="mobile-demo" data-sidenav="left" data-menuwidth="500" data-closeonclick="false"><i class="material-icons">menu</i></a>
-
       <ul class="right hide-on-med-and-down">
+        <li ng-class="{ active: isActive('/projeto')}"><a href="http://www.votacampinas.minhacampinas.org.br/" ng-click="closeNav()"> <strong>Novidade DIAGNÓSTICO</strong></a></li>  
         <li ng-class="{ active: isActive('/projeto')}"><a href="/projeto" ng-click="closeNav()">O Projeto</a></li>
         <li ng-class="{ active: isActive('/como-funciona')}"><a href="/como-funciona" ng-click="closeNav()">Como funciona</a></li>
         <li ng-class="{ active: isActive('/login')}" ng-if="!isAuthenticated()"><a href="/login">Entrar</a></li>
